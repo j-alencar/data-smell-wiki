@@ -1,0 +1,3322 @@
+{
+ "numerico/dummy-value": {
+  "duckdb": {
+   "cols": [
+    "top_value",
+    "n",
+    "constancy"
+   ],
+   "rows": [
+    [
+     "999",
+     "3",
+     "0.5"
+    ]
+   ]
+  },
+  "entrada": {
+   "cols": [
+    "id",
+    "age"
+   ],
+   "rows": [
+    [
+     "1",
+     "34"
+    ],
+    [
+     "2",
+     "999"
+    ],
+    [
+     "3",
+     "27"
+    ],
+    [
+     "4",
+     "999"
+    ],
+    [
+     "5",
+     "41"
+    ],
+    [
+     "6",
+     "999"
+    ]
+   ]
+  },
+  "jq": "{\"top_value\":999,\"n\":3,\"constancy\":0.5}",
+  "mongo": "{\"n\":3,\"top_value\":999,\"constancy\":0.5}",
+  "postgres": {
+   "cols": [
+    "top_value",
+    "n",
+    "constancy"
+   ],
+   "rows": [
+    [
+     "999",
+     "3",
+     "0.50"
+    ]
+   ]
+  }
+ },
+ "numerico/extraneous-value": {
+  "duckdb": {
+   "cols": [
+    "len",
+    "n",
+    "example"
+   ],
+   "rows": [
+    [
+     "1",
+     "1",
+     "9"
+    ],
+    [
+     "2",
+     "2",
+     "12"
+    ],
+    [
+     "10",
+     "1",
+     "approx. 20"
+    ],
+    [
+     "14",
+     "1",
+     "18 (estimated)"
+    ]
+   ]
+  },
+  "entrada": {
+   "cols": [
+    "id",
+    "qty"
+   ],
+   "rows": [
+    [
+     "1",
+     "12"
+    ],
+    [
+     "2",
+     "15"
+    ],
+    [
+     "3",
+     "approx. 20"
+    ],
+    [
+     "4",
+     "18 (estimated)"
+    ],
+    [
+     "5",
+     "9"
+    ]
+   ]
+  },
+  "jq": "{\"len\":1,\"n\":1,\"example\":\"9\"}\n{\"len\":2,\"n\":2,\"example\":\"12\"}\n{\"len\":10,\"n\":1,\"example\":\"approx. 20\"}\n{\"len\":14,\"n\":1,\"example\":\"18 (estimated)\"}",
+  "mongo": "{\"_id\":1,\"n\":1,\"example\":\"9\"}\n{\"_id\":2,\"n\":2,\"example\":\"12\"}\n{\"_id\":10,\"n\":1,\"example\":\"approx. 20\"}\n{\"_id\":14,\"n\":1,\"example\":\"18 (estimated)\"}",
+  "postgres": {
+   "cols": [
+    "len",
+    "n",
+    "example"
+   ],
+   "rows": [
+    [
+     "1",
+     "1",
+     "9"
+    ],
+    [
+     "2",
+     "2",
+     "12"
+    ],
+    [
+     "10",
+     "1",
+     "approx. 20"
+    ],
+    [
+     "14",
+     "1",
+     "18 (estimated)"
+    ]
+   ]
+  }
+ },
+ "numerico/floating-point-number-as-string": {
+  "duckdb": {
+   "cols": [
+    "data_type",
+    "pattern",
+    "n"
+   ],
+   "rows": [
+    [
+     "VARCHAR",
+     "9.9",
+     "2"
+    ],
+    [
+     "VARCHAR",
+     "9.99",
+     "1"
+    ],
+    [
+     "VARCHAR",
+     "99.99",
+     "1"
+    ]
+   ]
+  },
+  "entrada": {
+   "cols": [
+    "id",
+    "price"
+   ],
+   "rows": [
+    [
+     "1",
+     "3.5"
+    ],
+    [
+     "2",
+     "12.25"
+    ],
+    [
+     "3",
+     "0.75"
+    ],
+    [
+     "4",
+     "8.0"
+    ]
+   ]
+  },
+  "jq": "{\"type\":\"string\",\"pattern\":\"9.9\",\"n\":2}\n{\"type\":\"string\",\"pattern\":\"9.99\",\"n\":1}\n{\"type\":\"string\",\"pattern\":\"99.99\",\"n\":1}",
+  "mongo": "{\"_id\":{\"type\":\"string\",\"pattern\":\"9.9\"},\"n\":2}\n{\"_id\":{\"type\":\"string\",\"pattern\":\"9.99\"},\"n\":1}\n{\"_id\":{\"type\":\"string\",\"pattern\":\"99.99\"},\"n\":1}",
+  "postgres": {
+   "cols": [
+    "data_type",
+    "pattern",
+    "n"
+   ],
+   "rows": [
+    [
+     "text",
+     "9.9",
+     "2"
+    ],
+    [
+     "text",
+     "9.99",
+     "1"
+    ],
+    [
+     "text",
+     "99.99",
+     "1"
+    ]
+   ]
+  }
+ },
+ "numerico/integer-as-floating-point-number": {
+  "duckdb": {
+   "cols": [
+    "data_type",
+    "n",
+    "integral"
+   ],
+   "rows": [
+    [
+     "DOUBLE",
+     "4",
+     "4"
+    ]
+   ]
+  },
+  "entrada": {
+   "cols": [
+    "id",
+    "qty"
+   ],
+   "rows": [
+    [
+     "1",
+     "3.0"
+    ],
+    [
+     "2",
+     "12.0"
+    ],
+    [
+     "3",
+     "7.0"
+    ],
+    [
+     "4",
+     "5.0"
+    ]
+   ]
+  },
+  "jq": null,
+  "mongo": "{\"_id\":\"double\",\"n\":4,\"integral\":4}",
+  "postgres": {
+   "cols": [
+    "data_type",
+    "n",
+    "integral"
+   ],
+   "rows": [
+    [
+     "double precision",
+     "4",
+     "4"
+    ]
+   ]
+  }
+ },
+ "numerico/integer-as-string": {
+  "duckdb": {
+   "cols": [
+    "data_type",
+    "n",
+    "castable_to_integer"
+   ],
+   "rows": [
+    [
+     "VARCHAR",
+     "4",
+     "4"
+    ]
+   ]
+  },
+  "entrada": {
+   "cols": [
+    "sku",
+    "qty"
+   ],
+   "rows": [
+    [
+     "A1",
+     "5"
+    ],
+    [
+     "A2",
+     "12"
+    ],
+    [
+     "A3",
+     "0"
+    ],
+    [
+     "A4",
+     "7"
+    ]
+   ]
+  },
+  "jq": "{\"types\":[\"string\"],\"n\":4,\"castable_to_integer\":4}",
+  "mongo": "{\"_id\":\"string\",\"n\":4,\"castableToInt\":4}",
+  "postgres": {
+   "cols": [
+    "data_type",
+    "n",
+    "castable_to_integer"
+   ],
+   "rows": [
+    [
+     "text",
+     "4",
+     "4"
+    ]
+   ]
+  }
+ },
+ "numerico/intermingled-data-type": {
+  "duckdb": {
+   "cols": [
+    "basic_type",
+    "n",
+    "example"
+   ],
+   "rows": [
+    [
+     "numeric",
+     "3",
+     "5120"
+    ],
+    [
+     "alphanumeric",
+     "1",
+     "7O34"
+    ]
+   ]
+  },
+  "entrada": {
+   "cols": [
+    "id",
+    "code"
+   ],
+   "rows": [
+    [
+     "1",
+     "7034"
+    ],
+    [
+     "2",
+     "7O34"
+    ],
+    [
+     "3",
+     "5120"
+    ],
+    [
+     "4",
+     "8812"
+    ]
+   ]
+  },
+  "jq": "{\"basic_type\":\"numeric\",\"n\":3,\"example\":\"5120\"}\n{\"basic_type\":\"alphanumeric\",\"n\":1,\"example\":\"7O34\"}",
+  "mongo": "{\"_id\":\"numeric\",\"n\":3,\"example\":\"5120\"}\n{\"_id\":\"alphanumeric\",\"n\":1,\"example\":\"7O34\"}",
+  "postgres": {
+   "cols": [
+    "basic_type",
+    "n",
+    "example"
+   ],
+   "rows": [
+    [
+     "numeric",
+     "3",
+     "5120"
+    ],
+    [
+     "alphanumeric",
+     "1",
+     "7O34"
+    ]
+   ]
+  }
+ },
+ "numerico/missing-value-inconsistency": {
+  "duckdb": {
+   "cols": [
+    "value",
+    "n",
+    "as_double"
+   ],
+   "rows": [
+    [
+     "(NULL)",
+     "1",
+     "NULL"
+    ],
+    [
+     "NULL",
+     "1",
+     "NULL"
+    ],
+    [
+     "Na",
+     "1",
+     "NULL"
+    ],
+    [
+     "NaN",
+     "1",
+     "nan"
+    ],
+    [
+     "inf",
+     "1",
+     "inf"
+    ]
+   ]
+  },
+  "entrada": {
+   "cols": [
+    "id",
+    "temp"
+   ],
+   "rows": [
+    [
+     "1",
+     "12"
+    ],
+    [
+     "2",
+     "NaN"
+    ],
+    [
+     "3",
+     "Na"
+    ],
+    [
+     "4",
+     "NULL"
+    ],
+    [
+     "5",
+     "22"
+    ],
+    [
+     "6",
+     "inf"
+    ],
+    [
+     "7",
+     "23"
+    ],
+    [
+     "8",
+     "NULL"
+    ]
+   ]
+  },
+  "jq": "{\"value\":\"(campo ausente)\",\"as_number\":null,\"n\":1}\n{\"value\":\"(null)\",\"as_number\":null,\"n\":1}\n{\"value\":\"Na\",\"as_number\":\"erro\",\"n\":1}\n{\"value\":\"NaN\",\"as_number\":null,\"n\":1}\n{\"value\":\"inf\",\"as_number\":1.7976931348623157e+308,\"n\":1}",
+  "mongo": "{\"_id\":\"(campo ausente)\",\"n\":1,\"asDouble\":null}\n{\"_id\":\"(null)\",\"n\":1,\"asDouble\":null}\n{\"_id\":\"Na\",\"n\":1,\"asDouble\":\"erro\"}\n{\"_id\":\"NaN\",\"n\":1,\"asDouble\":{\"$numberDouble\":\"NaN\"}}\n{\"_id\":\"inf\",\"n\":1,\"asDouble\":{\"$numberDouble\":\"Infinity\"}}",
+  "postgres": {
+   "cols": [
+    "value",
+    "n",
+    "as_double"
+   ],
+   "rows": [
+    [
+     "(NULL)",
+     "1",
+     "NULL"
+    ],
+    [
+     "NULL",
+     "1",
+     "NULL"
+    ],
+    [
+     "Na",
+     "1",
+     "NULL"
+    ],
+    [
+     "NaN",
+     "1",
+     "NaN"
+    ],
+    [
+     "inf",
+     "1",
+     "Infinity"
+    ]
+   ]
+  }
+ },
+ "numerico/precision-inconsistency": {
+  "duckdb": {
+   "cols": [
+    "decimals",
+    "n"
+   ],
+   "rows": [
+    [
+     "1",
+     "1"
+    ],
+    [
+     "2",
+     "2"
+    ],
+    [
+     "3",
+     "1"
+    ],
+    [
+     "4",
+     "1"
+    ]
+   ]
+  },
+  "entrada": {
+   "cols": [
+    "id",
+    "kg"
+   ],
+   "rows": [
+    [
+     "1",
+     "5.5485"
+    ],
+    [
+     "2",
+     "7.45"
+    ],
+    [
+     "3",
+     "8.21"
+    ],
+    [
+     "4",
+     "8.5"
+    ],
+    [
+     "5",
+     "9.887"
+    ]
+   ]
+  },
+  "jq": "{\"decimals\":1,\"n\":1}\n{\"decimals\":2,\"n\":2}\n{\"decimals\":3,\"n\":1}\n{\"decimals\":4,\"n\":1}",
+  "mongo": "{\"_id\":1,\"n\":1}\n{\"_id\":2,\"n\":2}\n{\"_id\":3,\"n\":1}\n{\"_id\":4,\"n\":1}",
+  "postgres": {
+   "cols": [
+    "decimals",
+    "n"
+   ],
+   "rows": [
+    [
+     "1",
+     "1"
+    ],
+    [
+     "2",
+     "2"
+    ],
+    [
+     "3",
+     "1"
+    ],
+    [
+     "4",
+     "1"
+    ]
+   ]
+  }
+ },
+ "numerico/small-number": {
+  "duckdb": {
+   "cols": [
+    "magnitude",
+    "n"
+   ],
+   "rows": [
+    [
+     "-4",
+     "1"
+    ],
+    [
+     "-2",
+     "2"
+    ],
+    [
+     "-1",
+     "1"
+    ],
+    [
+     "0",
+     "1"
+    ],
+    [
+     "1",
+     "1"
+    ]
+   ]
+  },
+  "entrada": {
+   "cols": [
+    "id",
+    "rate"
+   ],
+   "rows": [
+    [
+     "1",
+     "12.0"
+    ],
+    [
+     "2",
+     "0.04"
+    ],
+    [
+     "3",
+     "0.02"
+    ],
+    [
+     "4",
+     "0.00024"
+    ],
+    [
+     "5",
+     "0.4"
+    ],
+    [
+     "6",
+     "7.0"
+    ]
+   ]
+  },
+  "jq": "{\"magnitude\":-4,\"n\":1}\n{\"magnitude\":-2,\"n\":2}\n{\"magnitude\":-1,\"n\":1}\n{\"magnitude\":0,\"n\":1}\n{\"magnitude\":1,\"n\":1}",
+  "mongo": "{\"_id\":-4,\"n\":1}\n{\"_id\":-2,\"n\":2}\n{\"_id\":-1,\"n\":1}\n{\"_id\":0,\"n\":1}\n{\"_id\":1,\"n\":1}",
+  "postgres": {
+   "cols": [
+    "magnitude",
+    "n"
+   ],
+   "rows": [
+    [
+     "-4",
+     "1"
+    ],
+    [
+     "-2",
+     "2"
+    ],
+    [
+     "-1",
+     "1"
+    ],
+    [
+     "0",
+     "1"
+    ],
+    [
+     "1",
+     "1"
+    ]
+   ]
+  }
+ },
+ "numerico/suspect-distribution": {
+  "duckdb": {
+   "cols": [
+    "min",
+    "q1",
+    "median",
+    "q3",
+    "max"
+   ],
+   "rows": [
+    [
+     "1.0",
+     "3.0",
+     "4.5",
+     "206250.0",
+     "800000.0"
+    ]
+   ]
+  },
+  "entrada": {
+   "cols": [
+    "id",
+    "amount"
+   ],
+   "rows": [
+    [
+     "1",
+     "1.0"
+    ],
+    [
+     "2",
+     "3.0"
+    ],
+    [
+     "3",
+     "4.0"
+    ],
+    [
+     "4",
+     "5.0"
+    ],
+    [
+     "5",
+     "3.0"
+    ],
+    [
+     "6",
+     "4.0"
+    ],
+    [
+     "7",
+     "3.0"
+    ],
+    [
+     "8",
+     "500.0"
+    ],
+    [
+     "9",
+     "15000.0"
+    ],
+    [
+     "10",
+     "780000.0"
+    ],
+    [
+     "11",
+     "800000.0"
+    ],
+    [
+     "12",
+     "800000.0"
+    ]
+   ]
+  },
+  "jq": "{\"min\":1,\"q1\":3,\"median\":4.5,\"q3\":206250,\"max\":800000}",
+  "mongo": "{\"min\":1,\"quartiles\":[3,4,15000],\"max\":800000}",
+  "postgres": {
+   "cols": [
+    "min",
+    "q1",
+    "median",
+    "q3",
+    "max"
+   ],
+   "rows": [
+    [
+     "1",
+     "3",
+     "4.5",
+     "206250",
+     "800000"
+    ]
+   ]
+  }
+ },
+ "numerico/suspect-precision": {
+  "duckdb": {
+   "cols": [
+    "decimals",
+    "n"
+   ],
+   "rows": [
+    [
+     "1",
+     "1"
+    ],
+    [
+     "2",
+     "2"
+    ],
+    [
+     "10",
+     "1"
+    ]
+   ]
+  },
+  "entrada": {
+   "cols": [
+    "id",
+    "ph"
+   ],
+   "rows": [
+    [
+     "1",
+     "5.5"
+    ],
+    [
+     "2",
+     "4.25"
+    ],
+    [
+     "3",
+     "5.5458415569"
+    ],
+    [
+     "4",
+     "3.75"
+    ]
+   ]
+  },
+  "jq": "{\"decimals\":1,\"n\":1}\n{\"decimals\":2,\"n\":2}\n{\"decimals\":10,\"n\":1}",
+  "mongo": "{\"_id\":1,\"n\":1}\n{\"_id\":2,\"n\":2}\n{\"_id\":10,\"n\":1}",
+  "postgres": {
+   "cols": [
+    "decimals",
+    "n"
+   ],
+   "rows": [
+    [
+     "1",
+     "1"
+    ],
+    [
+     "2",
+     "2"
+    ],
+    [
+     "10",
+     "1"
+    ]
+   ]
+  }
+ },
+ "numerico/unit-inconsistency": {
+  "duckdb": {
+   "cols": [
+    "pattern",
+    "n"
+   ],
+   "rows": [
+    [
+     "99.99",
+     "3"
+    ],
+    [
+     "9999.9",
+     "1"
+    ]
+   ]
+  },
+  "entrada": {
+   "cols": [
+    "day",
+    "close"
+   ],
+   "rows": [
+    [
+     "2021-01-04",
+     "62.15"
+    ],
+    [
+     "2021-01-05",
+     "62.37"
+    ],
+    [
+     "2021-01-06",
+     "6215.0"
+    ],
+    [
+     "2021-01-07",
+     "61.93"
+    ]
+   ]
+  },
+  "jq": "{\"pattern\":\"99.99\",\"n\":3}\n{\"pattern\":\"9999.9\",\"n\":1}",
+  "mongo": "{\"_id\":\"99.99\",\"n\":3}\n{\"_id\":\"9999\",\"n\":1}",
+  "postgres": {
+   "cols": [
+    "pattern",
+    "n"
+   ],
+   "rows": [
+    [
+     "99.99",
+     "3"
+    ],
+    [
+     "9999",
+     "1"
+    ]
+   ]
+  }
+ },
+ "serie-temporal/ambiguous-date-time-format": {
+  "duckdb": {
+   "cols": [
+    "pattern",
+    "n"
+   ],
+   "rows": [
+    [
+     "9999-99-99",
+     "2"
+    ],
+    [
+     "9/9/99",
+     "1"
+    ],
+    [
+     "9/9/9999",
+     "1"
+    ],
+    [
+     "99/99/99",
+     "1"
+    ],
+    [
+     "99/99/9999",
+     "1"
+    ]
+   ]
+  },
+  "entrada": {
+   "cols": [
+    "id",
+    "event_date"
+   ],
+   "rows": [
+    [
+     "1",
+     "2021-05-03"
+    ],
+    [
+     "2",
+     "5/3/21"
+    ],
+    [
+     "3",
+     "12/31/20"
+    ],
+    [
+     "4",
+     "03/05/2021"
+    ],
+    [
+     "5",
+     "2020-12-31"
+    ],
+    [
+     "6",
+     "1/2/1996"
+    ]
+   ]
+  },
+  "jq": "{\"pattern\":\"9999-99-99\",\"n\":2}\n{\"pattern\":\"9/9/99\",\"n\":1}\n{\"pattern\":\"9/9/9999\",\"n\":1}\n{\"pattern\":\"99/99/99\",\"n\":1}\n{\"pattern\":\"99/99/9999\",\"n\":1}",
+  "mongo": "{\"_id\":\"9999-99-99\",\"n\":2}\n{\"_id\":\"9/9/99\",\"n\":1}\n{\"_id\":\"9/9/9999\",\"n\":1}\n{\"_id\":\"99/99/99\",\"n\":1}\n{\"_id\":\"99/99/9999\",\"n\":1}",
+  "postgres": {
+   "cols": [
+    "pattern",
+    "n"
+   ],
+   "rows": [
+    [
+     "9999-99-99",
+     "2"
+    ],
+    [
+     "9/9/99",
+     "1"
+    ],
+    [
+     "9/9/9999",
+     "1"
+    ],
+    [
+     "99/99/99",
+     "1"
+    ],
+    [
+     "99/99/9999",
+     "1"
+    ]
+   ]
+  }
+ },
+ "serie-temporal/date-as-date-time": {
+  "duckdb": {
+   "cols": [
+    "pattern",
+    "time_part",
+    "n"
+   ],
+   "rows": [
+    [
+     "9999-99-99 99:99:99",
+     "00:00:00",
+     "4"
+    ]
+   ]
+  },
+  "entrada": {
+   "cols": [
+    "id",
+    "order_date"
+   ],
+   "rows": [
+    [
+     "1",
+     "2020-12-30 00:00:00"
+    ],
+    [
+     "2",
+     "2021-01-02 00:00:00"
+    ],
+    [
+     "3",
+     "2021-01-05 00:00:00"
+    ],
+    [
+     "4",
+     "2021-02-11 00:00:00"
+    ]
+   ]
+  },
+  "jq": "{\"time_part\":\"00:00:00Z\",\"n\":4}",
+  "mongo": "{\"_id\":\"00:00:00\",\"n\":4}",
+  "postgres": {
+   "cols": [
+    "pattern",
+    "time_part",
+    "n"
+   ],
+   "rows": [
+    [
+     "9999-99-99 99:99:99",
+     "00:00:00",
+     "4"
+    ]
+   ]
+  }
+ },
+ "serie-temporal/date-as-string": {
+  "duckdb": {
+   "cols": [
+    "data_type",
+    "n",
+    "castable_to_date"
+   ],
+   "rows": [
+    [
+     "VARCHAR",
+     "4",
+     "4"
+    ]
+   ]
+  },
+  "entrada": {
+   "cols": [
+    "id",
+    "event_date"
+   ],
+   "rows": [
+    [
+     "1",
+     "2020-12-30"
+    ],
+    [
+     "2",
+     "2020-12-31"
+    ],
+    [
+     "3",
+     "2021-01-04"
+    ],
+    [
+     "4",
+     "2021-01-05"
+    ]
+   ]
+  },
+  "jq": "{\"types\":[\"string\"],\"n\":4,\"castable_to_date\":4}",
+  "mongo": "{\"_id\":\"string\",\"n\":4,\"castableToDate\":4}",
+  "postgres": {
+   "cols": [
+    "data_type",
+    "n",
+    "castable_to_date"
+   ],
+   "rows": [
+    [
+     "text",
+     "4",
+     "4"
+    ]
+   ]
+  }
+ },
+ "serie-temporal/date-time-as-string": {
+  "duckdb": {
+   "cols": [
+    "data_type",
+    "pattern",
+    "n"
+   ],
+   "rows": [
+    [
+     "VARCHAR",
+     "9999-99-99 99:99:99",
+     "3"
+    ]
+   ]
+  },
+  "entrada": {
+   "cols": [
+    "id",
+    "read_at"
+   ],
+   "rows": [
+    [
+     "1",
+     "2020-12-30 11:50:40"
+    ],
+    [
+     "2",
+     "2020-12-30 11:51:10"
+    ],
+    [
+     "3",
+     "2020-12-30 11:52:05"
+    ]
+   ]
+  },
+  "jq": "{\"type\":\"string\",\"pattern\":\"9999-99-99 99:99:99\",\"n\":3}",
+  "mongo": "{\"_id\":{\"type\":\"string\",\"pattern\":\"9999-99-99 99:99:99\"},\"n\":3}",
+  "postgres": {
+   "cols": [
+    "data_type",
+    "pattern",
+    "n"
+   ],
+   "rows": [
+    [
+     "text",
+     "9999-99-99 99:99:99",
+     "3"
+    ]
+   ]
+  }
+ },
+ "serie-temporal/date-time-format-inconsistency": {
+  "duckdb": {
+   "cols": [
+    "pattern",
+    "n"
+   ],
+   "rows": [
+    [
+     "9999-99-99",
+     "3"
+    ],
+    [
+     "99-99-99",
+     "1"
+    ],
+    [
+     "99-99-9999",
+     "1"
+    ]
+   ]
+  },
+  "entrada": {
+   "cols": [
+    "id",
+    "paid_on"
+   ],
+   "rows": [
+    [
+     "1",
+     "2020-01-30"
+    ],
+    [
+     "2",
+     "30-01-2020"
+    ],
+    [
+     "3",
+     "20-01-30"
+    ],
+    [
+     "4",
+     "2020-02-14"
+    ],
+    [
+     "5",
+     "2020-03-02"
+    ]
+   ]
+  },
+  "jq": "{\"pattern\":\"9999-99-99\",\"n\":3}\n{\"pattern\":\"99-99-99\",\"n\":1}\n{\"pattern\":\"99-99-9999\",\"n\":1}",
+  "mongo": "{\"_id\":\"9999-99-99\",\"n\":3}\n{\"_id\":\"99-99-99\",\"n\":1}\n{\"_id\":\"99-99-9999\",\"n\":1}",
+  "postgres": {
+   "cols": [
+    "pattern",
+    "n"
+   ],
+   "rows": [
+    [
+     "9999-99-99",
+     "3"
+    ],
+    [
+     "99-99-99",
+     "1"
+    ],
+    [
+     "99-99-9999",
+     "1"
+    ]
+   ]
+  }
+ },
+ "serie-temporal/dummy-value": {
+  "duckdb": {
+   "cols": [
+    "top_value",
+    "n",
+    "constancy"
+   ],
+   "rows": [
+    [
+     "1970-01-01",
+     "3",
+     "0.5"
+    ]
+   ]
+  },
+  "entrada": {
+   "cols": [
+    "id",
+    "signed_up"
+   ],
+   "rows": [
+    [
+     "1",
+     "1970-01-01"
+    ],
+    [
+     "2",
+     "2021-06-14"
+    ],
+    [
+     "3",
+     "1970-01-01"
+    ],
+    [
+     "4",
+     "2022-03-02"
+    ],
+    [
+     "5",
+     "1970-01-01"
+    ],
+    [
+     "6",
+     "2021-11-20"
+    ]
+   ]
+  },
+  "jq": "{\"top_value\":\"1970-01-01\",\"n\":3,\"constancy\":0.5}",
+  "mongo": "{\"n\":3,\"top_value\":\"1970-01-01\",\"constancy\":0.5}",
+  "postgres": {
+   "cols": [
+    "top_value",
+    "n",
+    "constancy"
+   ],
+   "rows": [
+    [
+     "1970-01-01",
+     "3",
+     "0.50"
+    ]
+   ]
+  }
+ },
+ "serie-temporal/extraneous-value": {
+  "duckdb": {
+   "cols": [
+    "len",
+    "n",
+    "example"
+   ],
+   "rows": [
+    [
+     "10",
+     "2",
+     "2021-03-05"
+    ],
+    [
+     "14",
+     "1",
+     "2021-03-09 UTC"
+    ],
+    [
+     "15",
+     "1",
+     "Fri Mar 05 2021"
+    ]
+   ]
+  },
+  "entrada": {
+   "cols": [
+    "id",
+    "logged_on"
+   ],
+   "rows": [
+    [
+     "1",
+     "2021-03-05"
+    ],
+    [
+     "2",
+     "2021-03-08"
+    ],
+    [
+     "3",
+     "Fri Mar 05 2021"
+    ],
+    [
+     "4",
+     "2021-03-09 UTC"
+    ]
+   ]
+  },
+  "jq": "{\"len\":10,\"n\":2,\"example\":\"2021-03-05\"}\n{\"len\":14,\"n\":1,\"example\":\"2021-03-09 UTC\"}\n{\"len\":15,\"n\":1,\"example\":\"Fri Mar 05 2021\"}",
+  "mongo": "{\"_id\":10,\"n\":2,\"example\":\"2021-03-05\"}\n{\"_id\":14,\"n\":1,\"example\":\"2021-03-09 UTC\"}\n{\"_id\":15,\"n\":1,\"example\":\"Fri Mar 05 2021\"}",
+  "postgres": {
+   "cols": [
+    "len",
+    "n",
+    "example"
+   ],
+   "rows": [
+    [
+     "10",
+     "2",
+     "2021-03-05"
+    ],
+    [
+     "14",
+     "1",
+     "2021-03-09 UTC"
+    ],
+    [
+     "15",
+     "1",
+     "Fri Mar 05 2021"
+    ]
+   ]
+  }
+ },
+ "serie-temporal/intermingled-data-type": {
+  "duckdb": {
+   "cols": [
+    "basic_type",
+    "n"
+   ],
+   "rows": [
+    [
+     "date",
+     "3"
+    ],
+    [
+     "alphanumeric",
+     "2"
+    ]
+   ]
+  },
+  "entrada": {
+   "cols": [
+    "id",
+    "due"
+   ],
+   "rows": [
+    [
+     "1",
+     "2021-03-05"
+    ],
+    [
+     "2",
+     "2021-03-06"
+    ],
+    [
+     "3",
+     "Q1 2021"
+    ],
+    [
+     "4",
+     "2021-03-08"
+    ],
+    [
+     "5",
+     "week 12"
+    ]
+   ]
+  },
+  "jq": "{\"basic_type\":\"date\",\"n\":3}\n{\"basic_type\":\"alphanumeric\",\"n\":2}",
+  "mongo": "{\"_id\":\"date\",\"n\":3}\n{\"_id\":\"alphanumeric\",\"n\":2}",
+  "postgres": {
+   "cols": [
+    "basic_type",
+    "n"
+   ],
+   "rows": [
+    [
+     "date",
+     "3"
+    ],
+    [
+     "alphanumeric",
+     "2"
+    ]
+   ]
+  }
+ },
+ "serie-temporal/missing-value-inconsistency": {
+  "duckdb": {
+   "cols": [
+    "missing_as",
+    "n"
+   ],
+   "rows": [
+    [
+     "\"\"",
+     "1"
+    ],
+    [
+     "\"0000-00-00\"",
+     "1"
+    ],
+    [
+     "\"N/A\"",
+     "1"
+    ],
+    [
+     "\"NULL\"",
+     "1"
+    ],
+    [
+     "(NULL)",
+     "1"
+    ]
+   ]
+  },
+  "entrada": {
+   "cols": [
+    "id",
+    "visited_on"
+   ],
+   "rows": [
+    [
+     "1",
+     "2021-03-05"
+    ],
+    [
+     "2",
+     "NULL"
+    ],
+    [
+     "3",
+     ""
+    ],
+    [
+     "4",
+     "N/A"
+    ],
+    [
+     "5",
+     "0000-00-00"
+    ],
+    [
+     "6",
+     "2021-03-07"
+    ],
+    [
+     "7",
+     "NULL"
+    ]
+   ]
+  },
+  "jq": "{\"missing_as\":\"\\\"\\\"\",\"n\":1}\n{\"missing_as\":\"\\\"0000-00-00\\\"\",\"n\":1}\n{\"missing_as\":\"\\\"N/A\\\"\",\"n\":1}\n{\"missing_as\":\"(campo ausente)\",\"n\":1}\n{\"missing_as\":\"(null)\",\"n\":1}",
+  "mongo": "{\"_id\":\"\\\"\\\"\",\"n\":1}\n{\"_id\":\"\\\"0000-00-00\\\"\",\"n\":1}\n{\"_id\":\"\\\"N/A\\\"\",\"n\":1}\n{\"_id\":\"(campo ausente)\",\"n\":1}\n{\"_id\":\"(null)\",\"n\":1}",
+  "postgres": {
+   "cols": [
+    "missing_as",
+    "n"
+   ],
+   "rows": [
+    [
+     "\"\"",
+     "1"
+    ],
+    [
+     "\"0000-00-00\"",
+     "1"
+    ],
+    [
+     "\"N/A\"",
+     "1"
+    ],
+    [
+     "\"NULL\"",
+     "1"
+    ],
+    [
+     "(NULL)",
+     "1"
+    ]
+   ]
+  }
+ },
+ "serie-temporal/suspect-date-time-interval": {
+  "duckdb": {
+   "cols": [
+    "gap_days",
+    "n"
+   ],
+   "rows": [
+    [
+     "1",
+     "3"
+    ],
+    [
+     "272",
+     "1"
+    ]
+   ]
+  },
+  "entrada": {
+   "cols": [
+    "id",
+    "ran_on"
+   ],
+   "rows": [
+    [
+     "1",
+     "2019-01-01"
+    ],
+    [
+     "2",
+     "2019-01-02"
+    ],
+    [
+     "3",
+     "2019-10-01"
+    ],
+    [
+     "4",
+     "2019-10-02"
+    ],
+    [
+     "5",
+     "2019-10-03"
+    ]
+   ]
+  },
+  "jq": "{\"gap_days\":1,\"n\":3}\n{\"gap_days\":272,\"n\":1}",
+  "mongo": "{\"_id\":1,\"n\":3}\n{\"_id\":272,\"n\":1}",
+  "postgres": {
+   "cols": [
+    "gap_days",
+    "n"
+   ],
+   "rows": [
+    [
+     "1",
+     "3"
+    ],
+    [
+     "272",
+     "1"
+    ]
+   ]
+  }
+ },
+ "serie-temporal/suspect-date-value": {
+  "duckdb": {
+   "cols": [
+    "decade",
+    "n"
+   ],
+   "rows": [
+    [
+     "1890",
+     "1"
+    ],
+    [
+     "2010",
+     "1"
+    ],
+    [
+     "2020",
+     "3"
+    ],
+    [
+     "2090",
+     "1"
+    ]
+   ]
+  },
+  "entrada": {
+   "cols": [
+    "id",
+    "inspected_on"
+   ],
+   "rows": [
+    [
+     "1",
+     "1899-03-22"
+    ],
+    [
+     "2",
+     "2019-05-02"
+    ],
+    [
+     "3",
+     "2020-01-14"
+    ],
+    [
+     "4",
+     "2020-07-30"
+    ],
+    [
+     "5",
+     "2021-03-11"
+    ],
+    [
+     "6",
+     "2099-03-02"
+    ]
+   ]
+  },
+  "jq": "{\"decade\":1890,\"n\":1}\n{\"decade\":2010,\"n\":1}\n{\"decade\":2020,\"n\":3}\n{\"decade\":2090,\"n\":1}",
+  "mongo": "{\"_id\":1890,\"n\":1}\n{\"_id\":2010,\"n\":1}\n{\"_id\":2020,\"n\":3}\n{\"_id\":2090,\"n\":1}",
+  "postgres": {
+   "cols": [
+    "decade",
+    "n"
+   ],
+   "rows": [
+    [
+     "1890",
+     "1"
+    ],
+    [
+     "2010",
+     "1"
+    ],
+    [
+     "2020",
+     "3"
+    ],
+    [
+     "2090",
+     "1"
+    ]
+   ]
+  }
+ },
+ "serie-temporal/time-as-string": {
+  "duckdb": {
+   "cols": [
+    "data_type",
+    "n",
+    "castable_to_time"
+   ],
+   "rows": [
+    [
+     "VARCHAR",
+     "4",
+     "4"
+    ]
+   ]
+  },
+  "entrada": {
+   "cols": [
+    "id",
+    "starts"
+   ],
+   "rows": [
+    [
+     "1",
+     "11:50:40"
+    ],
+    [
+     "2",
+     "07:00:00"
+    ],
+    [
+     "3",
+     "23:15:00"
+    ],
+    [
+     "4",
+     "14:30:00"
+    ]
+   ]
+  },
+  "jq": "{\"types\":[\"string\"],\"n\":4,\"time_like\":4}",
+  "mongo": "{\"_id\":\"string\",\"n\":4,\"timeLike\":4}",
+  "postgres": {
+   "cols": [
+    "data_type",
+    "n",
+    "castable_to_time"
+   ],
+   "rows": [
+    [
+     "text",
+     "4",
+     "4"
+    ]
+   ]
+  }
+ },
+ "serie-temporal/unit-inconsistency": {
+  "duckdb": {
+   "cols": [
+    "pattern",
+    "n"
+   ],
+   "rows": [
+    [
+     "9999999999",
+     "3"
+    ],
+    [
+     "9999999999999",
+     "1"
+    ]
+   ]
+  },
+  "entrada": {
+   "cols": [
+    "id",
+    "created_at"
+   ],
+   "rows": [
+    [
+     "1",
+     "1609459200"
+    ],
+    [
+     "2",
+     "1609459260000"
+    ],
+    [
+     "3",
+     "1609459320"
+    ],
+    [
+     "4",
+     "1609459380"
+    ]
+   ]
+  },
+  "jq": "{\"pattern\":\"9999999999\",\"n\":3}\n{\"pattern\":\"9999999999999\",\"n\":1}",
+  "mongo": "{\"_id\":\"9999999999\",\"n\":3}\n{\"_id\":\"9999999999999\",\"n\":1}",
+  "postgres": {
+   "cols": [
+    "pattern",
+    "n"
+   ],
+   "rows": [
+    [
+     "9999999999",
+     "3"
+    ],
+    [
+     "9999999999999",
+     "1"
+    ]
+   ]
+  }
+ },
+ "texto/abbreviation-inconsistency": {
+  "duckdb": {
+   "cols": [
+    "title",
+    "n"
+   ],
+   "rows": [
+    [
+     "Doctor",
+     "2"
+    ],
+    [
+     "Dr.",
+     "2"
+    ],
+    [
+     "Prof.",
+     "1"
+    ]
+   ]
+  },
+  "entrada": {
+   "cols": [
+    "id",
+    "name"
+   ],
+   "rows": [
+    [
+     "1",
+     "Dr. Hofer"
+    ],
+    [
+     "2",
+     "Doctor Huber"
+    ],
+    [
+     "3",
+     "Dr. Maier"
+    ],
+    [
+     "4",
+     "Prof. Gruber"
+    ],
+    [
+     "5",
+     "Doctor Wolf"
+    ]
+   ]
+  },
+  "jq": "{\"title\":\"Doctor\",\"n\":2}\n{\"title\":\"Dr.\",\"n\":2}\n{\"title\":\"Prof.\",\"n\":1}",
+  "mongo": "{\"_id\":\"Doctor\",\"n\":2}\n{\"_id\":\"Dr.\",\"n\":2}\n{\"_id\":\"Prof.\",\"n\":1}",
+  "postgres": {
+   "cols": [
+    "title",
+    "n"
+   ],
+   "rows": [
+    [
+     "Doctor",
+     "2"
+    ],
+    [
+     "Dr.",
+     "2"
+    ],
+    [
+     "Prof.",
+     "1"
+    ]
+   ]
+  }
+ },
+ "texto/ambiguous-value": {
+  "duckdb": {
+   "cols": [
+    "term",
+    "domains",
+    "values_with_term"
+   ],
+   "rows": [
+    [
+     "Dr",
+     "street type, title",
+     "2"
+    ],
+    [
+     "St",
+     "saint, street type",
+     "2"
+    ]
+   ]
+  },
+  "entrada": {
+   "cols": [
+    "id",
+    "line"
+   ],
+   "rows": [
+    [
+     "1",
+     "12 Ocean Dr"
+    ],
+    [
+     "2",
+     "Dr Smith"
+    ],
+    [
+     "3",
+     "5 Main St"
+    ],
+    [
+     "4",
+     "St Paul"
+    ]
+   ]
+  },
+  "jq": "{\"term\":\"Dr\",\"domains\":[\"street type\",\"title\"],\"values_with_term\":2}\n{\"term\":\"St\",\"domains\":[\"saint\",\"street type\"],\"values_with_term\":2}",
+  "mongo": "{\"_id\":\"Dr\",\"domains\":[\"street type\",\"title\"],\"values_with_term\":2}\n{\"_id\":\"St\",\"domains\":[\"street type\",\"saint\"],\"values_with_term\":2}",
+  "postgres": {
+   "cols": [
+    "term",
+    "domains",
+    "values_with_term"
+   ],
+   "rows": [
+    [
+     "Dr",
+     "street type, title",
+     "2"
+    ],
+    [
+     "St",
+     "saint, street type",
+     "2"
+    ]
+   ]
+  }
+ },
+ "texto/casing": {
+  "duckdb": {
+   "cols": [
+    "casing",
+    "n"
+   ],
+   "rows": [
+    [
+     "Title",
+     "2"
+    ],
+    [
+     "Mixed",
+     "1"
+    ],
+    [
+     "UPPER",
+     "1"
+    ],
+    [
+     "lower",
+     "1"
+    ]
+   ]
+  },
+  "entrada": {
+   "cols": [
+    "id",
+    "msg"
+   ],
+   "rows": [
+    [
+     "1",
+     "GoOD MorNiNg"
+    ],
+    [
+     "2",
+     "GOOD MORNING"
+    ],
+    [
+     "3",
+     "good morning"
+    ],
+    [
+     "4",
+     "Good Morning"
+    ],
+    [
+     "5",
+     "Good Evening"
+    ]
+   ]
+  },
+  "jq": "{\"casing\":\"Title\",\"n\":2}\n{\"casing\":\"Mixed\",\"n\":1}\n{\"casing\":\"UPPER\",\"n\":1}\n{\"casing\":\"lower\",\"n\":1}",
+  "mongo": "{\"_id\":\"Title\",\"n\":2}\n{\"_id\":\"Mixed\",\"n\":1}\n{\"_id\":\"UPPER\",\"n\":1}\n{\"_id\":\"lower\",\"n\":1}",
+  "postgres": {
+   "cols": [
+    "casing",
+    "n"
+   ],
+   "rows": [
+    [
+     "Title",
+     "2"
+    ],
+    [
+     "Mixed",
+     "1"
+    ],
+    [
+     "UPPER",
+     "1"
+    ],
+    [
+     "lower",
+     "1"
+    ]
+   ]
+  }
+ },
+ "texto/casing-inconsistency": {
+  "duckdb": {
+   "cols": [
+    "casing",
+    "n"
+   ],
+   "rows": [
+    [
+     "Mixed",
+     "3"
+    ],
+    [
+     "UPPER",
+     "1"
+    ],
+    [
+     "lower",
+     "1"
+    ]
+   ]
+  },
+  "entrada": {
+   "cols": [
+    "id",
+    "city"
+   ],
+   "rows": [
+    [
+     "1",
+     "Joinville"
+    ],
+    [
+     "2",
+     "JOINVILLE"
+    ],
+    [
+     "3",
+     "joinville"
+    ],
+    [
+     "4",
+     "Curitiba"
+    ],
+    [
+     "5",
+     "Blumenau"
+    ]
+   ]
+  },
+  "jq": "{\"casing\":\"Mixed\",\"n\":3}\n{\"casing\":\"UPPER\",\"n\":1}\n{\"casing\":\"lower\",\"n\":1}",
+  "mongo": "{\"_id\":\"Mixed\",\"n\":3}\n{\"_id\":\"UPPER\",\"n\":1}\n{\"_id\":\"lower\",\"n\":1}",
+  "postgres": {
+   "cols": [
+    "casing",
+    "n"
+   ],
+   "rows": [
+    [
+     "Mixed",
+     "3"
+    ],
+    [
+     "UPPER",
+     "1"
+    ],
+    [
+     "lower",
+     "1"
+    ]
+   ]
+  }
+ },
+ "texto/contracting": {
+  "duckdb": {
+   "cols": [
+    "pattern",
+    "n"
+   ],
+   "rows": [
+    [
+     "aaa'a",
+     "2"
+    ],
+    [
+     "A aaaaa",
+     "1"
+    ],
+    [
+     "A'a",
+     "1"
+    ],
+    [
+     "aa aaa",
+     "1"
+    ]
+   ]
+  },
+  "entrada": {
+   "cols": [
+    "id",
+    "reply"
+   ],
+   "rows": [
+    [
+     "1",
+     "don't"
+    ],
+    [
+     "2",
+     "I'd"
+    ],
+    [
+     "3",
+     "do not"
+    ],
+    [
+     "4",
+     "I would"
+    ],
+    [
+     "5",
+     "can't"
+    ]
+   ]
+  },
+  "jq": "{\"pattern\":\"aaa'a\",\"n\":2}\n{\"pattern\":\"A aaaaa\",\"n\":1}\n{\"pattern\":\"A'a\",\"n\":1}\n{\"pattern\":\"aa aaa\",\"n\":1}",
+  "mongo": "{\"_id\":\"aaa'a\",\"n\":2}\n{\"_id\":\"A aaaaa\",\"n\":1}\n{\"_id\":\"A'a\",\"n\":1}\n{\"_id\":\"aa aaa\",\"n\":1}",
+  "postgres": {
+   "cols": [
+    "pattern",
+    "n"
+   ],
+   "rows": [
+    [
+     "aaa'a",
+     "2"
+    ],
+    [
+     "A aaaaa",
+     "1"
+    ],
+    [
+     "A'a",
+     "1"
+    ],
+    [
+     "aa aaa",
+     "1"
+    ]
+   ]
+  }
+ },
+ "texto/dummy-value": {
+  "duckdb": {
+   "cols": [
+    "top_value",
+    "n",
+    "constancy"
+   ],
+   "rows": [
+    [
+     "unknown",
+     "3",
+     "0.5"
+    ]
+   ]
+  },
+  "entrada": {
+   "cols": [
+    "id",
+    "name"
+   ],
+   "rows": [
+    [
+     "1",
+     "unknown"
+    ],
+    [
+     "2",
+     "Ana"
+    ],
+    [
+     "3",
+     "unknown"
+    ],
+    [
+     "4",
+     "Bruno"
+    ],
+    [
+     "5",
+     "unknown"
+    ],
+    [
+     "6",
+     "Carla"
+    ]
+   ]
+  },
+  "jq": "{\"top_value\":\"unknown\",\"n\":3,\"constancy\":0.5}",
+  "mongo": "{\"n\":3,\"top_value\":\"unknown\",\"constancy\":0.5}",
+  "postgres": {
+   "cols": [
+    "top_value",
+    "n",
+    "constancy"
+   ],
+   "rows": [
+    [
+     "unknown",
+     "3",
+     "0.50"
+    ]
+   ]
+  }
+ },
+ "texto/extraneous-value": {
+  "duckdb": {
+   "cols": [
+    "words",
+    "n",
+    "example"
+   ],
+   "rows": [
+    [
+     "2",
+     "2",
+     "Elena Kagan"
+    ],
+    [
+     "3",
+     "2",
+     "John Roberts Jr."
+    ],
+    [
+     "4",
+     "1",
+     "CJ. John Roberts Jr."
+    ]
+   ]
+  },
+  "entrada": {
+   "cols": [
+    "id",
+    "name"
+   ],
+   "rows": [
+    [
+     "1",
+     "John Roberts Jr."
+    ],
+    [
+     "2",
+     "CJ. John Roberts Jr."
+    ],
+    [
+     "3",
+     "Sonia Sotomayor"
+    ],
+    [
+     "4",
+     "Elena Kagan"
+    ],
+    [
+     "5",
+     "Justice Elena Kagan"
+    ]
+   ]
+  },
+  "jq": "{\"words\":2,\"n\":2,\"example\":\"Elena Kagan\"}\n{\"words\":3,\"n\":2,\"example\":\"John Roberts Jr.\"}\n{\"words\":4,\"n\":1,\"example\":\"CJ. John Roberts Jr.\"}",
+  "mongo": "{\"_id\":2,\"n\":2,\"example\":\"Elena Kagan\"}\n{\"_id\":3,\"n\":2,\"example\":\"John Roberts Jr.\"}\n{\"_id\":4,\"n\":1,\"example\":\"CJ. John Roberts Jr.\"}",
+  "postgres": {
+   "cols": [
+    "words",
+    "n",
+    "example"
+   ],
+   "rows": [
+    [
+     "2",
+     "2",
+     "Elena Kagan"
+    ],
+    [
+     "3",
+     "2",
+     "John Roberts Jr."
+    ],
+    [
+     "4",
+     "1",
+     "CJ. John Roberts Jr."
+    ]
+   ]
+  }
+ },
+ "texto/intermingled-data-type": {
+  "duckdb": {
+   "cols": [
+    "basic_type",
+    "n"
+   ],
+   "rows": [
+    [
+     "alphabetic",
+     "2"
+    ],
+    [
+     "alphanumeric",
+     "2"
+    ],
+    [
+     "numeric",
+     "1"
+    ]
+   ]
+  },
+  "entrada": {
+   "cols": [
+    "id",
+    "room"
+   ],
+   "rows": [
+    [
+     "1",
+     "Room 12"
+    ],
+    [
+     "2",
+     "90 Days"
+    ],
+    [
+     "3",
+     "Lobby"
+    ],
+    [
+     "4",
+     "Kitchen"
+    ],
+    [
+     "5",
+     "12"
+    ]
+   ]
+  },
+  "jq": "{\"basic_type\":\"alphabetic\",\"n\":2}\n{\"basic_type\":\"alphanumeric\",\"n\":2}\n{\"basic_type\":\"numeric\",\"n\":1}",
+  "mongo": "{\"_id\":\"alphabetic\",\"n\":2}\n{\"_id\":\"alphanumeric\",\"n\":2}\n{\"_id\":\"numeric\",\"n\":1}",
+  "postgres": {
+   "cols": [
+    "basic_type",
+    "n"
+   ],
+   "rows": [
+    [
+     "alphabetic",
+     "2"
+    ],
+    [
+     "alphanumeric",
+     "2"
+    ],
+    [
+     "numeric",
+     "1"
+    ]
+   ]
+  }
+ },
+ "texto/long-data-value": {
+  "duckdb": {
+   "cols": [
+    "min",
+    "max",
+    "median",
+    "avg"
+   ],
+   "rows": [
+    [
+     "5",
+     "45",
+     "13.0",
+     "20.4"
+    ]
+   ]
+  },
+  "entrada": {
+   "cols": [
+    "id",
+    "label"
+   ],
+   "rows": [
+    [
+     "1",
+     "alarm"
+    ],
+    [
+     "2",
+     "pressure high"
+    ],
+    [
+     "3",
+     "Pneumonoultramicroscopicsilicovolcanoconiosis"
+    ],
+    [
+     "4",
+     "12Am12-12-20highpressalarmset0"
+    ],
+    [
+     "5",
+     "door open"
+    ]
+   ]
+  },
+  "jq": "{\"min\":5,\"max\":45,\"median\":13,\"avg\":20.4}",
+  "mongo": "{\"min\":5,\"max\":45,\"median\":13,\"avg\":20.4}",
+  "postgres": {
+   "cols": [
+    "min",
+    "max",
+    "median",
+    "avg"
+   ],
+   "rows": [
+    [
+     "5",
+     "45",
+     "13",
+     "20.4"
+    ]
+   ]
+  }
+ },
+ "texto/meaningless-value": {
+  "duckdb": {
+   "cols": [
+    "domain",
+    "n",
+    "values"
+   ],
+   "rows": [
+    [
+     "repeated sequence",
+     "3",
+     "aaa, abcabc, 123412341234"
+    ],
+    [
+     "text",
+     "2",
+     "Maria, Joinville"
+    ]
+   ]
+  },
+  "entrada": {
+   "cols": [
+    "id",
+    "name"
+   ],
+   "rows": [
+    [
+     "1",
+     "aaa"
+    ],
+    [
+     "2",
+     "abcabc"
+    ],
+    [
+     "3",
+     "123412341234"
+    ],
+    [
+     "4",
+     "Maria"
+    ],
+    [
+     "5",
+     "Joinville"
+    ]
+   ]
+  },
+  "jq": "{\"domain\":\"repeated sequence\",\"n\":3,\"values\":[\"aaa\",\"abcabc\",\"123412341234\"]}\n{\"domain\":\"text\",\"n\":2,\"values\":[\"Maria\",\"Joinville\"]}",
+  "mongo": "{\"_id\":\"repeated sequence\",\"n\":3,\"values\":[\"aaa\",\"abcabc\",\"123412341234\"]}\n{\"_id\":\"text\",\"n\":2,\"values\":[\"Maria\",\"Joinville\"]}",
+  "postgres": {
+   "cols": [
+    "domain",
+    "n",
+    "values"
+   ],
+   "rows": [
+    [
+     "repeated sequence",
+     "3",
+     "aaa, abcabc, 123412341234"
+    ],
+    [
+     "text",
+     "2",
+     "Maria, Joinville"
+    ]
+   ]
+  }
+ },
+ "texto/missing-value-inconsistency": {
+  "duckdb": {
+   "cols": [
+    "missing_as",
+    "n"
+   ],
+   "rows": [
+    [
+     "\"\"",
+     "1"
+    ],
+    [
+     "\"-\"",
+     "1"
+    ],
+    [
+     "\"N/A\"",
+     "1"
+    ],
+    [
+     "\"null\"",
+     "1"
+    ],
+    [
+     "(NULL)",
+     "1"
+    ]
+   ]
+  },
+  "entrada": {
+   "cols": [
+    "id",
+    "city"
+   ],
+   "rows": [
+    [
+     "1",
+     "Joinville"
+    ],
+    [
+     "2",
+     "NULL"
+    ],
+    [
+     "3",
+     ""
+    ],
+    [
+     "4",
+     "N/A"
+    ],
+    [
+     "5",
+     "-"
+    ],
+    [
+     "6",
+     "Curitiba"
+    ],
+    [
+     "7",
+     "null"
+    ]
+   ]
+  },
+  "jq": "{\"missing_as\":\"\\\"\\\"\",\"n\":1}\n{\"missing_as\":\"\\\"-\\\"\",\"n\":1}\n{\"missing_as\":\"\\\"N/A\\\"\",\"n\":1}\n{\"missing_as\":\"(campo ausente)\",\"n\":1}\n{\"missing_as\":\"(null)\",\"n\":1}",
+  "mongo": "{\"_id\":\"\\\"\\\"\",\"n\":1}\n{\"_id\":\"\\\"-\\\"\",\"n\":1}\n{\"_id\":\"\\\"N/A\\\"\",\"n\":1}\n{\"_id\":\"(campo ausente)\",\"n\":1}\n{\"_id\":\"(null)\",\"n\":1}",
+  "postgres": {
+   "cols": [
+    "missing_as",
+    "n"
+   ],
+   "rows": [
+    [
+     "\"\"",
+     "1"
+    ],
+    [
+     "\"-\"",
+     "1"
+    ],
+    [
+     "\"N/A\"",
+     "1"
+    ],
+    [
+     "\"null\"",
+     "1"
+    ],
+    [
+     "(NULL)",
+     "1"
+    ]
+   ]
+  }
+ },
+ "texto/separating": {
+  "duckdb": {
+   "cols": [
+    "pattern",
+    "n"
+   ],
+   "rows": [
+    [
+     "99 999",
+     "1"
+    ],
+    [
+     "99 999 999",
+     "1"
+    ],
+    [
+     "99.999",
+     "1"
+    ],
+    [
+     "999",
+     "1"
+    ],
+    [
+     "9999",
+     "1"
+    ]
+   ]
+  },
+  "entrada": {
+   "cols": [
+    "id",
+    "people"
+   ],
+   "rows": [
+    [
+     "1",
+     "23 432"
+    ],
+    [
+     "2",
+     "21.321"
+    ],
+    [
+     "3",
+     "12 340 000"
+    ],
+    [
+     "4",
+     "1500"
+    ],
+    [
+     "5",
+     "980"
+    ]
+   ]
+  },
+  "jq": "{\"pattern\":\"99 999\",\"n\":1}\n{\"pattern\":\"99 999 999\",\"n\":1}\n{\"pattern\":\"99.999\",\"n\":1}\n{\"pattern\":\"999\",\"n\":1}\n{\"pattern\":\"9999\",\"n\":1}",
+  "mongo": "{\"_id\":\"99 999\",\"n\":1}\n{\"_id\":\"99 999 999\",\"n\":1}\n{\"_id\":\"99.999\",\"n\":1}\n{\"_id\":\"999\",\"n\":1}\n{\"_id\":\"9999\",\"n\":1}",
+  "postgres": {
+   "cols": [
+    "pattern",
+    "n"
+   ],
+   "rows": [
+    [
+     "99 999",
+     "1"
+    ],
+    [
+     "99 999 999",
+     "1"
+    ],
+    [
+     "99.999",
+     "1"
+    ],
+    [
+     "999",
+     "1"
+    ],
+    [
+     "9999",
+     "1"
+    ]
+   ]
+  }
+ },
+ "texto/separating-inconsistency": {
+  "duckdb": {
+   "cols": [
+    "pattern",
+    "n"
+   ],
+   "rows": [
+    [
+     "99 999",
+     "2"
+    ],
+    [
+     "99.999",
+     "1"
+    ],
+    [
+     "99_999",
+     "1"
+    ]
+   ]
+  },
+  "entrada": {
+   "cols": [
+    "id",
+    "amount"
+   ],
+   "rows": [
+    [
+     "1",
+     "23 100"
+    ],
+    [
+     "2",
+     "23.500"
+    ],
+    [
+     "3",
+     "25_000"
+    ],
+    [
+     "4",
+     "27 000"
+    ]
+   ]
+  },
+  "jq": "{\"pattern\":\"99 999\",\"n\":2}\n{\"pattern\":\"99.999\",\"n\":1}\n{\"pattern\":\"99_999\",\"n\":1}",
+  "mongo": "{\"_id\":\"99 999\",\"n\":2}\n{\"_id\":\"99.999\",\"n\":1}\n{\"_id\":\"99_999\",\"n\":1}",
+  "postgres": {
+   "cols": [
+    "pattern",
+    "n"
+   ],
+   "rows": [
+    [
+     "99 999",
+     "2"
+    ],
+    [
+     "99.999",
+     "1"
+    ],
+    [
+     "99_999",
+     "1"
+    ]
+   ]
+  }
+ },
+ "texto/spacing": {
+  "duckdb": {
+   "cols": [
+    "leading_or_trailing",
+    "multiple",
+    "missing",
+    "n"
+   ],
+   "rows": [
+    [
+     "2",
+     "2",
+     "1",
+     "4"
+    ]
+   ]
+  },
+  "entrada": {
+   "cols": [
+    "id",
+    "name"
+   ],
+   "rows": [
+    [
+     "1",
+     "JohnSmith "
+    ],
+    [
+     "2",
+     "John  Smith"
+    ],
+    [
+     "3",
+     "  John  Smith"
+    ],
+    [
+     "4",
+     "John Smith"
+    ]
+   ]
+  },
+  "jq": "{\"leading_or_trailing\":2,\"multiple\":2,\"missing\":1,\"n\":4}",
+  "mongo": "{\"leading_or_trailing\":2,\"multiple\":2,\"missing\":1,\"n\":4}",
+  "postgres": {
+   "cols": [
+    "leading_or_trailing",
+    "multiple",
+    "missing",
+    "n"
+   ],
+   "rows": [
+    [
+     "2",
+     "2",
+     "1",
+     "4"
+    ]
+   ]
+  }
+ },
+ "texto/spacing-inconsistency": {
+  "duckdb": {
+   "cols": [
+    "pattern",
+    "n"
+   ],
+   "rows": [
+    [
+     "+99 999 999",
+     "2"
+    ],
+    [
+     "+99999 999",
+     "2"
+    ]
+   ]
+  },
+  "entrada": {
+   "cols": [
+    "id",
+    "phone"
+   ],
+   "rows": [
+    [
+     "1",
+     "+43 664 123"
+    ],
+    [
+     "2",
+     "+43664 546"
+    ],
+    [
+     "3",
+     "+43 650 123"
+    ],
+    [
+     "4",
+     "+43699 111"
+    ]
+   ]
+  },
+  "jq": "{\"pattern\":\"+99 999 999\",\"n\":2}\n{\"pattern\":\"+99999 999\",\"n\":2}",
+  "mongo": "{\"_id\":\"+99 999 999\",\"n\":2}\n{\"_id\":\"+99999 999\",\"n\":2}",
+  "postgres": {
+   "cols": [
+    "pattern",
+    "n"
+   ],
+   "rows": [
+    [
+     "+99 999 999",
+     "2"
+    ],
+    [
+     "+99999 999",
+     "2"
+    ]
+   ]
+  }
+ },
+ "texto/special-character": {
+  "duckdb": {
+   "cols": [
+    "specials",
+    "n"
+   ],
+   "rows": [
+    [
+     "",
+     "1"
+    ],
+    [
+     "'",
+     "1"
+    ],
+    [
+     ",-",
+     "1"
+    ],
+    [
+     "..",
+     "1"
+    ]
+   ]
+  },
+  "entrada": {
+   "cols": [
+    "id",
+    "note"
+   ],
+   "rows": [
+    [
+     "1",
+     "Hello, how are you - today"
+    ],
+    [
+     "2",
+     "New.York."
+    ],
+    [
+     "3",
+     "John's house"
+    ],
+    [
+     "4",
+     "Main Street"
+    ]
+   ]
+  },
+  "jq": "{\"specials\":\"\",\"n\":1}\n{\"specials\":\"'\",\"n\":1}\n{\"specials\":\",-\",\"n\":1}\n{\"specials\":\"..\",\"n\":1}",
+  "mongo": "{\"_id\":\"\",\"n\":1}\n{\"_id\":\"'\",\"n\":1}\n{\"_id\":\",-\",\"n\":1}\n{\"_id\":\"..\",\"n\":1}",
+  "postgres": {
+   "cols": [
+    "specials",
+    "n"
+   ],
+   "rows": [
+    [
+     "",
+     "1"
+    ],
+    [
+     "'",
+     "1"
+    ],
+    [
+     ",-",
+     "1"
+    ],
+    [
+     "..",
+     "1"
+    ]
+   ]
+  }
+ },
+ "texto/special-character-inconsistency": {
+  "duckdb": {
+   "cols": [
+    "brackets",
+    "n"
+   ],
+   "rows": [
+    [
+     "()",
+     "3"
+    ],
+    [
+     "[]",
+     "1"
+    ]
+   ]
+  },
+  "entrada": {
+   "cols": [
+    "id",
+    "ref"
+   ],
+   "rows": [
+    [
+     "1",
+     "(2)"
+    ],
+    [
+     "2",
+     "(44)"
+    ],
+    [
+     "3",
+     "[32]"
+    ],
+    [
+     "4",
+     "(32)"
+    ]
+   ]
+  },
+  "jq": "{\"brackets\":\"()\",\"n\":3}\n{\"brackets\":\"[]\",\"n\":1}",
+  "mongo": "{\"_id\":\"()\",\"n\":3}\n{\"_id\":\"[]\",\"n\":1}",
+  "postgres": {
+   "cols": [
+    "brackets",
+    "n"
+   ],
+   "rows": [
+    [
+     "()",
+     "3"
+    ],
+    [
+     "[]",
+     "1"
+    ]
+   ]
+  }
+ },
+ "texto/synonym": {
+  "duckdb": {
+   "cols": [
+    "a",
+    "b",
+    "jaccard"
+   ],
+   "rows": [
+    [
+     "Bill Clinton",
+     "President Clinton",
+     "0.33"
+    ],
+    [
+     "Bill Clinton",
+     "William Jefferson Clinton",
+     "0.25"
+    ],
+    [
+     "President Clinton",
+     "William Jefferson Clinton",
+     "0.25"
+    ]
+   ]
+  },
+  "entrada": {
+   "cols": [
+    "id",
+    "name"
+   ],
+   "rows": [
+    [
+     "1",
+     "Bill Clinton"
+    ],
+    [
+     "2",
+     "President Clinton"
+    ],
+    [
+     "3",
+     "William Jefferson Clinton"
+    ],
+    [
+     "4",
+     "George Bush"
+    ]
+   ]
+  },
+  "jq": "{\"a\":\"Bill Clinton\",\"b\":\"President Clinton\",\"jaccard\":0.33}\n{\"a\":\"Bill Clinton\",\"b\":\"William Jefferson Clinton\",\"jaccard\":0.25}\n{\"a\":\"President Clinton\",\"b\":\"William Jefferson Clinton\",\"jaccard\":0.25}",
+  "mongo": "{\"a\":\"Bill Clinton\",\"b\":\"President Clinton\",\"jaccard\":0.33}\n{\"a\":\"Bill Clinton\",\"b\":\"William Jefferson Clinton\",\"jaccard\":0.25}\n{\"a\":\"President Clinton\",\"b\":\"William Jefferson Clinton\",\"jaccard\":0.25}",
+  "postgres": {
+   "cols": [
+    "a",
+    "b",
+    "jaccard"
+   ],
+   "rows": [
+    [
+     "Bill Clinton",
+     "President Clinton",
+     "0.33"
+    ],
+    [
+     "Bill Clinton",
+     "William Jefferson Clinton",
+     "0.25"
+    ],
+    [
+     "President Clinton",
+     "William Jefferson Clinton",
+     "0.25"
+    ]
+   ]
+  }
+ },
+ "texto/syntax-inconsistency": {
+  "duckdb": {
+   "cols": [
+    "pattern",
+    "n"
+   ],
+   "rows": [
+    [
+     "+99999999",
+     "3"
+    ],
+    [
+     "9999999999",
+     "1"
+    ]
+   ]
+  },
+  "entrada": {
+   "cols": [
+    "id",
+    "phone"
+   ],
+   "rows": [
+    [
+     "1",
+     "+43650123"
+    ],
+    [
+     "2",
+     "0043654124"
+    ],
+    [
+     "3",
+     "+43664123"
+    ],
+    [
+     "4",
+     "+43699111"
+    ]
+   ]
+  },
+  "jq": "{\"pattern\":\"+99999999\",\"n\":3}\n{\"pattern\":\"9999999999\",\"n\":1}",
+  "mongo": "{\"_id\":\"+99999999\",\"n\":3}\n{\"_id\":\"9999999999\",\"n\":1}",
+  "postgres": {
+   "cols": [
+    "pattern",
+    "n"
+   ],
+   "rows": [
+    [
+     "+99999999",
+     "3"
+    ],
+    [
+     "9999999999",
+     "1"
+    ]
+   ]
+  }
+ },
+ "texto/transposition-inconsistency": {
+  "duckdb": {
+   "cols": [
+    "pattern",
+    "n"
+   ],
+   "rows": [
+    [
+     "€99.9",
+     "2"
+    ],
+    [
+     "99.9€",
+     "1"
+    ],
+    [
+     "€9.9",
+     "1"
+    ]
+   ]
+  },
+  "entrada": {
+   "cols": [
+    "id",
+    "price"
+   ],
+   "rows": [
+    [
+     "1",
+     "€10.5"
+    ],
+    [
+     "2",
+     "11.0€"
+    ],
+    [
+     "3",
+     "€9.9"
+    ],
+    [
+     "4",
+     "€12.0"
+    ]
+   ]
+  },
+  "jq": "{\"pattern\":\"€99.9\",\"n\":2}\n{\"pattern\":\"99.9€\",\"n\":1}\n{\"pattern\":\"€9.9\",\"n\":1}",
+  "mongo": "{\"_id\":\"€99.9\",\"n\":2}\n{\"_id\":\"99.9€\",\"n\":1}\n{\"_id\":\"€9.9\",\"n\":1}",
+  "postgres": {
+   "cols": [
+    "pattern",
+    "n"
+   ],
+   "rows": [
+    [
+     "€99.9",
+     "2"
+    ],
+    [
+     "99.9€",
+     "1"
+    ],
+    [
+     "€9.9",
+     "1"
+    ]
+   ]
+  }
+ },
+ "texto/unit-inconsistency": {
+  "duckdb": {
+   "cols": [
+    "pattern",
+    "n"
+   ],
+   "rows": [
+    [
+     "99",
+     "2"
+    ],
+    [
+     "99 AAA",
+     "1"
+    ],
+    [
+     "99 aaa",
+     "1"
+    ],
+    [
+     "99 aaaaa",
+     "1"
+    ]
+   ]
+  },
+  "entrada": {
+   "cols": [
+    "id",
+    "maxspeed"
+   ],
+   "rows": [
+    [
+     "1",
+     "50"
+    ],
+    [
+     "2",
+     "30 mph"
+    ],
+    [
+     "3",
+     "60 MPH"
+    ],
+    [
+     "4",
+     "10 knots"
+    ],
+    [
+     "5",
+     "80"
+    ]
+   ]
+  },
+  "jq": "{\"pattern\":\"99\",\"n\":2}\n{\"pattern\":\"99 AAA\",\"n\":1}\n{\"pattern\":\"99 aaa\",\"n\":1}\n{\"pattern\":\"99 aaaaa\",\"n\":1}",
+  "mongo": "{\"_id\":\"99\",\"n\":2}\n{\"_id\":\"99 AAA\",\"n\":1}\n{\"_id\":\"99 aaa\",\"n\":1}\n{\"_id\":\"99 aaaaa\",\"n\":1}",
+  "postgres": {
+   "cols": [
+    "pattern",
+    "n"
+   ],
+   "rows": [
+    [
+     "99",
+     "2"
+    ],
+    [
+     "99 AAA",
+     "1"
+    ],
+    [
+     "99 aaa",
+     "1"
+    ],
+    [
+     "99 aaaaa",
+     "1"
+    ]
+   ]
+  }
+ }
+}

@@ -1,0 +1,85 @@
+---
+layout: base.njk
+---
+{%- macro tabela(t) -%}
+<table class="dados"><tr>{% for c in t.cols %}<th>{{ c | e }}</th>{% endfor %}</tr>
+{%- for r in t.rows %}<tr>{% for v in r %}<td>{{ v | e }}</td>{% endfor %}</tr>{% endfor %}</table>
+{%- endmacro -%}
+{%- macro naoAplica(b) -%}<p class="na"><b>Não se aplica.</b> {{ b.na | mdInline | safe }}</p>{%- endmacro -%}
+{%- set s = smells[smell] -%}
+{%- set ex = exemplo -%}
+{%- set out = saidas[mundoId + "/" + page.fileSlug] -%}
+<p class="meta"><span class="badge c-{{ s.tipo }}">Tipo de Data Smell: {{ categorias[s.tipo].nome }}</span>
+{%- if item.arq %} <a class="badge arq" href="/arquetipicos/" data-tip="Smell que pode surgir em qualquer mundo de campo. Clique para saber mais.">Smell arquetípico <span class="info">ⓘ</span></a>{% endif %}</p>
+
+<blockquote>
+<p>{{ s.definicao }}</p>
+<p class="cite">Exemplo: <code>{{ s.exemplo | e }}</code> (FOIDL; FELDERER; RAMLER, 2022b, tradução nossa).</p>
+</blockquote>
+
+{{ content | safe }}
+
+{%- if item.migra %}
+<p class="migra">→ Pode levar ao <a href="/arquetipicos/#text-smell-creep">Text Smell Creep</a>: o campo migra para o mundo <a href="/texto/{{ smell | smellSlug }}/">Texto</a>.</p>
+{%- endif %}
+
+<h2>Tarefas de perfilamento</h2>
+<table>
+<tr><th>Tarefa</th><th>Categoria</th><th>Escopo</th></tr>
+{%- for t in s.tarefas %}
+<tr{% if t == ex.tarefa %} class="usada"{% endif %}><td><a href="/tarefas/{{ t }}/">{{ tarefas[t].nome }}</a></td><td>{{ tarefas[t].categoria }}</td><td>{{ tarefas[t].escopo }}</td></tr>
+{%- endfor %}
+</table>
+
+<h2>Exemplo: {{ tarefas[ex.tarefa].nome }}</h2>
+{%- if "pattern(" in (ex.sql + ex.duckdb + ex.postgres + ex.mongo.pipeline + ex.jq.filtro) %}
+<p class="nota">Usa a função <code>pattern</code> de <a href="/tarefas/patterns/">patterns</a>.</p>
+{%- endif %}
+
+<h3>Entrada (SQL)</h3>
+{{ tabela(out.entrada) }}
+<details><summary>SQL de criação</summary><pre><code>{{ ex.sql | e }}</code></pre></details>
+
+<h3>DuckDB</h3>
+{%- if ex.duckdb.na %}{{ naoAplica(ex.duckdb) }}{% else %}
+<pre><code>{{ ex.duckdb | e }}</code></pre>
+<p class="rot">Saída</p>
+{{ tabela(out.duckdb) }}
+{%- endif %}
+
+<h3>PostgreSQL</h3>
+{%- if ex.postgres.na %}{{ naoAplica(ex.postgres) }}{% else %}
+<pre><code>{{ ex.postgres | e }}</code></pre>
+<p class="rot">Saída</p>
+{{ tabela(out.postgres) }}
+{%- endif %}
+
+<h3>MongoDB</h3>
+{%- if ex.mongo.na %}{{ naoAplica(ex.mongo) }}{% else %}
+<p class="rot">Documentos</p>
+<pre><code>{{ ex.mongo.docs | e }}</code></pre>
+<p class="rot">Pipeline</p>
+<pre><code>{{ ex.mongo.pipeline | e }}</code></pre>
+<p class="rot">Saída</p>
+<pre class="saida"><code>{{ out.mongo | e }}</code></pre>
+{%- endif %}
+
+<h3>jq</h3>
+{%- if ex.jq.na %}{{ naoAplica(ex.jq) }}{% else %}
+<p class="rot">Entrada{% if ex.jq.slurp %} (NDJSON, <code>jq -s</code>){% endif %}</p>
+<pre><code>{{ ex.jq.entrada | e }}</code></pre>
+<p class="rot">Filtro</p>
+<pre><code>{{ ex.jq.filtro | e }}</code></pre>
+<p class="rot">Saída</p>
+<pre class="saida"><code>{{ out.jq | e }}</code></pre>
+{%- endif %}
+
+<h2>Leitura</h2>
+<p>{{ ex.leitura | mdInline | safe }}</p>
+
+<h2>Referências</h2>
+<ul class="refs">
+{%- for r in (["abedjan2015", "foidl2022b"].concat(refs or [])) | abnt %}
+<li>{{ r | mdInline | safe }}</li>
+{%- endfor %}
+</ul>

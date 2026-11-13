@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>{{ title }} — Data Smell Wiki</title>
+<link rel="stylesheet" href="/assets/style.css">
+</head>
+<body>
+<nav id="side">
+  <div id="logo"><a href="/">Data Smell<br>Wiki</a></div>
+  <div class="portlet essencial"><ul><li><a href="/">O que é isto?</a></li></ul></div>
+  <div class="portlet essencial">
+    <h3>navegação</h3>
+    <ul><li><a href="/arvore/">Árvore de smells</a></li></ul>
+  </div>
+  <div class="portlet">
+    <h3>smells</h3>
+    {%- for m in nav %}
+    <details{% if page.url.startsWith("/" + m.id + "/") %} open{% endif %}>
+      <summary>{{ m.nome }}</summary>
+      <ul>
+        {%- for s in m.unicos %}
+        <li class="c-{{ s.tipo }}"><a href="{{ s.url }}"{% if page.url == s.url %} class="here"{% endif %}>{{ s.nome }}</a>{% if s.arq %} <span class="alfa" title="Smell arquetípico">α</span>{% endif %}</li>
+        {%- endfor %}
+      </ul>
+    </details>
+    {%- endfor %}
+  </div>
+  <div class="portlet">
+    <h3>tarefas de perfilamento</h3>
+    <ul>
+      {%- for id, t in tarefas %}
+      <li><a href="/tarefas/{{ id }}/">{{ t.nome }}</a></li>
+      {%- endfor %}
+    </ul>
+  </div>
+  <div class="portlet">
+    <h3>outros recursos</h3>
+    <ul>
+      <li><a href="/arquetipicos/">Smells arquetípicos</a></li>
+      <li><a href="/nao-relacional/">Dados não relacionais</a></li>
+      <li><a href="/referencias/">Referências</a></li>
+    </ul>
+  </div>
+</nav>
+<main id="content">
+  {%- if crumbs %}<div id="crumbs">{{ crumbs | safe }}</div>{% endif %}
+  <h1>{{ title }}</h1>
+  {{ content | safe }}
+  <footer id="foot">Data smells: <a href="/referencias/">Foidl, Felderer e Ramler (2022)</a>. Tarefas de perfilamento: <a href="/referencias/">Abedjan, Golab e Naumann (2015)</a>.</footer>
+</main>
+</body>
+</html>

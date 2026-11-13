@@ -1,0 +1,36 @@
+[tools]
+node = "22"
+python = "3.12"
+jq = "1.8.1"
+
+[env]
+_.python.venv = { path = ".venv", create = true }
+
+[tasks.setup]
+description = "Install site and verifier dependencies"
+run = [
+  "npm ci",
+  "python -m ensurepip",  # venvs made by uv ship without pip
+  "python -m pip install -q --disable-pip-version-check -r requirements.txt",
+]
+
+[tasks.engines]
+description = "Start PostgreSQL and MongoDB (docker compose)"
+run = "docker compose up -d --wait"
+
+[tasks.verify]
+description = "Run every example on DuckDB, PostgreSQL, MongoDB and jq; record outputs"
+depends = ["engines"]
+run = "python scripts/verify.py"
+
+[tasks.dev]
+description = "Serve the site with live reload"
+run = "npx @11ty/eleventy --serve"
+
+[tasks.build]
+description = "Build the static site into _site/"
+run = "npx @11ty/eleventy"
+
+[tasks.down]
+description = "Stop the engines"
+run = "docker compose down"

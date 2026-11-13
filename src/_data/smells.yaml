@@ -1,0 +1,182 @@
+# Definições: FOIDL; FELDERER; RAMLER (2022b), tradução nossa. exemplo: original do catálogo.
+# tarefas: mapeamento smell -> tarefa de perfilamento do framework.
+Suspect Date Value:
+  tipo: B
+  definicao: Ocorre quando um valor de dado representa uma data muito no passado ou no futuro.
+  exemplo: 1899-03-22, 2099-03-02
+  tarefas: [patterns, histogram, quartiles]
+Meaningless Value:
+  tipo: B
+  definicao: Surge quando um valor de dado não tem significado comum ou contém sequências de caracteres repetidas suspeitas.
+  exemplo: aaa, abcabc, 123412341234
+  tarefas: [constancy, domain-classification]
+Dummy Value:
+  tipo: B
+  definicao: Caracteriza uma situação em que algum tipo de valor substituto é usado por diversos motivos (p. ex., valores desconhecidos, erros de cálculo, contornar restrições "not NULL" etc.).
+  exemplo: 1970-01-01, 65535, -999
+  tarefas: [constancy, first-digit, patterns]
+Suspect Precision:
+  tipo: B
+  definicao: Surge quando um valor de dado tem um grande número de casas decimais.
+  exemplo: "5.5458415569"
+  tarefas: [decimals, histogram]
+Suspect Distribution:
+  tipo: B
+  definicao: Caracteriza uma situação em que valores de dados numéricos têm uma distribuição suspeita.
+  exemplo: 1, 3, 4, 5, 3, 4, 3, 500, 15000, 780000, 800000, 800000
+  tarefas: [histogram, quartiles, first-digit]
+Suspect Date/Time Interval:
+  tipo: B
+  definicao: Ocorre quando há um intervalo de data/hora muito longo ou muito curto entre instâncias de dados.
+  exemplo: 2019-01-01, 2019-01-02, 2019-10-01, 2019-10-02
+  tarefas: [histogram, sequential-dependencies]
+Date as Date/Time:
+  tipo: UE
+  definicao: Ocorre quando uma data é codificada com um tipo de dado datetime.
+  exemplo: 2020-12-30 00:00:00
+  tarefas: [basic-type, data-type, patterns]
+Date as String:
+  tipo: UE
+  definicao: Ocorre quando uma data é codificada como string.
+  exemplo: '"2020-12-30"'
+  tarefas: [basic-type, patterns]
+Date/Time as String:
+  tipo: UE
+  definicao: Ocorre quando um timestamp é codificado como string.
+  exemplo: '"2020-12-30 11:50:40"'
+  tarefas: [basic-type, patterns]
+Time as String:
+  tipo: UE
+  definicao: Ocorre quando um horário é codificado como string.
+  exemplo: '"11:50:40"'
+  tarefas: [basic-type, patterns]
+Floating-point Number as String:
+  tipo: UE
+  definicao: Ocorre quando um número de ponto flutuante é codificado como string.
+  exemplo: '"3.5"'
+  tarefas: [basic-type, patterns]
+Integer as Floating-point Number:
+  tipo: UE
+  definicao: Ocorre quando um inteiro é codificado como número de ponto flutuante.
+  exemplo: "3.0"
+  tarefas: [data-type, decimals]
+Integer as String:
+  tipo: UE
+  definicao: Ocorre quando um inteiro é codificado como string.
+  exemplo: '"3"'
+  tarefas: [basic-type, patterns]
+Small Number:
+  tipo: US
+  definicao: Ocorre quando valores de dados representam números menores que 1.
+  exemplo: 0.04, 0.02, 0.00024, 0.4
+  tarefas: [quartiles, histogram, value-length]
+Contracting:
+  tipo: US
+  definicao: Ocorre quando valores de dados representam versões encurtadas de palavras ou frases.
+  exemplo: don't, I'd
+  tarefas: [patterns]
+Spacing:
+  tipo: US
+  definicao: Surge quando valores de dados contêm um padrão incomum de espaços (espaços à esquerda, múltiplos ou ausentes).
+  exemplo: '"JohnSmith ", "John  Smith", "  John  Smith"'
+  tarefas: [patterns]
+Separating:
+  tipo: US
+  definicao: Surge quando valores de dados contêm separadores de milhar (espaço, sublinhado, ponto etc.) para agrupar dígitos. O uso de delimitadores pode gerar ambiguidade quando também se usa separador decimal e causar problemas na decodificação dos valores.
+  exemplo: 23 432, 21.321, 12 340 000
+  tarefas: [patterns]
+Long Data Value:
+  tipo: US
+  definicao: Surge quando valores de dados são longos demais para serem compreendidos.
+  exemplo: Pneumonoultramicroscopicsilicovolcanoconiosis, 12Am12-12-20highpressalarmset0
+  tarefas: [value-length, patterns]
+Intermingled Data Type:
+  tipo: US
+  definicao: Caracteriza uma situação em que valores de dados contêm caracteres numéricos e alfabéticos.
+  exemplo: Room 12, 90 Days
+  tarefas: [basic-type, patterns]
+Ambiguous Value:
+  tipo: US
+  definicao: Surge quando valores de dados representam abreviações, homônimos, acrônimos ou um contexto ambíguo.
+  exemplo: Dr (doctor vs. drive), Miami (Florida vs. Ohio)
+  tarefas: [domain-classification, clustering]
+Ambiguous Date/Time Format:
+  tipo: US
+  definicao: Ocorre quando uma data é representada em formato curto ou um horário é representado no formato de 12 horas.
+  exemplo: 06-03-05, 05:13
+  tarefas: [patterns]
+Special Character:
+  tipo: US
+  definicao: Ocorre quando valores de dados contêm caracteres especiais (não alfanuméricos), como vírgulas, pontos, hífens, apóstrofos, tabulações, pontuação, parênteses, travessões, letras acentuadas etc.
+  exemplo: '"Hello, how are you - today", "New.York.", "John''s house"'
+  tarefas: [patterns]
+Casing:
+  tipo: US
+  definicao: Ocorre quando valores de dados apresentam uso incomum de maiúsculas e minúsculas (misturadas, só maiúsculas, só minúsculas).
+  exemplo: GoOD MorNiNg, GOOD MORNING, good morning
+  tarefas: [patterns]
+Extraneous Value:
+  tipo: US
+  definicao: Ocorre quando valores de dados trazem informação adicional, provavelmente desnecessária.
+  exemplo: CJ. John Roberts Jr., Fri Mar 05 2021
+  tarefas: [value-length, patterns]
+Synonym:
+  tipo: US
+  definicao: Ocorre quando valores de dados têm o mesmo significado semântico, mas são sintaticamente diferentes (p. ex., aliases, apelidos, pseudônimos).
+  exemplo: (Bill Clinton, President Clinton, William Jefferson Clinton)
+  tarefas: [clustering, summaries-sketches]
+Abbreviation Inconsistency:
+  tipo: C
+  definicao: Ocorre quando abreviações, acrônimos ou contrações não são usados de forma consistente.
+  exemplo: Dr. Hofer vs. Doctor Huber, I'd vs. I would
+  tarefas: [patterns, histogram]
+Casing Inconsistency:
+  tipo: C
+  definicao: Caracteriza uma situação em que maiúsculas e minúsculas não são usadas de forma consistente.
+  exemplo: How are you?, fine., and you? Great.
+  tarefas: [patterns]
+Syntax Inconsistency:
+  tipo: C
+  definicao: Caracteriza uma situação em que a sintaxe geral dos valores (códigos de área telefônicos, informação estranha, valor substituto etc.) não é usada de forma consistente. Em geral, as inconsistências que não se encaixam nas demais categorias pertencem a esta.
+  exemplo: +43650123, 0043654124, Miss Smith, Mayer
+  tarefas: [patterns]
+Date/Time Format Inconsistency:
+  tipo: C
+  definicao: Ocorre quando formatos de data ou hora não são usados de forma consistente.
+  exemplo: 2020-01-30, 30-01-2020, 20-01-30, 05:13, 05:13:25
+  tarefas: [patterns]
+Missing Value Inconsistency:
+  tipo: C
+  definicao: Caracteriza uma situação em que constantes não são usadas de forma consistente para representar valores ausentes.
+  exemplo: 12, NaN, Na, NULL, 22, inf, 23
+  tarefas: [null-values, constancy]
+Precision Inconsistency:
+  tipo: C
+  definicao: Surge quando o número de casas decimais não é usado de forma consistente.
+  exemplo: 5.5485, 7.45, 8.21, 8.5, 9.887
+  tarefas: [decimals, histogram]
+Separating Inconsistency:
+  tipo: C
+  definicao: Ocorre quando separadores de milhar não são usados de forma consistente.
+  exemplo: 23 100, 23.500, 25_000, 27 000
+  tarefas: [patterns]
+Transposition Inconsistency:
+  tipo: C
+  definicao: Surge quando a ordem de palavras ou caracteres especiais não é usada de forma consistente.
+  exemplo: €10.5 vs. 11.0€, Jack Smith vs. Stevens John
+  tarefas: [patterns, correlations]
+Special Character Inconsistency:
+  tipo: C
+  definicao: Ocorre quando caracteres especiais não são usados de forma consistente.
+  exemplo: (2), (44), [32], (32)
+  tarefas: [patterns]
+Spacing Inconsistency:
+  tipo: C
+  definicao: Ocorre quando o espaçamento não é usado de forma consistente.
+  exemplo: +43 664 123, +43664 546
+  tarefas: [patterns]
+Unit Inconsistency:
+  tipo: C
+  definicao: Surge quando unidades de medida (implicitamente) não são usadas de forma consistente.
+  exemplo: 1.80, 1.84, 190, 176, 1.6
+  tarefas: [patterns, correlations]

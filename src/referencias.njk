@@ -1,0 +1,10 @@
+---
+layout: base.njk
+title: Referências
+permalink: /referencias/
+---
+<ul class="refs">
+{%- for r in null | abnt %}
+<li>{{ r | mdInline | safe }}</li>
+{%- endfor %}
+</ul>

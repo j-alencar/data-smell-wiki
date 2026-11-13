@@ -1,0 +1,9 @@
+# Engines used to verify the examples: mise run verify
+services:
+  postgres:
+    image: postgres:17
+    environment: { POSTGRES_PASSWORD: postgres, POSTGRES_INITDB_ARGS: "--locale=C.UTF-8" }
+    healthcheck: { test: ["CMD", "pg_isready", "-U", "postgres"], interval: 2s, retries: 30 }
+  mongo:
+    image: mongo:7
+    healthcheck: { test: ["CMD", "mongosh", "--quiet", "--eval", "db.runCommand({ping:1}).ok"], interval: 2s, retries: 30 }

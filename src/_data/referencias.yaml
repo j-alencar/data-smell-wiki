@@ -1,0 +1,28 @@
+# Referências (ABNT NBR 6023). Chave -> {citacao, abnt}. Markdown permitido em abnt.
+abedjan2015:
+  citacao: ABEDJAN; GOLAB; NAUMANN, 2015
+  abnt: "ABEDJAN, Ziawasch; GOLAB, Lukasz; NAUMANN, Felix. Profiling relational data: a survey. **The VLDB Journal**, [*s. l.*], v. 24, n. 4, p. 557-581, 2015. DOI: 10.1007/s00778-015-0389-y. Disponível em: <https://doi.org/10.1007/s00778-015-0389-y>. Acesso em: 13 nov. 2026."
+foidl2022a:
+  citacao: FOIDL; FELDERER; RAMLER, 2022a
+  abnt: "FOIDL, Harald; FELDERER, Michael; RAMLER, Rudolf. Data smells: categories, causes and consequences, and detection of suspicious data in AI-based systems. *In*: INTERNATIONAL CONFERENCE ON AI ENGINEERING: SOFTWARE ENGINEERING FOR AI, 1., 2022, Pittsburgh. **Proceedings** [...]. New York: ACM, 2022. p. 229-239. DOI: 10.1145/3522664.3528590. Disponível em: <https://doi.org/10.1145/3522664.3528590>. Acesso em: 13 nov. 2026."
+foidl2022b:
+  citacao: FOIDL; FELDERER; RAMLER, 2022b
+  abnt: "FOIDL, Harald; FELDERER, Michael; RAMLER, Rudolf. **Data_Smells_Catalogue**. [*S. l.*: *s. n.*], 2022. Planilha eletrônica. Disponível em: <https://bit.ly/2WpPauB>. Acesso em: 13 nov. 2026."
+osm-maxspeed:
+  citacao: OPENSTREETMAP WIKI, 2026
+  abnt: "OPENSTREETMAP WIKI. **Key:maxspeed**. [*S. l.*], 2026. Disponível em: <https://wiki.openstreetmap.org/wiki/Key:maxspeed>. Acesso em: 13 nov. 2026."
+osrm-measure:
+  citacao: PROJECT-OSRM, [20--]
+  abnt: "PROJECT-OSRM. **osrm-backend**: profiles/lib/measure.lua. Commit f2147ea. [*S. l.*]: GitHub, [20--]. Disponível em: <https://github.com/Project-OSRM/osrm-backend/blob/f2147ead8d9c6a2c724120113d9c56ab85963262/profiles/lib/measure.lua>. Acesso em: 13 nov. 2026."
+yfinance-552:
+  citacao: YFINANCE, 2021
+  abnt: "YFINANCE. **Incorrect data retrieved on ULVR.L for 6th Jan 2021 while OK in Yahoo Historical**. Issue #552. [*S. l.*]: GitHub, 15 jan. 2021. Disponível em: <https://github.com/ranaroussi/yfinance/issues/552>. Acesso em: 13 nov. 2026."
+yfinance-1110:
+  citacao: YFINANCE, 2022
+  abnt: "YFINANCE. **Feature - repair 100x price errors**. Pull request #1110. [*S. l.*]: GitHub, 23 out. 2022. Disponível em: <https://github.com/ranaroussi/yfinance/pull/1110>. Acesso em: 13 nov. 2026."
+gbif-parsers:
+  citacao: BLISSETT, 2018
+  abnt: "BLISSETT, Matthew. **Return ambiguous dates to caller, so ambiguity might be resolved from another source**. Commit 8631f5a, gbif/parsers. [*S. l.*]: GitHub, 23 out. 2018. Disponível em: <https://github.com/gbif/parsers/commit/8631f5ad70ab764974a8bcced0d495202f1d77af>. Acesso em: 13 nov. 2026."
+mesibov2023:
+  citacao: MESIBOV, 2023
+  abnt: "MESIBOV, Robert. **Please share your dates correctly**. GBIF Community Forum, 30 jan. 2023. Disponível em: <https://discourse.gbif.org/t/please-share-your-dates-correctly/3824>. Acesso em: 13 nov. 2026."

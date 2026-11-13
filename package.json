@@ -1,0 +1,10 @@
+{
+  "name": "data-smell-wiki",
+  "private": true,
+  "type": "module",
+  "devDependencies": {
+    "@11ty/eleventy": "^3.1.8",
+    "js-yaml": "^4.1.1",
+    "markdown-it": "^14.3.3"
+  }
+}
