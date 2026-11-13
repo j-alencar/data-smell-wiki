@@ -1,0 +1,5 @@
+# Tipos de Data Smell (FOIDL; FELDERER; RAMLER, 2022a)
+B:  { nome: Credibilidade, cor: "#C2185B" }
+UE: { nome: Compreensibilidade — Codificação, cor: "#1565C0" }
+US: { nome: Compreensibilidade — Sintática, cor: "#4527A0" }
+C:  { nome: Consistência, cor: "#00695C" }

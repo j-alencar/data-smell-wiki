@@ -1,0 +1,34 @@
+---
+layout: base.njk
+pagination: { data: tarefas, size: 1, alias: tid }
+permalink: "/tarefas/{{ tid }}/"
+eleventyComputed:
+  title: "{{ tarefas[tid].nome }}"
+  crumbs: '<a href="/arvore/">Árvore de smells</a> › Tarefas de perfilamento › {{ tarefas[tid].nome }}'
+---
+{%- set t = tarefas[tid] -%}
+<p class="meta">{{ t.categoria }} · {{ t.escopo }}</p>
+<blockquote>
+<p>{{ t.descricao }}</p>
+<p class="cite">(ABEDJAN; GOLAB; NAUMANN, 2015, {{ t.onde }}, tradução nossa).</p>
+</blockquote>
+{%- if tid == "patterns" %}
+<h2>Função <code>pattern</code></h2>
+<p>Os exemplos usam esta função em cada motor.</p>
+<h3>DuckDB</h3><pre><code>{{ helpers.duckdb | e }}</code></pre>
+<h3>PostgreSQL</h3><pre><code>{{ helpers.postgres | e }}</code></pre>
+<h3>MongoDB</h3><pre><code>{{ helpers.mongo | e }}</code></pre>
+<h3>jq</h3><pre><code>{{ helpers.jq | e }}</code></pre>
+{%- endif %}
+<h2>Aplicado a um Smell</h2>
+<ul>
+{%- for m in nav %}
+{%- set usados = [] %}
+{%- for s in m.unicos %}{% if tid in smells[s.nome].tarefas %}{% set usados = (usados.push(s), usados) %}{% endif %}{% endfor %}
+{%- if usados.length %}
+<li><b>{{ m.nome }}:</b> {% for s in usados %}<a href="{{ s.url }}">{{ s.nome }}</a>{% if s.arq %} <span class="alfa">α</span>{% endif %}{% if not loop.last %} · {% endif %}{% endfor %}</li>
+{%- endif %}
+{%- endfor %}
+</ul>
+<h2>Referências</h2>
+<ul class="refs"><li>{{ referencias.abedjan2015.abnt | mdInline | safe }}</li></ul>

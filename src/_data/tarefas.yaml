@@ -1,0 +1,92 @@
+# Tarefas de perfilamento (ABEDJAN; GOLAB; NAUMANN, 2015).
+# descricao: tradução nossa; onde: localização no artigo.
+value-length:
+  nome: value length
+  categoria: Cardinalidades
+  escopo: Coluna única
+  descricao: Medidas do comprimento dos valores (mínimo, máximo, mediana e média).
+  onde: Tabela 1
+null-values:
+  nome: null values
+  categoria: Cardinalidades
+  escopo: Coluna única
+  descricao: Número ou percentual de valores nulos.
+  onde: Tabela 1
+histogram:
+  nome: histogram
+  categoria: Distribuições de valores
+  escopo: Coluna única
+  descricao: Histogramas de frequência (largura igual, profundidade igual etc.).
+  onde: Tabela 1
+constancy:
+  nome: constancy
+  categoria: Distribuições de valores
+  escopo: Coluna única
+  descricao: Frequência do valor mais frequente dividida pelo número de linhas.
+  onde: Tabela 1
+quartiles:
+  nome: quartiles
+  categoria: Distribuições de valores
+  escopo: Coluna única
+  descricao: Três pontos que dividem os valores (numéricos) em quatro grupos iguais.
+  onde: Tabela 1
+first-digit:
+  nome: first digit
+  categoria: Distribuições de valores
+  escopo: Coluna única
+  descricao: Distribuição do primeiro dígito de valores numéricos, para verificar a Lei de Benford.
+  onde: Tabela 1
+basic-type:
+  nome: basic type
+  categoria: Padrões, tipos de dados e domínios
+  escopo: Coluna única
+  descricao: Tipo de dado genérico, como numérico, alfabético, alfanumérico, data, hora.
+  onde: Tabela 1
+data-type:
+  nome: data type
+  categoria: Padrões, tipos de dados e domínios
+  escopo: Coluna única
+  descricao: Tipo de dado concreto, específico do SGBD, como varchar, timestamp etc.
+  onde: Tabela 1
+decimals:
+  nome: decimals
+  categoria: Padrões, tipos de dados e domínios
+  escopo: Coluna única
+  descricao: Número máximo de casas decimais em valores numéricos.
+  onde: Tabela 1
+patterns:
+  nome: patterns
+  categoria: Padrões, tipos de dados e domínios
+  escopo: Coluna única
+  descricao: Histograma de padrões de valores (Aa9...).
+  onde: Tabela 1
+domain-classification:
+  nome: domain classification
+  categoria: Padrões, tipos de dados e domínios
+  escopo: Coluna única
+  descricao: Classificação do domínio semântico, como cartão de crédito, primeiro nome, cidade, fenótipo.
+  onde: Tabela 1
+clustering:
+  nome: clustering
+  categoria: Agrupamentos e outliers
+  escopo: Múltiplas colunas
+  descricao: Segmentar os registros em grupos homogêneos com um algoritmo de agrupamento; registros que não se encaixam em nenhum grupo podem ser marcados como outliers.
+  onde: §4.2
+summaries-sketches:
+  nome: summaries & sketches
+  categoria: Resumos e sketches
+  escopo: Múltiplas colunas
+  descricao: Criar resumos ou sketches dos dados; por exemplo, estimar a similaridade de Jaccard entre colunas pelas assinaturas MinHash.
+  onde: §4.3
+correlations:
+  nome: correlations
+  categoria: Correlações e regras de associação
+  escopo: Múltiplas colunas
+  descricao: A análise de correlação revela colunas numéricas relacionadas; regras de associação denotam relações ou padrões entre valores de atributos de colunas diferentes.
+  onde: §4.1
+sequential-dependencies:
+  nome: sequential dependencies
+  categoria: Dependências
+  escopo: Dependências
+  descricao: Uma dependência sequencial afirma que, ordenados por A, quaisquer dois valores consecutivos de B devem estar dentro de um intervalo predefinido.
+  onde: §5.4

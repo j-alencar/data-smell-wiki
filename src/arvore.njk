@@ -1,0 +1,26 @@
+---
+layout: base.njk
+title: Árvore de smells
+permalink: /arvore/
+---
+{%- macro ramo(m, s) -%}
+<li class="smell c-{{ s.tipo }}"><a href="{{ s.url }}">{{ s.nome }}</a>{% if s.arq %} <span class="alfa">α</span>{% endif %}
+ <small>{% for t in smells[s.nome].tarefas %}{{ tarefas[t].nome }}{% if not loop.last %} · {% endif %}{% endfor %}</small>
+{%- if s.migra %} <a class="migra" href="/arquetipicos/#text-smell-creep">→ pode migrar para Texto</a>{% endif %}</li>
+{%- endmacro -%}
+<p>Parta do mundo ao qual o campo parece pertencer, escolha um smell e siga para as tarefas de perfilamento.</p>
+<div class="smell-tree">
+<fieldset class="filters"><legend>Tipo de Data Smell</legend>
+{%- for id, c in categorias %} <label class="c-{{ id }}"><input type="checkbox" id="f-{{ id }}" checked> {{ c.nome }}</label>{% endfor %}
+</fieldset>
+{%- for m in nav %}
+<details class="mundo" open><summary><b>{{ m.nome }}</b> — <i>{{ m.pergunta }}</i></summary>
+<ul>
+{%- for s in m.especificos %}{{ ramo(m, s) }}{% endfor %}
+<li class="grupo"><span>Smells arquetípicos</span>
+<ul>{% for s in m.arquetipicos %}{{ ramo(m, s) }}{% endfor %}</ul></li>
+</ul>
+</details>
+{%- endfor %}
+</div>
+<p>α = <a href="/arquetipicos/">Smell arquetípico</a>.</p>

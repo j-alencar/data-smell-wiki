@@ -1,0 +1,51 @@
+# Mundos de campo. "especificos" segue a ordem do esboço do framework.
+# Extraneous Value e Intermingled Data Type aparecem de propósito duas vezes em série temporal.
+arquetipicos: [Dummy Value, Missing Value Inconsistency, Unit Inconsistency, Extraneous Value, Intermingled Data Type]
+# Arquetípicos que podem levar ao Text Smell Creep (fora do mundo Texto).
+migram: [Unit Inconsistency, Extraneous Value, Intermingled Data Type]
+lista:
+  - id: serie-temporal
+    nome: Série temporal
+    pergunta: Parece destinado a dados de série temporal?
+    especificos:
+      - Date as Date/Time
+      - Date as String
+      - Date/Time as String
+      - Time as String
+      - Suspect Date Value
+      - Suspect Date/Time Interval
+      - Ambiguous Date/Time Format
+      - Date/Time Format Inconsistency
+      - Extraneous Value
+      - Intermingled Data Type
+  - id: numerico
+    nome: Numérico
+    pergunta: Parece destinado a dados numéricos?
+    especificos:
+      - Floating-point Number as String
+      - Integer as String
+      - Integer as Floating-point Number
+      - Suspect Precision
+      - Suspect Distribution
+      - Small Number
+      - Precision Inconsistency
+  - id: texto
+    nome: Texto
+    pergunta: Parece destinado a dados de texto?
+    especificos:
+      - Meaningless Value
+      - Contracting
+      - Spacing
+      - Separating
+      - Long Data Value
+      - Special Character
+      - Casing
+      - Casing Inconsistency
+      - Syntax Inconsistency
+      - Abbreviation Inconsistency
+      - Separating Inconsistency
+      - Transposition Inconsistency
+      - Special Character Inconsistency
+      - Spacing Inconsistency
+      - Synonym
+      - Ambiguous Value

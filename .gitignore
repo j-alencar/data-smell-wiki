@@ -1,7 +1,5 @@
-build/
 _site/
-starlight/node_modules/
-starlight/dist/
-starlight/.astro/
-starlight/src/content/docs/
+node_modules/
+.venv/
 __pycache__/
+.claude/
