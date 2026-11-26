@@ -1,6 +1,6 @@
 ---
 ---
-Como o [tipo básico](/tarefas/basic-type/), o tipo de dado concreto se reconhece pelo padrão dos valores: timestamp, boolean ou int seguem um padrão fixo, às vezes específico do SGBD. Prefira o tipo mais específico e evite char e varchar sempre que possível.[@abedjan2015]
+Reconhecer o tipo de dado concreto, por exemplo entre os tipos SQL, é tão simples quanto o [tipo básico](/tarefas/basic-type/): tipos como timestamp, boolean ou int seguem um padrão fixo, às vezes específico do SGBD. Ao classificar uma coluna, prefira o tipo mais específico e evite os genéricos char e varchar sempre que possível.[@abedjan2015]
 
 Quando a coluna já tem esquema, a tarefa é uma leitura de metadados, não um cálculo sobre os valores:
 

@@ -38,4 +38,6 @@ exemplos:
       nenhum dos dois e é o candidato a erro. Note o equilíbrio entre generalidade e especificidade:
       `.*` aceitaria tudo; `ABC-1234` só aceitaria a si mesmo.
 ---
-A função `pattern` troca maiúsculas por `A`, minúsculas por `a` e dígitos por `9`; os demais caracteres ficam iguais. Conte os padrões e examine os valores que fogem dos mais frequentes.
+Extrair os padrões frequentes de uma coluna é um resultado de perfilamento comum e útil: valores que não seguem esses padrões provavelmente estão errados ou malformados. Um telefone, por exemplo, pode seguir `+dd (ddd) ddd dddd`. A dificuldade é equilibrar generalidade e especificidade: a expressão regular `.*` casa com qualquer string, enquanto a própria string casa só consigo mesma. A ferramenta Potter's Wheel escolhe o padrão de menor comprimento de descrição (MDL), que combina precisão, cobertura e concisão.[@abedjan2015]
+
+A função `pattern` abaixo é a forma mais simples dessa ideia: troca maiúsculas por `A`, minúsculas por `a` e dígitos por `9`, e mantém o resto. O histograma desses padrões é a base de quase todos os smells de texto deste guia.
