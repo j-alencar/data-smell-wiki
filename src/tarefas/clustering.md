@@ -1,60 +1,45 @@
 ---
 exemplos:
-  - id: outliers
-    titulo: cercas de Tukey, z-score e MAD
+  - id: tukey
+    titulo: cercas de Tukey
     sql: |
       CREATE TABLE requests (id int, ms int);
       INSERT INTO requests VALUES
         (1, 12), (2, 15), (3, 18), (4, 22), (5, 25), (6, 31), (7, 45), (8, 60), (9, 480);
     duckdb: |
-      WITH s AS (SELECT quantile_cont(ms, 0.25) AS q1, quantile_cont(ms, 0.75) AS q3,
-                        avg(ms) AS mean, stddev_samp(ms) AS sd, median(ms) AS med
-                 FROM requests),
-      m AS (SELECT median(abs(ms - med)) AS mad FROM requests, s)
-      SELECT ms,
-             CASE WHEN ms < q1 - 3 * (q3 - q1) OR ms > q3 + 3 * (q3 - q1) THEN 'extreme'
-                  WHEN ms < q1 - 1.5 * (q3 - q1) OR ms > q3 + 1.5 * (q3 - q1) THEN 'mild'
-                  ELSE '-' END AS tukey,
-             round((ms - mean) / sd, 2) AS z,
-             round(0.6745 * (ms - med) / mad, 2) AS mod_z
-      FROM requests, s, m
+      WITH s AS (SELECT quantile_cont(ms, 0.25) AS q1, quantile_cont(ms, 0.75) AS q3 FROM requests)
+      SELECT ms, q1, q3, q3 + 1.5 * (q3 - q1) AS upper_inner, q3 + 3 * (q3 - q1) AS upper_outer,
+             CASE WHEN ms < q1 - 3 * (q3 - q1) OR ms > q3 + 3 * (q3 - q1) THEN 'extreme' ELSE 'mild' END AS tukey
+      FROM requests, s
+      WHERE ms < q1 - 1.5 * (q3 - q1) OR ms > q3 + 1.5 * (q3 - q1)
       ORDER BY ms;
     postgres: |
       WITH s AS (SELECT percentile_cont(0.25) WITHIN GROUP (ORDER BY ms) AS q1,
-                        percentile_cont(0.75) WITHIN GROUP (ORDER BY ms) AS q3,
-                        avg(ms) AS mean, stddev_samp(ms) AS sd,
-                        percentile_cont(0.5) WITHIN GROUP (ORDER BY ms) AS med
-                 FROM requests),
-      m AS (SELECT percentile_cont(0.5) WITHIN GROUP (ORDER BY abs(ms - med)) AS mad FROM requests, s)
-      SELECT ms,
-             CASE WHEN ms < q1 - 3 * (q3 - q1) OR ms > q3 + 3 * (q3 - q1) THEN 'extreme'
-                  WHEN ms < q1 - 1.5 * (q3 - q1) OR ms > q3 + 1.5 * (q3 - q1) THEN 'mild'
-                  ELSE '-' END AS tukey,
-             round((ms - mean) / sd, 2) AS z,
-             round((0.6745 * (ms - med) / mad)::numeric, 2) AS mod_z
-      FROM requests, s, m
+                        percentile_cont(0.75) WITHIN GROUP (ORDER BY ms) AS q3
+                 FROM requests)
+      SELECT ms, q1, q3, q3 + 1.5 * (q3 - q1) AS upper_inner, q3 + 3 * (q3 - q1) AS upper_outer,
+             CASE WHEN ms < q1 - 3 * (q3 - q1) OR ms > q3 + 3 * (q3 - q1) THEN 'extreme' ELSE 'mild' END AS tukey
+      FROM requests, s
+      WHERE ms < q1 - 1.5 * (q3 - q1) OR ms > q3 + 1.5 * (q3 - q1)
       ORDER BY ms;
     mongo:
       docs: |
         [12, 15, 18, 22, 25, 31, 45, 60, 480].map((v, i) => ({ _id: i + 1, ms: v }))
       pipeline: |
         [
-          { $group: { _id: null, vs: { $push: "$ms" }, mean: { $avg: "$ms" }, sd: { $stdDevSamp: "$ms" },
-              q: { $percentile: { input: "$ms", p: [0.25, 0.5, 0.75], method: "approximate" } } } },
-          { $set: { q1: { $arrayElemAt: ["$q", 0] }, med: { $arrayElemAt: ["$q", 1] }, q3: { $arrayElemAt: ["$q", 2] } } },
-          { $set: { iqr: { $subtract: ["$q3", "$q1"] },
-              mad: { $median: { input: { $map: { input: "$vs", in: { $abs: { $subtract: ["$$this", "$med"] } } } },
-                                method: "approximate" } } } },
-          { $unwind: "$vs" },
-          { $project: { _id: 0, ms: "$vs",
-              tukey: { $switch: { branches: [
-                { case: { $or: [{ $lt: ["$vs", { $subtract: ["$q1", { $multiply: [3, "$iqr"] }] }] },
-                                { $gt: ["$vs", { $add: ["$q3", { $multiply: [3, "$iqr"] }] }] }] }, then: "extreme" },
-                { case: { $or: [{ $lt: ["$vs", { $subtract: ["$q1", { $multiply: [1.5, "$iqr"] }] }] },
-                                { $gt: ["$vs", { $add: ["$q3", { $multiply: [1.5, "$iqr"] }] }] }] }, then: "mild" } ],
-                default: "-" } },
-              z: { $round: [{ $divide: [{ $subtract: ["$vs", "$mean"] }, "$sd"] }, 2] },
-              mod_z: { $round: [{ $divide: [{ $multiply: [0.6745, { $subtract: ["$vs", "$med"] }] }, "$mad"] }, 2] } } },
+          { $setWindowFields: { output: {
+              q: { $percentile: { input: "$ms", p: [0.25, 0.75], method: "approximate" },
+                   window: { documents: ["unbounded", "unbounded"] } } } } },
+          { $set: { q1: { $arrayElemAt: ["$q", 0] }, q3: { $arrayElemAt: ["$q", 1] } } },
+          { $set: { iqr: { $subtract: ["$q3", "$q1"] } } },
+          { $set: { upper_inner: { $add: ["$q3", { $multiply: [1.5, "$iqr"] }] },
+                    upper_outer: { $add: ["$q3", { $multiply: [3, "$iqr"] }] },
+                    lower_inner: { $subtract: ["$q1", { $multiply: [1.5, "$iqr"] }] },
+                    lower_outer: { $subtract: ["$q1", { $multiply: [3, "$iqr"] }] } } },
+          { $match: { $expr: { $or: [{ $lt: ["$ms", "$lower_inner"] }, { $gt: ["$ms", "$upper_inner"] }] } } },
+          { $project: { _id: 0, ms: 1, q1: 1, q3: 1, upper_inner: 1, upper_outer: 1,
+              tukey: { $cond: [{ $or: [{ $lt: ["$ms", "$lower_outer"] }, { $gt: ["$ms", "$upper_outer"] }] },
+                               "extreme", "mild"] } } },
           { $sort: { ms: 1 } }
         ]
     jq:
@@ -63,21 +48,105 @@ exemplos:
       filtro: |
         def q(p): sort as $s | (length - 1) * p | floor as $i | (. - $i) as $f
                   | $s[$i] + $f * (($s[$i + 1] // $s[$i]) - $s[$i]);
-        def r2: . * 100 | round / 100;
-        . as $v | length as $n | q(0.25) as $q1 | q(0.75) as $q3 | ($q3 - $q1) as $iqr
-        | q(0.5) as $med | (add / $n) as $mean
-        | (map(pow(. - $mean; 2)) | add / ($n - 1) | sqrt) as $sd
-        | (map(. - $med | fabs) | q(0.5)) as $mad
+        q(0.25) as $q1 | q(0.75) as $q3 | ($q3 - $q1) as $iqr
         | sort[]
-        | {ms: .,
-           tukey: (if . < $q1 - 3 * $iqr or . > $q3 + 3 * $iqr then "extreme"
-                   elif . < $q1 - 1.5 * $iqr or . > $q3 + 1.5 * $iqr then "mild" else "-" end),
-           z: ((. - $mean) / $sd | r2),
-           mod_z: (0.6745 * (. - $med) / $mad | r2)}
+        | select(. < $q1 - 1.5 * $iqr or . > $q3 + 1.5 * $iqr)
+        | {ms: ., q1: $q1, q3: $q3, upper_inner: ($q3 + 1.5 * $iqr), upper_outer: ($q3 + 3 * $iqr),
+           tukey: (if . < $q1 - 3 * $iqr or . > $q3 + 3 * $iqr then "extreme" else "mild" end)}
     leitura: >-
-      As cercas de Tukey marcam 480 como outlier extremo, e o z-score modificado dá 30,69, muito
-      acima de 3,5. O z-score clássico dá só 2,65 e não passa do corte usual de 3: o próprio 480 infla
-      a média e o desvio padrão. Com n = 9, nenhum valor pode passar de (n − 1)/√n ≈ 2,67.
+      Com Q1 = 18 e Q3 = 45, o IQR é 27. A cerca interna superior fica em 85,5 e a externa em 126.
+      Só 480 passa de alguma cerca, e passa da externa: é um outlier extremo. O 60 fica dentro.
+  - id: z-score
+    titulo: z-score
+    sql: |
+      CREATE TABLE requests (id int, ms int);
+      INSERT INTO requests VALUES
+        (1, 12), (2, 15), (3, 18), (4, 22), (5, 25), (6, 31), (7, 45), (8, 60), (9, 480);
+    duckdb: |
+      WITH s AS (SELECT avg(ms) AS mean, stddev_samp(ms) AS sd FROM requests)
+      SELECT ms, round((ms - mean) / sd, 2) AS z,
+             CASE WHEN abs((ms - mean) / sd) > 3 THEN 'outlier' ELSE '-' END AS flag
+      FROM requests, s
+      ORDER BY ms;
+    postgres: |
+      WITH s AS (SELECT avg(ms) AS mean, stddev_samp(ms) AS sd FROM requests)
+      SELECT ms, round((ms - mean) / sd, 2) AS z,
+             CASE WHEN abs((ms - mean) / sd) > 3 THEN 'outlier' ELSE '-' END AS flag
+      FROM requests, s
+      ORDER BY ms;
+    mongo:
+      docs: |
+        [12, 15, 18, 22, 25, 31, 45, 60, 480].map((v, i) => ({ _id: i + 1, ms: v }))
+      pipeline: |
+        [
+          { $setWindowFields: { output: {
+              mean: { $avg: "$ms", window: { documents: ["unbounded", "unbounded"] } },
+              sd: { $stdDevSamp: "$ms", window: { documents: ["unbounded", "unbounded"] } } } } },
+          { $set: { z: { $divide: [{ $subtract: ["$ms", "$mean"] }, "$sd"] } } },
+          { $project: { _id: 0, ms: 1, z: { $round: ["$z", 2] },
+              flag: { $cond: [{ $gt: [{ $abs: "$z" }, 3] }, "outlier", "-"] } } },
+          { $sort: { ms: 1 } }
+        ]
+    jq:
+      entrada: |
+        [12, 15, 18, 22, 25, 31, 45, 60, 480]
+      filtro: |
+        length as $n | (add / $n) as $mean
+        | (map(pow(. - $mean; 2)) | add / ($n - 1) | sqrt) as $sd
+        | sort[]
+        | ((. - $mean) / $sd) as $z
+        | {ms: ., z: ($z * 100 | round / 100), flag: (if ($z | fabs) > 3 then "outlier" else "-" end)}
+    leitura: >-
+      Nenhum valor passa do corte usual de 3. O 480 chega a 2,65 porque ele próprio infla a média e o
+      desvio padrão. Com n = 9, nenhum z passa de (n − 1)/√n ≈ 2,67, então o corte de 3 é
+      inalcançável nesta amostra.
+  - id: mad
+    titulo: z-score modificado (MAD)
+    sql: |
+      CREATE TABLE requests (id int, ms int);
+      INSERT INTO requests VALUES
+        (1, 12), (2, 15), (3, 18), (4, 22), (5, 25), (6, 31), (7, 45), (8, 60), (9, 480);
+    duckdb: |
+      WITH s AS (SELECT median(ms) AS med FROM requests),
+      m AS (SELECT median(abs(ms - med)) AS mad FROM requests, s)
+      SELECT ms, round(0.6745 * (ms - med) / mad, 2) AS mod_z,
+             CASE WHEN abs(0.6745 * (ms - med) / mad) > 3.5 THEN 'outlier' ELSE '-' END AS flag
+      FROM requests, s, m
+      ORDER BY ms;
+    postgres: |
+      WITH s AS (SELECT percentile_cont(0.5) WITHIN GROUP (ORDER BY ms) AS med FROM requests),
+      m AS (SELECT percentile_cont(0.5) WITHIN GROUP (ORDER BY abs(ms - med)) AS mad FROM requests, s)
+      SELECT ms, round((0.6745 * (ms - med) / mad)::numeric, 2) AS mod_z,
+             CASE WHEN abs(0.6745 * (ms - med) / mad) > 3.5 THEN 'outlier' ELSE '-' END AS flag
+      FROM requests, s, m
+      ORDER BY ms;
+    mongo:
+      docs: |
+        [12, 15, 18, 22, 25, 31, 45, 60, 480].map((v, i) => ({ _id: i + 1, ms: v }))
+      pipeline: |
+        [
+          { $group: { _id: null, vs: { $push: "$ms" }, med: { $median: { input: "$ms", method: "approximate" } } } },
+          { $set: { mad: { $median: { input: { $map: { input: "$vs", in: { $abs: { $subtract: ["$$this", "$med"] } } } },
+                                      method: "approximate" } } } },
+          { $unwind: "$vs" },
+          { $set: { m: { $divide: [{ $multiply: [0.6745, { $subtract: ["$vs", "$med"] }] }, "$mad"] } } },
+          { $project: { _id: 0, ms: "$vs", mod_z: { $round: ["$m", 2] },
+              flag: { $cond: [{ $gt: [{ $abs: "$m" }, 3.5] }, "outlier", "-"] } } },
+          { $sort: { ms: 1 } }
+        ]
+    jq:
+      entrada: |
+        [12, 15, 18, 22, 25, 31, 45, 60, 480]
+      filtro: |
+        def q(p): sort as $s | (length - 1) * p | floor as $i | (. - $i) as $f
+                  | $s[$i] + $f * (($s[$i + 1] // $s[$i]) - $s[$i]);
+        q(0.5) as $med | (map(. - $med | fabs) | q(0.5)) as $mad
+        | sort[]
+        | (0.6745 * (. - $med) / $mad) as $m
+        | {ms: ., mod_z: ($m * 100 | round / 100), flag: (if ($m | fabs) > 3.5 then "outlier" else "-" end)}
+    leitura: >-
+      A mediana (25) e o MAD (10) mal se mexem com o 480, que chega a 30,69 e passa muito de 3,5. O
+      60 fica em 2,36, abaixo do corte. Nos mesmos dados, o z-score clássico não marcou nada.
   - id: k-means
     titulo: k-means com k = 3
     sql: |
