@@ -54,7 +54,7 @@ exemplo:
       | [.[].line | split(" ")[] | select(($dict[.] // []) | length > 1)]
       | group_by(.) | map({term: .[0], domains: $dict[.[0]], values_with_term: length})[]
   leitura: >-
-    "Dr" e "St" pertencem a dois domínios cada; "Dr" pode ser rua (drive) ou título (doctor). Os
+    "Dr" e "St" pertencem a dois domínios cada. "Dr", por exemplo, pode ser rua (drive) ou título (doctor). Os
     quatro valores precisam de contexto para serem lidos.
 ---
 Classifique cada token contra um dicionário de domínios. Um token com mais de um domínio é ambíguo. O dicionário é parte da entrada: na prática, vem do conhecimento do negócio.

@@ -48,7 +48,7 @@ exemplos:
            benford: ((1 + 1 / $d | log10) * 1000 | round / 1000)}
     leitura: >-
       Trinta potências de 2 já seguem a curva: o 1 lidera com 30%, o 2 vem depois com 20%. Os
-      dígitos 7 e 9 faltam porque a série é curta; com mais potências, as frequências se aproximam
+      dígitos 7 e 9 faltam porque a série é curta. Com mais potências, as frequências se aproximam
       de P(*d*).
   - id: aplicado
     smell: Dummy Value
@@ -103,9 +103,8 @@ exemplos:
            observed: ($n / ($ds | length) * 1000 | round / 1000),
            benford: ((1 + 1 / $d | log10) * 1000 | round / 1000)}
     leitura: >-
-      O dígito 9 aparece em 20% das faturas; a Lei de Benford espera 4,6%. Os quatro `9999` são o
-      excesso: um valor fictício repetido distorce a distribuição do primeiro dígito. Com só 20
-      valores o teste é grosseiro; ele ganha força em colunas grandes.
+      O dígito 9 aparece em 20% das faturas, quando a Lei de Benford espera 4,6%. Os quatro `9999` são o
+      excesso: um valor fictício repetido distorce a distribuição do primeiro dígito. Com só 20 valores o teste é grosseiro, mas ganha força em colunas grandes.
 ---
 A Lei de Benford afirma que, em números que ocorrem naturalmente, o primeiro dígito *d* segue aproximadamente P(*d*) = log₁₀(1 + 1/*d*). O dígito 1 deve ser o mais frequente, seguido do 2 e assim por diante. Desvios da lei já ajudaram a revelar fraudes e números fabricados.[@abedjan2015][@benford1938]
 

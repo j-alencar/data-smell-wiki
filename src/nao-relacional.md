@@ -30,7 +30,7 @@ As tarefas foram pensadas para dados relacionais.[@abedjan2015, §7.2] Ainda ass
 - `null values`, contando tanto `null` quanto o campo ausente;
 - `basic type`, com `$type` no MongoDB ou `type` no jq.
 
-Outras são exclusivas de sistemas relacionais. `data type` descreve o tipo que o SGBD declara para a coluna (varchar, timestamp); um documento JSON não declara tipo por campo. As tarefas de dependência (chaves únicas, dependências funcionais e de inclusão) partem de relações entre colunas e tabelas.
+Outras são exclusivas de sistemas relacionais. `data type` descreve o tipo que o SGBD declara para a coluna (varchar, timestamp), mas um documento JSON não declara tipo por campo. As tarefas de dependência (chaves únicas, dependências funcionais e de inclusão) partem de relações entre colunas e tabelas.
 
 <figure class="venn">
 <svg viewBox="0 0 760 420" role="img" aria-label="Diagrama de Venn das tarefas de perfilamento em dados relacionais e não relacionais">

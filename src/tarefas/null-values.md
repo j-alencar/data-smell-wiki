@@ -43,9 +43,7 @@ exemplos:
            empty: (map(select(.phone == "")) | length)}
         | .pct_missing = ((.nulls + .empty) / $n * 1000 | round / 10)
     leitura: >-
-      Dois nulos e um vazio: metade da coluna não tem telefone. Contar só `NULL` daria 33,3%. No
-      MongoDB e no JSON, o documento 5 nem tem o campo; `$ifNull` e `.phone == null` tratam campo
-      ausente como nulo.
+      Dois nulos e um vazio: metade da coluna não tem telefone. Contar só `NULL` daria 33,3%. No MongoDB e no JSON, o documento 5 nem tem o campo, mas `$ifNull` e `.phone == null` tratam campo ausente como nulo.
 ---
 Células vazias, isto é, com valor nulo ou string vazia, indicam o grau de (in)completude da coluna.[@abedjan2015]
 

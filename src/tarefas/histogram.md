@@ -41,8 +41,7 @@ exemplos:
         | group_by(.)
         | map(.[0] as $b | {bucket: $b, from_ms: ($lo + ($b - 1) * $w), to_ms: ($lo + $b * $w), n: length})[]
     leitura: >-
-      Nove dos dez valores caem na primeira faixa; as faixas 2 e 3 nem aparecem, porque estão
-      vazias. Um único valor alto (480) estica a amplitude e esmaga o resto. Com cauda longa, a
+      Nove dos dez valores caem na primeira faixa. As faixas 2 e 3 nem aparecem, porque estão vazias. Um único valor alto (480) estica a amplitude e esmaga o resto. Com cauda longa, a
       largura igual esconde a forma da distribuição.
   - id: equi-depth
     titulo: faixas com o mesmo número de valores (equi-depth)
@@ -89,8 +88,7 @@ exemplos:
         | map({bucket: .[0].bucket, from_ms: .[0].ms, to_ms: .[-1].ms, n: length})[]
     leitura: >-
       Cada faixa tem 2 ou 3 valores, como `ntile` distribui o resto. Agora a forma aparece: as três
-      primeiras faixas cabem em 12–45 ms, a última vai de 60 a 480 ms. Os limites das faixas são
-      quantis; com quatro faixas, são os [quartis](/tarefas/quartiles/).
+      primeiras faixas cabem em 12–45 ms, a última vai de 60 a 480 ms. Os limites das faixas são quantis, que com quatro faixas se chamam [quartis](/tarefas/quartiles/).
 ---
 Um histograma conta os valores por grupo (faixa). O equi-depth fixa o número de valores por faixa e define os limites ordenando os valores, como os [quartis](/tarefas/quartiles/).[@abedjan2015]
 

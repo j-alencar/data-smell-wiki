@@ -37,6 +37,6 @@ exemplo:
     filtro: |
       [.[].note | gsub("[A-Za-z0-9 ]"; "")]
       | group_by(.) | map({specials: .[0], n: length})[]
-  leitura: Três dos quatro valores têm caracteres especiais; os pontos de `New.York.` não pertencem a um nome de cidade.
+  leitura: Três dos quatro valores têm caracteres especiais. Os pontos de `New.York.` não pertencem a um nome de cidade.
 ---
 Apague letras, dígitos e espaços: o que sobra são os caracteres especiais de cada valor.

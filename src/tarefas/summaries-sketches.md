@@ -261,20 +261,20 @@ exemplos:
       fração de posições iguais estima a similaridade de Jaccard: 0,31 (exata: 0,33). Com os 40
       valores distintos de cada coluna, a interseção estimada é de 19 valores (exata: 20).[@dasu2002]
 ---
-Amostras e sketches são métodos de processamento aproximado de consultas (AQP). Eles procedem "calculando uma sinopse compacta, com perdas, dos dados, e então executando a consulta de interesse sobre a sinopse em vez do conjunto de dados inteiro".[@cormode2011, p. 1] Servem a tabelas grandes demais para perfilar por inteiro; por exemplo, para testar numa amostra se uma dependência vale.
+Amostras e sketches são métodos de processamento aproximado de consultas (AQP). Eles procedem "calculando uma sinopse compacta, com perdas, dos dados, e então executando a consulta de interesse sobre a sinopse em vez do conjunto de dados inteiro".[@cormode2011, p. 1] Servem a tabelas grandes demais para perfilar por inteiro, por exemplo para testar numa amostra se uma dependência vale.
 
 ## Amostragem
 
 - **Bernoulli:** inclua cada linha com probabilidade *p*. Estime a soma dividindo a soma da amostra por *p*.[@cormode2011]
-- **Estratificada:** amostre cada grupo separadamente; estime a soma de cada grupo multiplicando a soma amostral pelo tamanho do grupo dividido pelo tamanho da amostra. Grupos homogêneos reduzem a variação da estimativa.[@cormode2011]
+- **Estratificada:** amostre cada grupo separadamente e estime a soma de cada um multiplicando a soma amostral pelo tamanho do grupo dividido pelo tamanho da amostra. Grupos homogêneos reduzem a variação da estimativa.[@cormode2011]
 
-DuckDB (`USING SAMPLE`), PostgreSQL (`TABLESAMPLE`) e MongoDB (`$sample`) sorteiam de verdade; os exemplos usam o hash do `id` como moeda para que a saída se repita.
+Como DuckDB (`USING SAMPLE`), PostgreSQL (`TABLESAMPLE`) e MongoDB (`$sample`) sorteiam de verdade, os exemplos usam o hash do `id` como moeda para que a saída se repita.
 
 ## Sketches e similaridade de colunas
 
 Para comparar colunas *A* e *B*, a similaridade de Jaccard é |*A* ∩ *B*| / |*A* ∪ *B*|, considerando apenas valores distintos.[@abedjan2015]
 
-- **KMV:** guarde os *k* menores hashes distintos. Estime o número de valores distintos por (*k* − 1)/*h*ₖ, com *h*ₖ igual ao *k*-ésimo hash normalizado para [0, 1]. A fração dos *k* menores hashes da união presentes nas duas colunas estima Jaccard; interseções pequenas podem passar despercebidas.[@cormode2011]
+- **KMV:** guarde os *k* menores hashes distintos. Estime o número de valores distintos por (*k* − 1)/*h*ₖ, com *h*ₖ igual ao *k*-ésimo hash normalizado para [0, 1]. A fração dos *k* menores hashes da união presentes nas duas colunas estima Jaccard, mas interseções pequenas podem passar despercebidas.[@cormode2011]
 - **MinHash:** guarde o menor hash de cada coluna sob *k* funções. A fração de posições iguais entre duas assinaturas estima Jaccard, ρ. Com as contagens de valores distintos, estime a interseção por ρ/(1 + ρ) · (|*A*| + |*B*|).[@dasu2002, p. 241-242] Nos testes dos autores, 50 posições já separavam interseções pequenas, médias e grandes.[@dasu2002, p. 246]
 
-Os exemplos usam um hash escrito à mão para dar o mesmo resultado nos quatro motores; em uso real, prefira o do motor (`hash` no DuckDB, `hashtext` no PostgreSQL).
+Os exemplos usam um hash escrito à mão para dar o mesmo resultado nos quatro motores. Em uso real, prefira o do motor (`hash` no DuckDB, `hashtext` no PostgreSQL).

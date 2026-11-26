@@ -44,7 +44,6 @@ exemplos:
             | {col: $c, distinct_values: (unique | length), n: length})
         | map(.uniqueness = .distinct_values / .n) | sort_by(-.uniqueness)[]
     leitura: >-
-      `email` tem unicidade 1: todo valor é único, logo é candidata a chave. `city` fica em 0,5. A
-      unicidade 1 numa amostra não garante a chave; só a restrição no esquema garante.
+      `email` tem unicidade 1: todo valor é único, logo é candidata a chave. `city` fica em 0,5. A unicidade 1 numa amostra não garante a chave, porque só a restrição no esquema garante.
 ---
 A unicidade deriva do número de [valores distintos](/tarefas/distinct-values/): é esse número dividido pelo número de linhas. Coluna com todos os valores únicos é candidata a chave.[@abedjan2015]

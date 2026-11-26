@@ -43,6 +43,6 @@ exemplo:
                   elif test("^[A-Za-z ]+$") then "alphabetic" else "alphanumeric" end]
       | group_by(.) | map({basic_type: .[0], n: length})
       | sort_by([-.n, .basic_type])[]
-  leitura: Três tipos básicos numa coluna de nomes de sala; `12` e `Room 12` talvez sejam a mesma sala.
+  leitura: Há três tipos básicos numa coluna de nomes de sala, e `12` e `Room 12` talvez sejam a mesma sala.
 ---
 Classifique cada valor como numérico, alfabético ou alfanumérico. Uma coluna de texto saudável costuma ter um tipo dominante.

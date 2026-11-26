@@ -38,6 +38,6 @@ exemplo:
     filtro: |
       [.[].inspectedOn[0:4] | tonumber / 10 | floor * 10]
       | group_by(.) | map({decade: .[0], n: length})[]
-  leitura: As décadas de 1890 e 2090 estão longe do restante; são datas implausíveis para uma inspeção.
+  leitura: Longe do restante, as décadas de 1890 e 2090 são datas implausíveis para uma inspeção.
 ---
 Agrupe as datas em faixas largas (décadas) para que os extremos fiquem isolados.

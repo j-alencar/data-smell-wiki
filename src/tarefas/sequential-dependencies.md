@@ -39,8 +39,7 @@ exemplos:
         | {pollnum: .[1].pollnum, t: .[1].t, gap: $gap,
            sd: (if $gap >= 9 and $gap <= 11 then "ok" else "violates" end)}
     leitura: >-
-      Sete das nove lacunas ficam em [9, 11]. A lacuna de 20 s entre as coletas 4 e 5 indica uma
-      coleta perdida; a de 6 s entre 8 e 9, uma coleta extra ou adiantada.
+      Sete das nove lacunas ficam em [9, 11]. A lacuna de 20 s entre as coletas 4 e 5 indica uma coleta perdida, e a de 6 s entre 8 e 9, uma coleta extra ou adiantada.
   - id: aplicado
     smell: Suspect Date/Time Interval
     mundo: serie-temporal

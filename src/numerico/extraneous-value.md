@@ -33,7 +33,7 @@ exemplo:
       [.[].qty] | group_by(length)
       | map({len: (.[0] | length), n: length, example: min})[]
   leitura: >-
-    Quantidades têm 1 ou 2 caracteres; dois valores carregam um qualificador. Para guardá-los, a
+    Quantidades têm 1 ou 2 caracteres, mas dois valores carregam um qualificador. Para guardá-los, a
     coluna já virou texto.
 ---
 Um número com observação ("aprox.", "estimado") só cabe num campo de texto: o qualificador empurra o campo para fora do mundo numérico.

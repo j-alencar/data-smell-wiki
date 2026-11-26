@@ -53,4 +53,4 @@ exemplo:
     `GoOD MorNiNg` é o caso "Mixed": maiúsculas fora de qualquer regra. Só maiúsculas ou só
     minúsculas também contam como uso incomum, conforme o contexto.
 ---
-Reduza cada valor à sua classe de caixa: UPPER, lower, Title ou Mixed. O PostgreSQL tem `initcap`; nos demais, uma regex faz o mesmo.
+Reduza cada valor à sua classe de caixa: UPPER, lower, Title ou Mixed. Nos demais motores, uma regex faz o que o `initcap` faz no PostgreSQL.

@@ -45,4 +45,4 @@ exemplo:
              n: length, values: .})[]
   leitura: Três "nomes" são só uma sequência repetida e não pertencem ao domínio de nomes de pessoa.
 ---
-Uma regra de domínio simples: o valor é uma sequência curta repetida? O RE2 do DuckDB não tem retrovisor (`\1`), então a consulta testa cada tamanho de prefixo; PostgreSQL, MongoDB e jq usam a regex direto.
+Uma regra de domínio simples: o valor é uma sequência curta repetida? O RE2 do DuckDB não tem retrovisor (`\1`), então a consulta testa cada tamanho de prefixo, enquanto PostgreSQL, MongoDB e jq usam a regex direto.
