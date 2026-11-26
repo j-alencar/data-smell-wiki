@@ -24,13 +24,13 @@ Dados binários guardados como blob não têm a semântica necessária para leva
 
 ## Tarefas de perfilamento
 
-As tarefas de Abedjan, Golab e Naumann (2015) foram escritas pensando em dados relacionais; os autores observam que a maioria dos métodos de perfilamento se aplica apenas a dados relacionais ou foi desenvolvida para eles (§7.2). Ainda assim, muitas tarefas só olham para uma sequência de valores e funcionam igual em documentos. Por exemplo:
+As tarefas de Abedjan, Golab e Naumann[@abedjan2015] foram escritas pensando em dados relacionais; os autores observam que a maioria dos métodos de perfilamento se aplica apenas a dados relacionais ou foi desenvolvida para eles (§7.2). Ainda assim, muitas tarefas só olham para uma sequência de valores e funcionam igual em documentos. Por exemplo:
 
 - `patterns`, `histogram` e `value length` sobre `itens[].qtd`, depois de achatar o array (`$unwind` no MongoDB, `.[]` no jq);
 - `null values`, contando tanto `null` quanto o campo ausente;
 - `basic type`, com `$type` no MongoDB ou `type` no jq.
 
-Outras são exclusivas de sistemas relacionais. `data type` descreve o tipo que o SGBD declara para a coluna (varchar, timestamp); um documento JSON não declara tipo por campo. As tarefas de dependência (chaves únicas, dependências funcionais e de inclusão) partem de relações entre colunas e tabelas. Existem adaptações para XML, como chaves aproximadas (ABEDJAN; GOLAB; NAUMANN, 2015, §7.2), mas elas não são tratadas aqui.
+Outras são exclusivas de sistemas relacionais. `data type` descreve o tipo que o SGBD declara para a coluna (varchar, timestamp); um documento JSON não declara tipo por campo. As tarefas de dependência (chaves únicas, dependências funcionais e de inclusão) partem de relações entre colunas e tabelas. Existem adaptações para XML, como chaves aproximadas,[@abedjan2015, §7.2] mas elas não são tratadas aqui.
 
 <figure class="venn">
 <svg viewBox="0 0 760 420" role="img" aria-label="Diagrama de Venn das tarefas de perfilamento em dados relacionais e não relacionais">
@@ -56,11 +56,7 @@ Outras são exclusivas de sistemas relacionais. `data type` descreve o tipo que 
     <text x="565" y="230">presença de campos</text>
   </g>
 </svg>
-<figcaption>Tarefas de perfilamento por modelo de dados. O lado não relacional mostra exemplos de metadados próprios de documentos, sem tarefa equivalente na classificação de Abedjan, Golab e Naumann (2015).</figcaption>
+<figcaption>Tarefas de perfilamento por modelo de dados. O lado não relacional mostra exemplos de metadados próprios de documentos, sem tarefa equivalente na classificação de Abedjan, Golab e Naumann[@abedjan2015].</figcaption>
 </figure>
 
 Nos exemplos, quando uma tarefa não funciona em um motor, a página do smell diz por quê e mostra o resultado nos demais.
-
-## Referências
-
-- {{ referencias.abedjan2015.abnt | mdInline | safe }}

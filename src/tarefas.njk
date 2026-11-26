@@ -17,7 +17,7 @@ grupos:
 {%- macro linha(nome, url) -%}
 <tr><td><a href="{{ url }}">{{ smells[nome].pt }}</a> <small>({{ nome }})</small></td><td>{% for t in smells[nome].tarefas %}<a href="/tarefas/{{ t }}/">{{ tarefas[t].nome }}</a>{% if not loop.last %}; {% endif %}{% endfor %}</td></tr>
 {%- endmacro -%}
-<p>O perfilamento de dados divide-se em três grupos de tarefas: análise de coluna única, análise de múltiplas colunas e descoberta de dependências. As dependências descrevem relações entre colunas e são próprias de dados relacionais (ABEDJAN; GOLAB; NAUMANN, 2015). Cada página traz a descrição da tarefa, um exemplo base e, quando o framework a liga a um smell, um exemplo aplicado.</p>
+<p>O perfilamento de dados divide-se em três grupos de tarefas: análise de coluna única, análise de múltiplas colunas e descoberta de dependências. As dependências descrevem relações entre colunas e são próprias de dados relacionais.[@abedjan2015] Cada página traz a descrição da tarefa, um exemplo base e, quando o framework a liga a um smell, um exemplo aplicado.</p>
 
 {%- for g in grupos %}
 <h2>{{ g.n }}. {{ g.nome }}</h2>
@@ -44,8 +44,3 @@ grupos:
 </table>
 <p>Ordem: smells de cada mundo de campo e, ao fim, os <a href="/arquetipicos/">arquetípicos</a>.</p>
 
-<h2>Referências</h2>
-<ul class="refs">
-<li>{{ referencias.abedjan2015.abnt | mdInline | safe }}</li>
-<li>{{ referencias.foidl2022b.abnt | mdInline | safe }}</li>
-</ul>

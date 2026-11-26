@@ -7,7 +7,7 @@ layout: base.njk
 {%- for ex in exemplos or [] %}{% if ex.smell %}{% set aplicados = (aplicados.push(ex), aplicados) %}{% else %}{% set base = (base.push(ex), base) %}{% endif %}{% endfor -%}
 <p class="meta">{{ t.secao }} · {{ t.categoria }}{% if t.escopo != t.categoria %} · {{ t.escopo }}{% endif %} · original: <i>{{ t.original }}</i></p>
 
-<p class="lead">{{ t.descricao | replace(r/\.$/, "") }} (ABEDJAN; GOLAB; NAUMANN, 2015).</p>
+<p class="lead">{{ t.descricao | replace(r/\.$/, "") }}.[@abedjan2015]</p>
 
 {{ content | safe }}
 
@@ -50,9 +50,3 @@ layout: base.njk
 <p>Nenhum smell do framework usa esta tarefa. Ela completa o perfil da coluna.</p>
 {%- endif %}
 
-<h2>Referências</h2>
-<ul class="refs">
-{%- for r in (["abedjan2015"].concat(refs or [])) | abnt %}
-<li>{{ r | mdInline | safe }}</li>
-{%- endfor %}
-</ul>

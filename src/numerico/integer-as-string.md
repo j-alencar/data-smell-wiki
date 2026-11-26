@@ -1,6 +1,5 @@
 ---
 smell: Integer as String
-refs: [foidl2022a]
 exemplo:
   tarefa: basic-type
   sql: |
@@ -46,6 +45,6 @@ exemplo:
          castable_to_integer: (map(select(test("^-?[0-9]+$"))) | length)}
   leitura: >-
     Todos os valores são strings, e todos se convertem em inteiro. Somar `"5"` falha onde concatenar
-    funciona (FOIDL; FELDERER; RAMLER, 2022a).
+    funciona.[@foidl2022a]
 ---
 Em documentos, procure em todos os níveis: o campo pode estar dentro de arrays.

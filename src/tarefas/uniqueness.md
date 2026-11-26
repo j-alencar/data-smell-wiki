@@ -47,4 +47,4 @@ exemplos:
       `email` tem unicidade 1: todo valor é único, logo é candidata a chave. `city` fica em 0,5. A
       unicidade 1 numa amostra não garante a chave; só a restrição no esquema garante.
 ---
-A unicidade deriva do número de [valores distintos](/tarefas/distinct-values/): é esse número dividido pelo número de linhas (ABEDJAN; GOLAB; NAUMANN, 2015). Ferramentas de perfilamento sugerem declarar como candidata a chave a coluna em que todos os valores são únicos (ABEDJAN; GOLAB; NAUMANN, 2015). Com várias colunas, a mesma ideia leva à descoberta de combinações únicas de colunas, tarefa de dependências que este guia não cobre.
+A unicidade deriva do número de [valores distintos](/tarefas/distinct-values/): é esse número dividido pelo número de linhas.[@abedjan2015] Ferramentas de perfilamento sugerem declarar como candidata a chave a coluna em que todos os valores são únicos.[@abedjan2015] Com várias colunas, a mesma ideia leva à descoberta de combinações únicas de colunas, tarefa de dependências que este guia não cobre.

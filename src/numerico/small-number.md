@@ -1,6 +1,5 @@
 ---
 smell: Small Number
-refs: [foidl2022a]
 exemplo:
   tarefa: histogram
   sql: |
@@ -35,6 +34,6 @@ exemplo:
       | group_by(.) | map({magnitude: .[0], n: length})[]
   leitura: >-
     Quatro dos seis valores estão abaixo de 1, um deles na casa de 10⁻⁴. Multiplicados entre si, perdem
-    casas decimais ou sofrem underflow (FOIDL; FELDERER; RAMLER, 2022a).
+    casas decimais ou sofrem underflow.[@foidl2022a]
 ---
 Um histograma por ordem de grandeza (`floor(log10(v))`) mostra quantos valores ficam abaixo de 1 e quão abaixo.

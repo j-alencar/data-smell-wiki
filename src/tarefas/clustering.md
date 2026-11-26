@@ -1,5 +1,4 @@
 ---
-refs: [nist-handbook, jain1999]
 exemplos:
   - id: outliers
     titulo: cercas de Tukey, z-score e MAD
@@ -211,15 +210,15 @@ exemplos:
       O agrupamento propõe; confirmar que valores diferentes nomeiam a mesma coisa exige conhecer o
       domínio.
 ---
-A análise de agrupamentos (*clustering*) identifica grupos de registros semelhantes numa tabela, e registros que não cabem em grupo nenhum podem ser marcados como outliers, que costumam indicar problemas de qualidade. Dasu e Johnson, por exemplo, agrupam colunas numéricas para identificar outliers, e o ProLOD++ aplica k-means a relações RDF (ABEDJAN; GOLAB; NAUMANN, 2015). Jain, Murty e Flynn (1999) revisam os algoritmos de agrupamento.
+A análise de agrupamentos (*clustering*) identifica grupos de registros semelhantes numa tabela, e registros que não cabem em grupo nenhum podem ser marcados como outliers, que costumam indicar problemas de qualidade. Dasu e Johnson, por exemplo, agrupam colunas numéricas para identificar outliers, e o ProLOD++ aplica k-means a relações RDF.[@abedjan2015] Jain, Murty e Flynn[@jain1999] revisam os algoritmos de agrupamento.
 
 <h2 id="outliers">Detecção de outliers</h2>
 
 A detecção de outliers tem várias implementações. As mais comuns:
 
-- **Cercas de Tukey:** com os [quartis](/tarefas/quartiles/) Q1 e Q3 e o intervalo interquartil IQ = Q3 − Q1, as cercas internas ficam em Q1 − 1,5·IQ e Q3 + 1,5·IQ, e as externas em Q1 − 3·IQ e Q3 + 3·IQ. Um ponto além de uma cerca interna é um outlier leve; além de uma externa, extremo (NIST, 2012).
-- **Z-score:** *z* = (*x* − média) / desvio padrão. É prática comum, mas pode enganar, sobretudo em amostras pequenas: o maior *z* possível é (*n* − 1)/√*n* (NIST, 2012).
-- **MAD:** o z-score modificado, *M* = 0,6745·(*x* − mediana) / MAD, troca média e desvio pela mediana e pelo desvio absoluto mediano. Iglewicz e Hoaglin recomendam marcar como outlier potencial |*M*| > 3,5 (NIST, 2012). Valores extremos distorcem o desvio padrão, e o MAD e o IQR estimam a dispersão de forma mais estável (NIST, 2012).
+- **Cercas de Tukey:** com os [quartis](/tarefas/quartiles/) Q1 e Q3 e o intervalo interquartil IQ = Q3 − Q1, as cercas internas ficam em Q1 − 1,5·IQ e Q3 + 1,5·IQ, e as externas em Q1 − 3·IQ e Q3 + 3·IQ. Um ponto além de uma cerca interna é um outlier leve; além de uma externa, extremo.[@nist-handbook]
+- **Z-score:** *z* = (*x* − média) / desvio padrão. É prática comum, mas pode enganar, sobretudo em amostras pequenas: o maior *z* possível é (*n* − 1)/√*n*.[@nist-handbook]
+- **MAD:** o z-score modificado, *M* = 0,6745·(*x* − mediana) / MAD, troca média e desvio pela mediana e pelo desvio absoluto mediano. Iglewicz e Hoaglin recomendam marcar como outlier potencial |*M*| > 3,5.[@nist-handbook] Valores extremos distorcem o desvio padrão, e o MAD e o IQR estimam a dispersão de forma mais estável.[@nist-handbook]
 - **k-means:** agrupa os valores em *k* grupos em torno de centroides; um grupo pequeno e distante, ou um ponto longe do próprio centroide, é candidato a outlier.
 
 Os exemplos base cobrem os quatro. No exemplo aplicado, o agrupamento é por colisão de chave: valores com a mesma chave normalizada caem no mesmo grupo.

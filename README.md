@@ -27,6 +27,8 @@ mise run verify                   # run all; writes src/_data/saidas.json
 
 Task pages hold a list of examples under `exemplos` (`mise run verify -- tarefas/histogram`); an example with `smell` and `mundo` is an applied one.
 
+Cite with `[@key]` or `[@key, p. 12]` (keys from `referencias.yaml`). The build numbers citations per page, Wikipedia style, and lists the cited works at the end; an unknown key fails the build.
+
 Pages render the outputs from `saidas.json`, so the site only shows real runs. CI fails if that file is stale. If an engine can't do a task, replace its block with `na: "<motivo>"`.
 
 | Data | File |

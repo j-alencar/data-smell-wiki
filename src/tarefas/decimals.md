@@ -45,6 +45,6 @@ exemplos:
       então a coluna só cabe sem perda em `DECIMAL(8, 5)`. Os valores chegam como texto de propósito:
       num `double`, a representação decimal depende do motor.
 ---
-Para os tipos decimal, float e double, extraia o número máximo de dígitos e de casas decimais. Os dois números dão os metadados *size* e *decimals* da coluna (ABEDJAN; GOLAB; NAUMANN, 2015) e definem a precisão e a escala de um tipo `DECIMAL(p, s)`.
+Para os tipos decimal, float e double, extraia o número máximo de dígitos e de casas decimais. Os dois números dão os metadados *size* e *decimals* da coluna[@abedjan2015] e definem a precisão e a escala de um tipo `DECIMAL(p, s)`.
 
 Casas decimais demais ou em número variável são, elas mesmas, data smells: veja os smells ligados a esta tarefa abaixo.

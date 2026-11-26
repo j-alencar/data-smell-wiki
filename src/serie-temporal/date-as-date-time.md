@@ -1,6 +1,5 @@
 ---
 smell: Date as Date/Time
-refs: [foidl2022a]
 exemplo:
   tarefa: patterns
   sql: |
@@ -46,7 +45,6 @@ exemplo:
       | group_by(.) | map({time_part: .[0], n: length})[]
   leitura: >-
     Todas as linhas têm o mesmo horário, `00:00:00`: a coluna é uma data guardada como datetime.
-    Converter "2021-01-01" com `pandas.to_datetime` sem declarar o formato produz exatamente isso
-    (FOIDL; FELDERER; RAMLER, 2022a).
+    Converter "2021-01-01" com `pandas.to_datetime` sem declarar o formato produz exatamente isso.[@foidl2022a]
 ---
 Perfile só a parte do horário. Se ela for constante, o campo não carrega hora.

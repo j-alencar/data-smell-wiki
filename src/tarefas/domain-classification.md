@@ -75,8 +75,8 @@ exemplos:
       de cada coluna é o suspeito (`dani(at)w.com`, `50.050-000`, `XX`). A coluna `d` fica sem
       domínio: reconhecer primeiros nomes exige um dicionário de nomes, não uma expressão regular.
 ---
-O domínio semântico de uma coluna descreve não a sintaxe dos valores, mas o seu significado. Uma expressão regular pode caracterizar a coluna; o rótulo "número de telefone" dá a ela um domínio concreto. A tarefa não se automatiza por completo, mas há trabalhos para domínios comuns, sobre pessoas, lugares etc.: agrupar colunas de mesmo significado entre tabelas, inclusive numéricas, e casar colunas com semânticas predefinidas. Conhecer o domínio interessa também ao casamento de esquemas (*schema matching*) (ABEDJAN; GOLAB; NAUMANN, 2015).
+O domínio semântico de uma coluna descreve não a sintaxe dos valores, mas o seu significado. Uma expressão regular pode caracterizar a coluna; o rótulo "número de telefone" dá a ela um domínio concreto. A tarefa não se automatiza por completo, mas há trabalhos para domínios comuns, sobre pessoas, lugares etc.: agrupar colunas de mesmo significado entre tabelas, inclusive numéricas, e casar colunas com semânticas predefinidas. Conhecer o domínio interessa também ao casamento de esquemas (*schema matching*).[@abedjan2015]
 
-Entre a sintaxe e o domínio fica a classe de dados (*data class*): um tipo semântico genérico, como código, indicador, texto, data/hora, quantidade ou identificador (ABEDJAN; GOLAB; NAUMANN, 2015).
+Entre a sintaxe e o domínio fica a classe de dados (*data class*): um tipo semântico genérico, como código, indicador, texto, data/hora, quantidade ou identificador.[@abedjan2015]
 
 O exemplo base faz a versão mais simples: testa cada coluna contra um dicionário de domínios e mede a fração de valores que casam.

@@ -1,6 +1,5 @@
 ---
 smell: Unit Inconsistency
-refs: [yfinance-552, yfinance-1110]
 exemplo:
   tarefa: patterns
   sql: |
@@ -43,7 +42,7 @@ exemplo:
       | sort_by(-.n)[]
   leitura: >-
     Um valor tem dois dígitos inteiros a mais: um salto de 100×, a forma de pence (GBp) misturado
-    com libras (GBP), como no yfinance (YFINANCE, 2021; 2022). O padrão do valor discrepante muda
+    com libras (GBP), como no yfinance.[@yfinance-552][@yfinance-1110] O padrão do valor discrepante muda
     conforme o motor escreve `6215.0`: com ou sem a casa decimal.
 ---
 Num campo numérico sem unidade escrita, a troca de escala só aparece como salto de magnitude. Se alguém escrever a unidade no valor, o campo migra para Texto.

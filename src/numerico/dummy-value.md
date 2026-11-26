@@ -1,6 +1,5 @@
 ---
 smell: Dummy Value
-refs: [foidl2022a]
 exemplo:
   tarefa: constancy
   sql: |
@@ -47,6 +46,6 @@ exemplo:
       | {top_value: .[0].age, n: length, constancy: (length / $rows)}
   leitura: >-
     999 é a idade mais frequente e não é plausível. Como idade, o valor provavelmente marca uma
-    entrada ausente (FOIDL; FELDERER; RAMLER, 2022a).
+    entrada ausente.[@foidl2022a]
 ---
 Em números, procure um valor repetido fora da faixa plausível, muitas vezes feito de noves ou de limites de tipo (65535).
