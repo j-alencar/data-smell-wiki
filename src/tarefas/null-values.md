@@ -47,6 +47,6 @@ exemplos:
       MongoDB e no JSON, o documento 5 nem tem o campo; `$ifNull` e `.phone == null` tratam campo
       ausente como nulo.
 ---
-Células vazias, isto é, com valor nulo ou string vazia, indicam o grau de (in)completude da coluna.[@abedjan2015]
+Células vazias, isto é, com valor nulo ou string vazia, indicam o grau de (in)completude da coluna. A contagem exige uma única passada pelos dados.[@abedjan2015]
 
-Valores ausentes também se disfarçam. Em formulários web, o primeiro item de uma lista vem pré-selecionado e parte dos usuários não o troca: o CEP vira `99999`, o estado vira o primeiro da lista. Esses valores não são nulos, mas fazem o mesmo papel.[@abedjan2015] Veja [Constância](/tarefas/constancy/), que mede o peso do valor mais frequente.
+Valores ausentes também se disfarçam. Formulários web trazem listas com o primeiro item pré-selecionado, e parte dos usuários não o troca: o CEP vira `99999` ou o estado vira o primeiro da lista. Esses valores não são nulos, mas fazem o mesmo papel. Detectá-los é difícil; uma heurística examina, para cada valor de uma coluna, a distribuição dos demais atributos.[@abedjan2015] Veja também [Constância](/tarefas/constancy/), que mede o peso do valor mais frequente.

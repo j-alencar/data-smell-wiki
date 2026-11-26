@@ -43,6 +43,6 @@ exemplos:
       pré-selecionada. Constância alta num campo que deveria variar sugere um valor padrão
       disfarçado, não um fato.
 ---
-A constância é a frequência do valor mais frequente, possivelmente um valor padrão predefinido, dividida pelo número total de valores.[@abedjan2015]
+A constância é a frequência do valor mais frequente, possivelmente um valor padrão predefinido, dividida pelo número total de valores. Ela representa a proporção de algum valor constante em relação à coluna inteira.[@abedjan2015] O valor mais frequente sai de uma passada com hashing ou de uma ordenação.[@abedjan2015]
 
-O exemplo segue o caso dos formulários web: o primeiro item de uma lista vem pré-selecionado e parte dos usuários não o troca.[@abedjan2015] Aqui, a lista é a de UFs brasileiras.
+O exemplo segue o caso dos formulários web descrito pelos autores: o primeiro item de uma lista vem pré-selecionado e parte dos usuários não o troca, como o estado `Alabama`, primeiro em ordem alfabética nos EUA.[@abedjan2015] Aqui, a lista é a de UFs brasileiras.

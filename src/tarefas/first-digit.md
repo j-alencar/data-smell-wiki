@@ -107,7 +107,7 @@ exemplos:
       excesso: um valor fictício repetido distorce a distribuição do primeiro dígito. Com só 20
       valores o teste é grosseiro; ele ganha força em colunas grandes.
 ---
-A Lei de Benford afirma que, em números que ocorrem naturalmente, o primeiro dígito *d* segue aproximadamente P(*d*) = log₁₀(1 + 1/*d*). O dígito 1 deve ser o mais frequente, seguido do 2 e assim por diante. Desvios da lei já ajudaram a revelar fraudes e números fabricados.[@abedjan2015][@benford1938]
+A Lei de Benford afirma que, em números que ocorrem naturalmente, o primeiro dígito *d* segue aproximadamente P(*d*) = log₁₀(1 + 1/*d*). O dígito 1 deve ser o mais frequente, seguido do 2 e assim por diante. O comportamento foi observado em pesos moleculares, tamanhos de prédios e contas de luz, e a lei já serviu para revelar fraudes contábeis e outros números fabricados.[@abedjan2015][@benford1938]
 
 | *d* | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 |
 |---|---|---|---|---|---|---|---|---|---|

@@ -9,8 +9,8 @@ layout: base.njk
 {%- if item.arq %} <a class="badge arq" href="/arquetipicos/" data-tip="Smell que pode surgir em qualquer mundo de campo. Clique para saber mais.">Smell arquetípico <span class="info">ⓘ</span></a>{% endif %}</p>
 
 <blockquote>
-<p>{{ s.definicao | replace(r/\.$/, "") }}.[@foidl2022b]</p>
-<p class="cite">Exemplo: <code>{{ s.exemplo | e }}</code></p>
+<p>{{ s.definicao }}</p>
+<p class="cite">Exemplo: <code>{{ s.exemplo | e }}</code>.[@foidl2022b]</p>
 </blockquote>
 
 {{ content | safe }}
