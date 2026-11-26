@@ -35,6 +35,6 @@ exemplo:
     filtro: |
       [.[].ph | tostring | (split(".")[1] // "") | length]
       | group_by(.) | map({decimals: .[0], n: length})[]
-  leitura: Um valor tem 10 casas decimais; os demais têm 1 ou 2. Um pH com essa precisão é implausível.
+  leitura: Um valor tem 10 casas decimais, contra 1 ou 2 nos demais. Um pH com essa precisão é implausível.
 ---
 Conte as casas decimais de cada valor. Uma cauda longa sugere precisão que o instrumento não tem.

@@ -44,4 +44,4 @@ exemplos:
 ---
 Os quartis são um caso especial comum do [histograma](/tarefas/histogram/) equi-depth: dividem os dados em quatro grupos com o mesmo número de valores.[@abedjan2015]
 
-A distância entre o primeiro e o terceiro quartil, o intervalo interquartil (IQR), mede a dispersão sem se deixar levar por extremos. As cercas de Tukey usam o IQR para marcar outliers; veja [Agrupamento (clustering)](/tarefas/clustering/#outliers).
+A distância entre o primeiro e o terceiro quartil, o intervalo interquartil (IQR), mede a dispersão sem se deixar levar por extremos. As cercas de Tukey, em [Agrupamento (clustering)](/tarefas/clustering/#outliers), usam o IQR para marcar outliers.

@@ -162,8 +162,7 @@ exemplos:
     leitura: >-
       Com centroides iniciais no mínimo, na mediana e no máximo, o k-means converge para três grupos:
       pacotes de 1 kg, pacotes de 5 kg e um grupo de um único pacote de 48 kg. Um grupo com um só
-      membro é um registro que não se encaixa em nenhum outro: candidato a outlier. Com k = 2, os
-      grupos de 1 kg e 5 kg se fundiriam; a escolha de k e dos centroides iniciais muda o resultado.
+      membro é um registro que não se encaixa em nenhum outro: candidato a outlier. Com k = 2, os grupos de 1 kg e 5 kg se fundiriam. A escolha de k e dos centroides iniciais muda o resultado.
   - id: aplicado
     smell: Synonym
     mundo: texto
@@ -207,7 +206,7 @@ exemplos:
     leitura: >-
       A chave (último nome, em minúsculas) agrupa as grafias em dois grupos, candidatos a sinônimos.
       O grupo `clinton` mistura duas pessoas: Hillary Clinton não é sinônimo de Bill Clinton.
-      O agrupamento propõe; confirmar que valores diferentes nomeiam a mesma coisa exige conhecer o
+      O agrupamento só propõe candidatos, porque confirmar que valores diferentes nomeiam a mesma coisa exige conhecer o
       domínio.
 ---
 Agrupe registros semelhantes e examine os grupos pequenos ou distantes: podem indicar valores suspeitos.[@abedjan2015]
@@ -219,6 +218,6 @@ Os exemplos usam estes critérios:
 - **Cercas de Tukey:** com os [quartis](/tarefas/quartiles/) Q1 e Q3 e o intervalo interquartil IQ = Q3 − Q1, as cercas internas ficam em Q1 − 1,5·IQ e Q3 + 1,5·IQ, e as externas em Q1 − 3·IQ e Q3 + 3·IQ. Um ponto além de uma cerca interna é um outlier leve; além de uma externa, extremo.[@nist-handbook]
 - **Z-score:** *z* = (*x* − média) / desvio padrão. É prática comum, mas pode enganar, sobretudo em amostras pequenas: o maior *z* possível é (*n* − 1)/√*n*.[@nist-handbook]
 - **MAD:** o z-score modificado é *M* = 0,6745·(*x* − mediana) / MAD, em que MAD é o desvio absoluto mediano. |*M*| > 3,5 indica outlier potencial. O MAD resiste melhor a valores extremos que o desvio padrão.[@nist-handbook]
-- **k-means:** agrupa os valores em *k* grupos em torno de centroides; um grupo pequeno e distante, ou um ponto longe do próprio centroide, é candidato a outlier.[@jain1999]
+- **k-means:** agrupa os valores em *k* grupos em torno de centroides. Um grupo pequeno e distante, ou um ponto longe do próprio centroide, é candidato a outlier.[@jain1999]
 
 No exemplo de nomes, a chave normalizada forma grupos que ainda precisam de confirmação: o mesmo sobrenome não garante que os valores sejam sinônimos.

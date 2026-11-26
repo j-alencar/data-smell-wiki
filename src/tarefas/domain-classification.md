@@ -75,4 +75,4 @@ exemplos:
       de cada coluna é o suspeito (`dani(at)w.com`, `50.050-000`, `XX`). A coluna `d` fica sem
       domínio: reconhecer primeiros nomes exige um dicionário de nomes, não uma expressão regular.
 ---
-O domínio semântico descreve o significado dos valores, não só sua sintaxe.[@abedjan2015] Teste cada coluna contra os padrões de um dicionário de domínios. A fração de valores que casam indica a aderência; valores fora do padrão são candidatos a erro. Uma coluna sem correspondência pode exigir outro tipo de dicionário, como no caso dos nomes.
+O domínio semântico descreve o significado dos valores, não só sua sintaxe.[@abedjan2015] Teste cada coluna contra os padrões de um dicionário de domínios. A fração de valores que casam indica a aderência, e os que ficam fora do padrão são candidatos a erro. Uma coluna sem correspondência pode exigir outro tipo de dicionário, como no caso dos nomes.

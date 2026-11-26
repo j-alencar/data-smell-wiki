@@ -30,11 +30,10 @@ exemplos:
       filtro: |
         {n: length, distinct_values: (map(.city) | unique | length)}
     leitura: >-
-      Seis pedidos, três cidades. Com 3 distintos em 6 linhas, `city` não identifica pedidos;
-      a razão entre os dois números é a [Unicidade](/tarefas/uniqueness/).
+      Seis pedidos, três cidades. Com 3 distintos em 6 linhas, `city` não identifica pedidos. A razão entre os dois números é a [Unicidade](/tarefas/uniqueness/).
 ---
 Comparado ao número de linhas, o número de valores distintos aponta candidatas a chave ou mostra quantos valores diferentes há, como quantas cidades aparecem numa tabela de endereços.[@abedjan2015]
 
-Em colunas grandes, o sketch *k Minimum Values* (KMV) estima esse número;[@cormode2011] veja [Resumos e sketches](/tarefas/summaries-sketches/#kmv).
+Em colunas grandes, o sketch *k Minimum Values* (KMV), descrito em [Resumos e sketches](/tarefas/summaries-sketches/#kmv), estima esse número.[@cormode2011]
 
-`count(DISTINCT ...)` ignora `NULL` no SQL; o `$addToSet` do MongoDB guarda `null` como um valor.
+`count(DISTINCT ...)` ignora `NULL` no SQL, mas o `$addToSet` do MongoDB guarda `null` como um valor.

@@ -45,7 +45,7 @@ exemplo:
              else empty end]
       | group_by(.) | map({missing_as: .[0], n: length})[]
   leitura: >-
-    Cinco formas de "sem cidade". A lista de marcadores é uma suposição; ajuste-a ao que aparece
+    Cinco formas de "sem cidade". Como a lista de marcadores é uma suposição, ajuste-a ao que aparece
     nos dados, por exemplo olhando os valores mais curtos ou mais frequentes.
 ---
 Em texto, o "vazio" pode ser `NULL`, string vazia ou uma palavra-marcador. Conte cada forma.

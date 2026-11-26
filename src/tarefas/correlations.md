@@ -194,7 +194,7 @@ exemplos:
       alturas está em metros e metade em centímetros. Uma correlação esperada que desaparece é
       sinal de unidades misturadas.
 ---
-A correlação revela colunas numéricas relacionadas, como idade e salário; calcule-a para todos os pares.[@abedjan2015] Perto de 1, as colunas crescem juntas. Uma correlação esperada que desaparece pode revelar dados suspeitos, como unidades misturadas.
+Calculada para todos os pares de colunas, a correlação revela as numéricas relacionadas, como idade e salário.[@abedjan2015] Perto de 1, as colunas crescem juntas. Uma correlação esperada que desaparece pode revelar dados suspeitos, como unidades misturadas.
 
 Regras de associação ligam valores de colunas diferentes, como {department=finance, position=assistant manager} → {allowance=1000}.[@abedjan2015] O **suporte** é a fração de linhas que satisfazem antecedente e consequente; a **confiança** é a fração das linhas com o antecedente que também satisfazem o consequente. Minere as regras em dois passos:[@abedjan2015]
 

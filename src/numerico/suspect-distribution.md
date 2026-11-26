@@ -43,8 +43,7 @@ exemplo:
       {min: $s[0], q1: q(0.25), median: q(0.5), q3: q(0.75), max: $s[-1]}
   leitura: >-
     A mediana fica em 4,5, mas o terceiro quartil salta para os milhares: metade dos valores é
-    minúscula e o resto é enorme. DuckDB, PostgreSQL e o jq acima interpolam (Q3 = 206250); o
-    `$percentile` aproximado do MongoDB devolve um valor existente (Q3 = 15000). Os números mudam,
+    minúscula e o resto é enorme. DuckDB, PostgreSQL e o jq acima interpolam (Q3 = 206250), enquanto o `$percentile` aproximado do MongoDB devolve um valor existente (Q3 = 15000). Os números mudam,
     a leitura não.
 ---
 Quartis resumem a forma da distribuição. Uma distância grande entre a mediana e o terceiro quartil denuncia grupos de escala diferente.

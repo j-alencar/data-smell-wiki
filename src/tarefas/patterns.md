@@ -38,4 +38,4 @@ exemplos:
       nenhum dos dois e é o candidato a erro. Note o equilíbrio entre generalidade e especificidade:
       `.*` aceitaria tudo; `ABC-1234` só aceitaria a si mesmo.
 ---
-A função `pattern` troca maiúsculas por `A`, minúsculas por `a` e dígitos por `9`; os demais caracteres ficam iguais. Conte os padrões e examine os valores que fogem dos mais frequentes.
+A função `pattern` troca maiúsculas por `A`, minúsculas por `a` e dígitos por `9`, mantendo os demais caracteres. Conte os padrões e examine os valores que fogem dos mais frequentes.

@@ -67,8 +67,7 @@ exemplos:
         | map({basic_type: .[0].basic_type, n: length, vals: map(.v)})[]
     leitura: >-
       `2024-13-45` e `25:99` têm a forma de data e hora, mas os números saem dos intervalos válidos
-      (mês 13, minuto 99) e caem em `other`. Numa coluna real, o tipo básico é o da maioria; os
-      demais valores são os suspeitos.
+      (mês 13, minuto 99) e caem em `other`. Numa coluna real, o tipo básico é o da maioria, e os valores que fogem dele são os suspeitos.
 ---
 A tarefa classifica uma coluna como numérica, alfabética, alfanumérica, data ou hora. A presença ou ausência de caracteres numéricos e não numéricos separa os três primeiros tipos. Datas e horas se reconhecem por números dentro de certos intervalos, separados em padrões regulares por símbolos especiais.[@abedjan2015]
 

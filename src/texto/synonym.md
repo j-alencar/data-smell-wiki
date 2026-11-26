@@ -55,7 +55,7 @@ exemplo:
          | select(.jaccard > 0)]
       | sort_by([-.jaccard, .a, .b])[]
   leitura: >-
-    Os três "Clinton" se sobrepõem; "George Bush" não aparece em par nenhum. A similaridade só
+    Os três "Clinton" se sobrepõem, enquanto "George Bush" não aparece em par nenhum. A similaridade só
     aponta candidatos: confirmar que são a mesma pessoa exige conhecer o domínio. Em escala,
     assinaturas MinHash estimam essa similaridade sem comparar todos os pares.[@abedjan2015]
 ---

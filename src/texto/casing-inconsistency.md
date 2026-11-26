@@ -50,6 +50,6 @@ exemplo:
           elif . == ascii_downcase then "lower" else "Mixed" end]
       | group_by(.) | map({casing: .[0], n: length})
       | sort_by([-.n, .casing])[]
-  leitura: A maioria segue uma caixa; as minorias UPPER e lower são a mesma cidade escrita de outro jeito.
+  leitura: A maioria segue uma caixa, enquanto as minorias UPPER e lower são a mesma cidade escrita de outro jeito.
 ---
 Reduza cada valor à classe de caixa antes de contar. Padrões `Aa9` crus dependem do comprimento e escondem a caixa.

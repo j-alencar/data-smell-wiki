@@ -35,6 +35,6 @@ exemplo:
     filtro: |
       [.[].kg | tostring | (split(".")[1] // "") | length]
       | group_by(.) | map({decimals: .[0], n: length})[]
-  leitura: Quatro precisões diferentes em cinco valores; nenhuma domina.
+  leitura: São quatro precisões diferentes em cinco valores. Nenhuma domina.
 ---
 Um histograma de casas decimais mostra se a coluna segue uma precisão.
