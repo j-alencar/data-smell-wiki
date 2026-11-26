@@ -1,6 +1,5 @@
 ---
 smell: Ambiguous Date/Time Format
-refs: [mesibov2023, gbif-parsers]
 exemplo:
   tarefa: patterns
   sql: |
@@ -46,7 +45,7 @@ exemplo:
       | sort_by([-.n, .pattern])[]
   leitura: >-
     Todo padrão diferente de `9999-99-99` é ambíguo. "5/3/21" pode ser maio ou março, e de 1921
-    ou 2021 (MESIBOV, 2023). O parser do GBIF devolve "1/2/1996" como ambíguo, com duas
-    alternativas (BLISSETT, 2018).
+    ou 2021.[@mesibov2023] O parser do GBIF devolve "1/2/1996" como ambíguo, com duas
+    alternativas.[@gbif-parsers]
 ---
 Com separador `/` e dois grupos curtos no início, o padrão não diz se é dia/mês ou mês/dia. Ano com dois dígitos acrescenta ambiguidade de século.

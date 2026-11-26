@@ -51,6 +51,13 @@ ul.sumario li.sub { margin-left: 1.5rem; }
 .ex { font-size: .75rem; font-weight: bold; color: #54595d; }
 details > summary { cursor: pointer; }
 ul.refs li { margin-bottom: .5rem; }
+ol.refs { font-size: .9rem; padding-left: 2rem; }
+ol.refs li { margin-bottom: .4rem; }
+ol.refs li:target { background: #eaf3ff; }
+ol.refs .back { text-decoration: none; font-weight: bold; }
+sup.cite { line-height: 0; font-size: .75em; white-space: nowrap; }
+sup.cite a { text-decoration: none; }
+sup.cite:target { background: #eaf3ff; }
 #foot { margin-top: 3rem; border-top: 1px solid var(--line); font-size: .82rem; color: #54595d; padding-top: .5rem; }
 
 /* badges */

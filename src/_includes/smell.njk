@@ -10,7 +10,7 @@ layout: base.njk
 
 <blockquote>
 <p>{{ s.definicao }}</p>
-<p class="cite">Exemplo: <code>{{ s.exemplo | e }}</code> (FOIDL; FELDERER; RAMLER, 2022b, tradução nossa).</p>
+<p class="cite">Exemplo: <code>{{ s.exemplo | e }}</code>.[@foidl2022b]</p>
 </blockquote>
 
 {{ content | safe }}
@@ -31,9 +31,3 @@ layout: base.njk
 <h2>Exemplo: {{ tarefas[ex.tarefa].nome }}</h2>
 {{ renderExemplo(ex, out) }}
 
-<h2>Referências</h2>
-<ul class="refs">
-{%- for r in (["abedjan2015", "foidl2022b"].concat(refs or [])) | abnt %}
-<li>{{ r | mdInline | safe }}</li>
-{%- endfor %}
-</ul>

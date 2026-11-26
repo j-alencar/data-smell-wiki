@@ -1,5 +1,4 @@
 ---
-refs: [cormode2011, dasu2002]
 exemplos:
   - id: bernoulli
     titulo: amostra de Bernoulli
@@ -260,17 +259,17 @@ exemplos:
     leitura: >-
       Cada coluna vira uma assinatura de 16 números, o menor hash sob cada uma de 16 funções. A
       fração de posições iguais estima a similaridade de Jaccard: 0,31 (exata: 0,33). Com os 40
-      valores distintos de cada coluna, que o perfil já conhece, a fórmula de Dasu et al. (2002)
+      valores distintos de cada coluna, que o perfil já conhece, a fórmula de Dasu et al.[@dasu2002]
       estima uma interseção de 19 valores (exata: 20). Comparar duas assinaturas custa 16
       comparações, não importa o tamanho das colunas.
 ---
-Além do agrupamento, outra forma de descrever os dados é criar resumos ou *sketches*, por amostragem ou por hashing dos valores para um domínio menor. Sketches respondem consultas aproximadas, processam fluxos de dados e estimam tamanhos de junções (ABEDJAN; GOLAB; NAUMANN, 2015).
+Além do agrupamento, outra forma de descrever os dados é criar resumos ou *sketches*, por amostragem ou por hashing dos valores para um domínio menor. Sketches respondem consultas aproximadas, processam fluxos de dados e estimam tamanhos de junções.[@abedjan2015]
 
-São métodos de processamento aproximado de consultas (*Approximate Query Processing*, AQP), muitas vezes o único meio de manter a exploração interativa em conjuntos de dados enormes. Eles procedem "calculando uma sinopse compacta, com perdas, dos dados, e então executando a consulta de interesse sobre a sinopse em vez do conjunto de dados inteiro" (CORMODE et al., 2011, p. 1, tradução nossa).
+São métodos de processamento aproximado de consultas (*Approximate Query Processing*, AQP), muitas vezes o único meio de manter a exploração interativa em conjuntos de dados enormes. Eles procedem "calculando uma sinopse compacta, com perdas, dos dados, e então executando a consulta de interesse sobre a sinopse em vez do conjunto de dados inteiro".[@cormode2011, p. 1]
 
 ## Amostragem
 
-A amostra aleatória é a sinopse mais fundamental e mais implementada: executa-se a consulta sobre um subconjunto pequeno e representativo dos dados (CORMODE et al., 2011). Em perfilamento, isso permite, por exemplo, verificar se uma dependência vale numa amostra em vez da tabela inteira. Os esquemas básicos (CORMODE et al., 2011):
+A amostra aleatória é a sinopse mais fundamental e mais implementada: executa-se a consulta sobre um subconjunto pequeno e representativo dos dados.[@cormode2011] Em perfilamento, isso permite, por exemplo, verificar se uma dependência vale numa amostra em vez da tabela inteira. Os esquemas básicos:[@cormode2011]
 
 - **Amostragem aleatória simples, com ou sem reposição:** sorteie *n* itens de *R*; sem reposição, nenhum item entra duas vezes, e a variância das estimativas é menor.
 - **Amostragem de Bernoulli:** lance uma moeda independente para cada linha, com a mesma probabilidade *p* de inclusão. O tamanho da amostra é aleatório, e a soma estimada é a soma da amostra dividida por *p*. Na amostragem de Poisson, cada linha tem a sua própria probabilidade.
@@ -281,19 +280,19 @@ DuckDB (`USING SAMPLE`), PostgreSQL (`TABLESAMPLE`) e MongoDB (`$sample`) sortei
 
 ## Sketches e similaridade de colunas
 
-Uma tarefa de interesse é avaliar a similaridade de duas colunas *A* e *B* pela similaridade de Jaccard, |*A* ∩ *B*| / |*A* ∪ *B*|: o número de valores distintos em comum dividido pelo total de valores distintos nas duas. Como valores semanticamente iguais podem ter formatos diferentes, a mesma conta vale para as distribuições de n-gramas. Se os conjuntos de valores distintos não estiverem disponíveis, estime a similaridade pelas assinaturas MinHash das colunas (ABEDJAN; GOLAB; NAUMANN, 2015).
+Uma tarefa de interesse é avaliar a similaridade de duas colunas *A* e *B* pela similaridade de Jaccard, |*A* ∩ *B*| / |*A* ∪ *B*|: o número de valores distintos em comum dividido pelo total de valores distintos nas duas. Como valores semanticamente iguais podem ter formatos diferentes, a mesma conta vale para as distribuições de n-gramas. Se os conjuntos de valores distintos não estiverem disponíveis, estime a similaridade pelas assinaturas MinHash das colunas.[@abedjan2015]
 
-- **k Minimum Values (KMV):** aplique uma função de hash aos valores e guarde só os *k* menores hashes distintos. O número de valores distintos se estima por (*k* − 1)/*h*ₖ, com *h*ₖ o *k*-ésimo menor hash normalizado para [0, 1]. Para duas colunas, os *k* menores hashes da união dos dois sketches formam uma amostra uniforme da união; a fração desses itens presentes nos dois sketches estima |*A* ∩ *B*| / |*A* ∪ *B*|. A precisão depende do tamanho da união: se a interseção for pequena, é improvável que a amostra a encontre (CORMODE et al., 2011).
-- **MinHash (hashing min-wise):** use *k* funções de hash independentes e guarde, para cada uma, o menor hash da coluna. Gasta mais tempo por valor que o KMV, que usa uma única função (CORMODE et al., 2011). Duas colunas têm o mesmo mínimo numa posição com probabilidade igual à similaridade de Jaccard; a fração de posições iguais a estima (DASU et al., 2002).
+- **k Minimum Values (KMV):** aplique uma função de hash aos valores e guarde só os *k* menores hashes distintos. O número de valores distintos se estima por (*k* − 1)/*h*ₖ, com *h*ₖ o *k*-ésimo menor hash normalizado para [0, 1]. Para duas colunas, os *k* menores hashes da união dos dois sketches formam uma amostra uniforme da união; a fração desses itens presentes nos dois sketches estima |*A* ∩ *B*| / |*A* ∪ *B*|. A precisão depende do tamanho da união: se a interseção for pequena, é improvável que a amostra a encontre.[@cormode2011]
+- **MinHash (hashing min-wise):** use *k* funções de hash independentes e guarde, para cada uma, o menor hash da coluna. Gasta mais tempo por valor que o KMV, que usa uma única função.[@cormode2011] Duas colunas têm o mesmo mínimo numa posição com probabilidade igual à similaridade de Jaccard; a fração de posições iguais a estima.[@dasu2002]
 
-O sistema Bellman usa essas assinaturas para minerar a estrutura de bancos com milhares de tabelas e pouca documentação sobre chaves primárias e estrangeiras (DASU et al., 2002):
+O sistema Bellman usa essas assinaturas para minerar a estrutura de bancos com milhares de tabelas e pouca documentação sobre chaves primárias e estrangeiras:[@dasu2002]
 
-- **Semelhança (*resemblance*):** com *s*(*A*) = min *h*(*a*), vale Pr[*s*(*A*) = *s*(*B*)] = ρ, a similaridade de Jaccard. Um único mínimo é uma variável de Bernoulli de variância alta; a assinatura junta *N* mínimos, um por função de hash, e estima ρ pela fração de posições iguais (DASU et al., 2002, p. 241).
-- **Tamanho da interseção:** como o perfil já guarda o número de valores distintos |*A*| e |*B*|, |*A* ∩ *B*| = ρ/(1 + ρ) · (|*A*| + |*B*|). A estimativa filtra pares de colunas com interseção pequena antes de testar junções (DASU et al., 2002, p. 241-242).
-- **Contenção:** a fração de posições com *s*ᵢ(*A*) < *s*ᵢ(*B*) estima |*A* \ *B*| / |*A* ∪ *B*|. Se essa fração é pequena e a inversa é grande, *A* está em grande parte contido em *B* (DASU et al., 2002, p. 242).
-- **Soma:** a assinatura de *A* ∪ *B* é o mínimo, posição a posição, das duas assinaturas (DASU et al., 2002, p. 242).
-- **Em SQL:** as assinaturas ficam numa tabela (campo, número do hash, valor do hash), e uma junção nessa tabela conta as posições iguais entre um campo e todos os outros (DASU et al., 2002, p. 242).
-- **q-gramas:** chaves em formatos diferentes, como `ddd-dd-dddd` e `SSddd-dd-dddd`, quase não têm valores em comum, mas seus conjuntos de q-gramas (substrings de *q* caracteres) são parecidos. A assinatura do conjunto de q-gramas aponta campos ligados por uma pequena transformação (DASU et al., 2002, p. 242-243).
-- **Tamanho da assinatura:** nos experimentos dos autores, 50 posições bastaram para separar interseções pequenas, médias e grandes, e 100 separaram todos os pares testados. O erro cresce muito com similaridade de 25% ou menos (DASU et al., 2002, p. 246).
+- **Semelhança (*resemblance*):** com *s*(*A*) = min *h*(*a*), vale Pr[*s*(*A*) = *s*(*B*)] = ρ, a similaridade de Jaccard. Um único mínimo é uma variável de Bernoulli de variância alta; a assinatura junta *N* mínimos, um por função de hash, e estima ρ pela fração de posições iguais.[@dasu2002, p. 241]
+- **Tamanho da interseção:** como o perfil já guarda o número de valores distintos |*A*| e |*B*|, |*A* ∩ *B*| = ρ/(1 + ρ) · (|*A*| + |*B*|). A estimativa filtra pares de colunas com interseção pequena antes de testar junções.[@dasu2002, p. 241-242]
+- **Contenção:** a fração de posições com *s*ᵢ(*A*) < *s*ᵢ(*B*) estima |*A* \ *B*| / |*A* ∪ *B*|. Se essa fração é pequena e a inversa é grande, *A* está em grande parte contido em *B*.[@dasu2002, p. 242]
+- **Soma:** a assinatura de *A* ∪ *B* é o mínimo, posição a posição, das duas assinaturas.[@dasu2002, p. 242]
+- **Em SQL:** as assinaturas ficam numa tabela (campo, número do hash, valor do hash), e uma junção nessa tabela conta as posições iguais entre um campo e todos os outros.[@dasu2002, p. 242]
+- **q-gramas:** chaves em formatos diferentes, como `ddd-dd-dddd` e `SSddd-dd-dddd`, quase não têm valores em comum, mas seus conjuntos de q-gramas (substrings de *q* caracteres) são parecidos. A assinatura do conjunto de q-gramas aponta campos ligados por uma pequena transformação.[@dasu2002, p. 242-243]
+- **Tamanho da assinatura:** nos experimentos dos autores, 50 posições bastaram para separar interseções pequenas, médias e grandes, e 100 separaram todos os pares testados. O erro cresce muito com similaridade de 25% ou menos.[@dasu2002, p. 246]
 
 Nos exemplos, os valores são inteiros e o hash é uma função de módulo primo escrita à mão, para dar o mesmo resultado nos quatro motores. Em uso real, prefira a função de hash do motor (`hash` no DuckDB, `hashtext` no PostgreSQL).

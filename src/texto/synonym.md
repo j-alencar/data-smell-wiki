@@ -57,7 +57,6 @@ exemplo:
   leitura: >-
     Os três "Clinton" se sobrepõem; "George Bush" não aparece em par nenhum. A similaridade só
     aponta candidatos: confirmar que são a mesma pessoa exige conhecer o domínio. Em escala,
-    assinaturas MinHash estimam essa similaridade sem comparar todos os pares (ABEDJAN; GOLAB;
-    NAUMANN, 2015).
+    assinaturas MinHash estimam essa similaridade sem comparar todos os pares.[@abedjan2015]
 ---
 Compare os valores dois a dois pela similaridade de Jaccard dos tokens. Pares parecidos e diferentes são candidatos a sinônimo.

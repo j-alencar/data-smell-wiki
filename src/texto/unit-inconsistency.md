@@ -1,6 +1,5 @@
 ---
 smell: Unit Inconsistency
-refs: [osm-maxspeed, osrm-measure]
 exemplo:
   tarefa: patterns
   sql: |
@@ -46,6 +45,6 @@ exemplo:
       | sort_by([-.n, .pattern])[]
   leitura: >-
     Números sem unidade (km/h implícito) convivem com três sufixos de unidade. Pelo código do OSRM,
-    só "mph" em minúsculas é convertido; "60 MPH" seria lido como 60 km/h (OPENSTREETMAP WIKI, 2026; PROJECT-OSRM, [20--]).
+    só "mph" em minúsculas é convertido; "60 MPH" seria lido como 60 km/h.[@osm-maxspeed][@osrm-measure]
 ---
 Em texto, a unidade vem escrita no valor e aparece na cauda alfabética do padrão. Variações de caixa da mesma unidade dividem o histograma.

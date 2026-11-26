@@ -70,7 +70,7 @@ exemplos:
       (mês 13, minuto 99) e caem em `other`. Numa coluna real, o tipo básico é o da maioria; os
       demais valores são os suspeitos.
 ---
-Classificar uma coluna como numérica, alfabética, alfanumérica, data ou hora é simples. A presença ou ausência de caracteres numéricos e não numéricos separa os três primeiros tipos. Datas e horas se reconhecem por números dentro de certos intervalos, separados em padrões regulares por símbolos especiais (ABEDJAN; GOLAB; NAUMANN, 2015).
+Classificar uma coluna como numérica, alfabética, alfanumérica, data ou hora é simples. A presença ou ausência de caracteres numéricos e não numéricos separa os três primeiros tipos. Datas e horas se reconhecem por números dentro de certos intervalos, separados em padrões regulares por símbolos especiais.[@abedjan2015]
 
 O tipo básico antecede o [tipo de dado](/tarefas/data-type/) concreto. Para tipos decimais, extraia também dígitos e casas: veja [Casas decimais](/tarefas/decimals/).
 

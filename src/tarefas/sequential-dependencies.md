@@ -1,5 +1,4 @@
 ---
-refs: [ginsburg1983, golab2009]
 exemplos:
   - id: base
     titulo: "pollnum →[9,11] t: coletas a cada 9 a 11 segundos"
@@ -41,8 +40,8 @@ exemplos:
            sd: (if $gap >= 9 and $gap <= 11 then "ok" else "violates" end)}
     leitura: >-
       Sete das nove lacunas ficam em [9, 11]. A lacuna de 20 s entre as coletas 4 e 5 indica uma
-      coleta perdida; a de 6 s entre 8 e 9, uma coleta extra ou adiantada. A confiança de Golab et al.
-      (2009) conta o mínimo de linhas a inserir ou remover para a SD valer; aqui basta listar as
+      coleta perdida; a de 6 s entre 8 e 9, uma coleta extra ou adiantada. A confiança de Golab et
+      al.[@golab2009] conta o mínimo de linhas a inserir ou remover para a SD valer; aqui basta listar as
       violações.
   - id: aplicado
     smell: Suspect Date/Time Interval
@@ -103,13 +102,13 @@ exemplos:
       dia. Só o par 2 → 3 viola, com 272 dias. Diferente do histograma de lacunas, a SD aponta
       exatamente onde a sequência quebra.
 ---
-Algumas dependências envolvem ordem. Pode ser útil descobrir que, se a relação *r* está ordenada pelo atributo *A*, também está ordenada por *B*: é uma dependência de ordem entre *A* e *B* (ABEDJAN; GOLAB; NAUMANN, 2015; GINSBURG; HULL, 1983). Golab et al. (2009) generalizaram o conceito nas dependências sequenciais (SDs). Uma SD afirma que, ordenados por *A*, quaisquer dois valores consecutivos de *B* ficam dentro de um intervalo predefinido. Dada uma SD completa, com *A*, *B* e o intervalo, os autores dão um algoritmo que descobre as faixas de valores de *A* em que ela vale aproximadamente. Até o levantamento de Abedjan, Golab e Naumann (2015), o problema geral de descobrir SDs a partir dos dados seguia em aberto.
+Algumas dependências envolvem ordem. Pode ser útil descobrir que, se a relação *r* está ordenada pelo atributo *A*, também está ordenada por *B*: é uma dependência de ordem entre *A* e *B*.[@abedjan2015][@ginsburg1983] Golab et al.[@golab2009] generalizaram o conceito nas dependências sequenciais (SDs). Uma SD afirma que, ordenados por *A*, quaisquer dois valores consecutivos de *B* ficam dentro de um intervalo predefinido. Dada uma SD completa, com *A*, *B* e o intervalo, os autores dão um algoritmo que descobre as faixas de valores de *A* em que ela vale aproximadamente. Até o levantamento de Abedjan, Golab e Naumann[@abedjan2015], o problema geral de descobrir SDs a partir dos dados seguia em aberto.
 
-Na notação de Golab et al. (2009), *X* →*g* *Y* diz que, com os registros ordenados por *X*, a diferença entre os valores de *Y* de quaisquer dois registros consecutivos está no intervalo *g*:
+Na notação de Golab et al.[@golab2009], *X* →*g* *Y* diz que, com os registros ordenados por *X*, a diferença entre os valores de *Y* de quaisquer dois registros consecutivos está no intervalo *g*:
 
 - *X* →(0,∞) *Y*: *Y* cresce estritamente com *X*. É a dependência de ordem clássica; por exemplo, `time →(0,∞) sequence number`.
 - `sequence number →[4,5] time`: o tempo entre números de sequência consecutivos fica entre 4 e 5, como num feed de cotações atualizado a cada 4 ou 5 minutos.
 
-SDs medem a qualidade de feeds que devem chegar com certa frequência: lacunas grandes demais indicam dados faltantes, pequenas demais indicam dados excedentes, e lacunas negativas indicam dados fora de ordem. Como dados reais têm exceções, os autores definem a **confiança** de uma SD como (*N* − OPS)/*N*, em que OPS é o menor número de registros a inserir ou remover para a SD valer. Também definem SDs condicionais, cujo *tableau* lista as faixas de *X* em que a SD vale (GOLAB et al., 2009).
+SDs medem a qualidade de feeds que devem chegar com certa frequência: lacunas grandes demais indicam dados faltantes, pequenas demais indicam dados excedentes, e lacunas negativas indicam dados fora de ordem. Como dados reais têm exceções, os autores definem a **confiança** de uma SD como (*N* − OPS)/*N*, em que OPS é o menor número de registros a inserir ou remover para a SD valer. Também definem SDs condicionais, cujo *tableau* lista as faixas de *X* em que a SD vale.[@golab2009]
 
-O exemplo base reproduz o caso de monitoramento de rede dos autores: a coleta de contadores deve acontecer a cada 10 segundos, e a SD `pollnum →[9,11] time` admite lacunas de 9 a 11 segundos (GOLAB et al., 2009).
+O exemplo base reproduz o caso de monitoramento de rede dos autores: a coleta de contadores deve acontecer a cada 10 segundos, e a SD `pollnum →[9,11] time` admite lacunas de 9 a 11 segundos.[@golab2009]

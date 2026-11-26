@@ -196,17 +196,17 @@ exemplos:
       alturas está em metros e metade em centímetros. Uma correlação esperada que desaparece é
       sinal de unidades misturadas.
 ---
-A análise de correlação revela colunas numéricas relacionadas; numa tabela de funcionários, idade e salário podem estar correlacionados. O caminho direto é calcular a correlação de todos os pares de colunas (ABEDJAN; GOLAB; NAUMANN, 2015).
+A análise de correlação revela colunas numéricas relacionadas; numa tabela de funcionários, idade e salário podem estar correlacionados. O caminho direto é calcular a correlação de todos os pares de colunas.[@abedjan2015]
 
-Além das correlações entre colunas, associações entre valores também informam o perfil. No varejo, uma regra de associação {pão} → {manteiga} diz que quem compra pão tende a comprar manteiga. Em dados relacionais, as regras ligam valores de colunas diferentes, como {department=finance, position=assistant manager} → {allowance=$1000} (ABEDJAN; GOLAB; NAUMANN, 2015). Os algoritmos dividem o problema em dois passos (ABEDJAN; GOLAB; NAUMANN, 2015):
+Além das correlações entre colunas, associações entre valores também informam o perfil. No varejo, uma regra de associação {pão} → {manteiga} diz que quem compra pão tende a comprar manteiga. Em dados relacionais, as regras ligam valores de colunas diferentes, como {department=finance, position=assistant manager} → {allowance=$1000}.[@abedjan2015] Os algoritmos dividem o problema em dois passos:[@abedjan2015]
 
 1. Descubra todos os conjuntos frequentes de itens (*itemsets*), isto é, aqueles cuja frequência no conjunto de dados, o **suporte**, passa de um limiar. Por exemplo, {pão, manteiga} em 800 de 50 000 transações tem suporte de 1,6%.
 2. Para cada conjunto frequente *a*, gere regras *l* → *a* − *l*, com *l* ⊂ *a*, cuja **confiança** passe de um limiar. A confiança é a frequência de *a* dividida pela frequência de *l*, a probabilidade condicional de *a* − *l* dado *l*. Se {pão, manteiga} aparece 800 vezes e {pão}, 1000, a regra {pão} → {manteiga} tem confiança 0,8.
 
-O segundo passo é direto; o primeiro é caro, pelo número de conjuntos possíveis. Três algoritmos populares para ele (ABEDJAN; GOLAB; NAUMANN, 2015):
+O segundo passo é direto; o primeiro é caro, pelo número de conjuntos possíveis. Três algoritmos populares para ele:[@abedjan2015]
 
 - **Apriori:** parte do fato de que todo subconjunto de um conjunto frequente também é frequente. Encontra os conjuntos frequentes de tamanho 1, expande só esses para tamanho 2, e assim por diante.
 - **Eclat:** intersecta os conjuntos de identificadores de transação (TID) dos itens; serve melhor a conjuntos frequentes grandes. Sua estratégia de busca lembra a do Apriori.
 - **FP-Growth:** dispensa a geração de candidatos. Transforma os dados numa árvore de prefixos de padrões frequentes (FP-tree) e a percorre em profundidade, fazendo os padrões crescerem.
 
-Regras de correlação negativa, entre valores que não ocorrem juntos, ajudam a achar anomalias, mas são mais difíceis de minerar: conjuntos infrequentes não se podam como os frequentes (ABEDJAN; GOLAB; NAUMANN, 2015).
+Regras de correlação negativa, entre valores que não ocorrem juntos, ajudam a achar anomalias, mas são mais difíceis de minerar: conjuntos infrequentes não se podam como os frequentes.[@abedjan2015]
