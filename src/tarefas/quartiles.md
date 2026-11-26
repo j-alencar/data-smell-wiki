@@ -42,6 +42,6 @@ exemplos:
       quartis resistem a extremos, ao contrário da média. Com 9 valores, as posições dos quartis caem
       em valores existentes, e o `$percentile` aproximado do MongoDB coincide com a interpolação.
 ---
-Os quartis são um caso especial comum do [histograma](/tarefas/histogram/) equi-depth: dividem os dados em quatro grupos com o mesmo número de valores. Como o histograma equi-depth, exigem ordenar os valores.[@abedjan2015]
+Os quartis são um caso especial comum do [histograma](/tarefas/histogram/) equi-depth: dividem os dados em quatro grupos com o mesmo número de valores.[@abedjan2015]
 
 A distância entre o primeiro e o terceiro quartil, o intervalo interquartil (IQR), mede a dispersão sem se deixar levar por extremos. As cercas de Tukey usam o IQR para marcar outliers; veja [Agrupamento (clustering)](/tarefas/clustering/#outliers).

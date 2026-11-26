@@ -33,8 +33,8 @@ exemplos:
       Seis pedidos, três cidades. Com 3 distintos em 6 linhas, `city` não identifica pedidos;
       a razão entre os dois números é a [Unicidade](/tarefas/uniqueness/).
 ---
-O número de valores distintos permite ao otimizador de consultas estimar a seletividade de seleções e junções: quanto mais valores distintos, mais seletiva a operação. Para quem analisa, comparado ao número de linhas, ele aponta candidatas a chave ou mostra quantos valores diferentes há, como quantas cidades aparecem numa tabela de endereços.[@abedjan2015]
+Comparado ao número de linhas, o número de valores distintos aponta candidatas a chave ou mostra quantos valores diferentes há, como quantas cidades aparecem numa tabela de endereços.[@abedjan2015]
 
-O cálculo exato exige ordenar ou fazer hashing de todos os valores. Na ordenação, uma passada conta cada grupo de valores iguais uma vez; no hashing, contam-se os buckets não vazios, descontadas as colisões. Quando o custo importa, estimadores trabalham sobre amostras ou leem tudo com pouca memória.[@abedjan2015] Um deles é o sketch *k Minimum Values* (KMV), que guarda só os *k* menores valores de hash;[@cormode2011] veja [Resumos e sketches](/tarefas/summaries-sketches/#kmv).
+Em colunas grandes, o sketch *k Minimum Values* (KMV) estima esse número;[@cormode2011] veja [Resumos e sketches](/tarefas/summaries-sketches/#kmv).
 
 `count(DISTINCT ...)` ignora `NULL` no SQL; o `$addToSet` do MongoDB guarda `null` como um valor.
