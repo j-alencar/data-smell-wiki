@@ -1,6 +1,6 @@
 """Run every smell page example on its engine and record the outputs.
 
-Pages show src/_data/saidas.json, so every output on the site is a real run.
+Smell and task pages show src/_data/saidas.json, so every output on the site is a real run.
 
   mise run verify               # run all, rewrite saidas.json
   mise run verify -- -c         # fail if saidas.json is stale (CI)
@@ -32,21 +32,24 @@ def need(binary, hint):
         sys.exit(f"verify: {binary} not found -- {hint}")
 
 
+def frontmatter(md):
+    try:
+        return yaml.safe_load(md.read_text().split("---\n")[1]) or {}
+    except yaml.YAMLError as e:
+        sys.exit(f"verify: bad frontmatter in {md.relative_to(ROOT)}\n{e}")
+
+
 def load_pages(only):
+    """Examples by key: <world>/<smell> (one per page) and tarefas/<task>/<id> (a list per page)."""
     pages = {}
     for world in WORLDS:
         for md in sorted((SRC / world).glob("*.md")):
-            key = f"{world}/{md.stem}"
-            if only and not any(o in key for o in only):
-                continue
-            front = md.read_text().split("---\n")[1]
-            try:
-                ex = (yaml.safe_load(front) or {}).get("exemplo")
-            except yaml.YAMLError as e:
-                sys.exit(f"verify: bad frontmatter in {md.relative_to(ROOT)}\n{e}")
-            if ex:
-                pages[key] = ex
-    return pages
+            if ex := frontmatter(md).get("exemplo"):
+                pages[f"{world}/{md.stem}"] = ex
+    for md in sorted((SRC / "tarefas").glob("*.md")):
+        for ex in frontmatter(md).get("exemplos") or []:
+            pages[f"tarefas/{md.stem}/{ex['id']}"] = ex
+    return {k: ex for k, ex in pages.items() if not only or any(o in k for o in only)}
 
 
 def na(block):

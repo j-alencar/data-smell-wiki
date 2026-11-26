@@ -26,3 +26,24 @@ gbif-parsers:
 mesibov2023:
   citacao: MESIBOV, 2023
   abnt: "MESIBOV, Robert. **Please share your dates correctly**. GBIF Community Forum, 30 jan. 2023. Disponível em: <https://discourse.gbif.org/t/please-share-your-dates-correctly/3824>. Acesso em: 13 nov. 2026."
+benford1938:
+  citacao: BENFORD, 1938
+  abnt: "BENFORD, Frank. The law of anomalous numbers. **Proceedings of the American Philosophical Society**, Philadelphia, v. 78, n. 4, p. 551-572, 1938."
+ginsburg1983:
+  citacao: GINSBURG; HULL, 1983
+  abnt: "GINSBURG, Seymour; HULL, Richard. Order dependency in the relational model. **Theoretical Computer Science**, [*s. l.*], v. 26, n. 1-2, p. 149-195, 1983. DOI: 10.1016/0304-3975(83)90084-1. Disponível em: <https://doi.org/10.1016/0304-3975(83)90084-1>. Acesso em: 26 nov. 2026."
+golab2009:
+  citacao: GOLAB et al., 2009
+  abnt: "GOLAB, Lukasz; KARLOFF, Howard; KORN, Flip; SAHA, Avishek; SRIVASTAVA, Divesh. Sequential dependencies. **Proceedings of the VLDB Endowment**, [*s. l.*], v. 2, n. 1, p. 574-585, 2009. DOI: 10.14778/1687627.1687693. Disponível em: <https://doi.org/10.14778/1687627.1687693>. Acesso em: 26 nov. 2026."
+cormode2011:
+  citacao: CORMODE et al., 2011
+  abnt: "CORMODE, Graham; GAROFALAKIS, Minos; HAAS, Peter J.; JERMAINE, Chris. Synopses for massive data: samples, histograms, wavelets, sketches. **Foundations and Trends in Databases**, [*s. l.*], v. 4, n. 1-3, p. 1-294, 2011. DOI: 10.1561/1900000004. Disponível em: <https://doi.org/10.1561/1900000004>. Acesso em: 26 nov. 2026."
+dasu2002:
+  citacao: DASU et al., 2002
+  abnt: "DASU, Tamraparni; JOHNSON, Theodore; MUTHUKRISHNAN, S.; SHKAPENYUK, Vladislav. Mining database structure; or, how to build a data quality browser. *In*: ACM SIGMOD INTERNATIONAL CONFERENCE ON MANAGEMENT OF DATA, 2002, Madison. **Proceedings** [...]. New York: ACM, 2002. p. 240-251. DOI: 10.1145/564691.564719. Disponível em: <https://doi.org/10.1145/564691.564719>. Acesso em: 26 nov. 2026."
+jain1999:
+  citacao: JAIN; MURTY; FLYNN, 1999
+  abnt: "JAIN, Anil K.; MURTY, M. Narasimha; FLYNN, Patrick J. Data clustering: a review. **ACM Computing Surveys**, [*s. l.*], v. 31, n. 3, p. 264-323, 1999. DOI: 10.1145/331499.331504. Disponível em: <https://doi.org/10.1145/331499.331504>. Acesso em: 26 nov. 2026."
+nist-handbook:
+  citacao: NIST, [20--]
+  abnt: "NATIONAL INSTITUTE OF STANDARDS AND TECHNOLOGY (NIST). **NIST/SEMATECH e-Handbook of Statistical Methods**. Gaithersburg: NIST, [20--]. Disponível em: <https://www.itl.nist.gov/div898/handbook/>. Acesso em: 26 nov. 2026."

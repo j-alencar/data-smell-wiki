@@ -25,13 +25,16 @@ mise run verify -- texto/casing   # run one page's example on DuckDB, PostgreSQL
 mise run verify                   # run all; writes src/_data/saidas.json
 ```
 
+Task pages hold a list of examples under `exemplos` (`mise run verify -- tarefas/histogram`); an example with `smell` and `mundo` is an applied one.
+
 Pages render the outputs from `saidas.json`, so the site only shows real runs. CI fails if that file is stale. If an engine can't do a task, replace its block with `na: "<motivo>"`.
 
 | Data | File |
 |---|---|
 | Smells (definition, type, tasks) | `src/_data/smells.yaml` |
 | Worlds and archetypal smells | `src/_data/mundos.yaml` |
-| Profiling tasks | `src/_data/tarefas.yaml` |
+| Profiling tasks (name, section, description) | `src/_data/tarefas.yaml` |
+| Task page (prose, base and applied examples) | `src/tarefas/<task>.md` |
 | ABNT references | `src/_data/referencias.yaml` |
 | `pattern()` helper per engine | `helpers/` |
 

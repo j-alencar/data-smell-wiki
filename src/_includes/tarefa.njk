@@ -1,0 +1,58 @@
+---
+layout: base.njk
+---
+{%- from "exemplo.njk" import exemplo as renderExemplo -%}
+{%- set t = tarefas[tarefa] -%}
+{%- set base = [] -%}{%- set aplicados = [] -%}
+{%- for ex in exemplos or [] %}{% if ex.smell %}{% set aplicados = (aplicados.push(ex), aplicados) %}{% else %}{% set base = (base.push(ex), base) %}{% endif %}{% endfor -%}
+<p class="meta">{{ t.secao }} · {{ t.categoria }}{% if t.escopo != t.categoria %} · {{ t.escopo }}{% endif %} · original: <i>{{ t.original }}</i></p>
+
+<p class="lead">{{ t.descricao | replace(r/\.$/, "") }} (ABEDJAN; GOLAB; NAUMANN, 2015).</p>
+
+{{ content | safe }}
+
+{%- if tarefa == "patterns" %}
+<h2>Função <code>pattern</code></h2>
+<p>Os exemplos usam esta função em cada motor.</p>
+<h3>DuckDB</h3><pre><code>{{ helpers.duckdb | e }}</code></pre>
+<h3>PostgreSQL</h3><pre><code>{{ helpers.postgres | e }}</code></pre>
+<h3>MongoDB</h3><pre><code>{{ helpers.mongo | e }}</code></pre>
+<h3>jq</h3><pre><code>{{ helpers.jq | e }}</code></pre>
+{%- endif %}
+
+{%- for ex in base %}
+<h2 id="{{ ex.id }}">Exemplo base: {{ ex.titulo }}</h2>
+{{ renderExemplo(ex, saidas["tarefas/" + tarefa + "/" + ex.id]) }}
+{%- endfor %}
+
+{%- for ex in aplicados %}
+<h2 id="{{ ex.id }}">Exemplo aplicado: <a href="/{{ ex.mundo }}/{{ ex.smell | smellSlug }}/">{{ ex.smell }}</a></h2>
+{{ renderExemplo(ex, saidas["tarefas/" + tarefa + "/" + ex.id]) }}
+{%- endfor %}
+
+<h2>Aplicado a um Smell</h2>
+{%- set usados = [] %}
+{%- for m in nav %}{% for s in m.unicos %}{% if tarefa in smells[s.nome].tarefas %}{% set usados = (usados.push(s), usados) %}{% endif %}{% endfor %}{% endfor %}
+{%- if usados.length %}
+<p>Smells que o framework liga a esta tarefa. <b>ex.</b> marca a página do smell cujo exemplo usa esta tarefa.</p>
+<ul>
+{%- for m in nav %}
+{%- set lista = [] %}
+{%- for s in m.unicos %}{% if tarefa in smells[s.nome].tarefas %}{% set lista = (lista.push(s), lista) %}{% endif %}{% endfor %}
+{%- if lista.length %}
+<li><b>{{ m.nome }}:</b> {% for s in lista %}<a href="{{ s.url }}">{{ s.nome }}</a>{% if s.arq %} <span class="alfa">α</span>{% endif %}
+{%- for p in collections.smell %}{% if p.url == s.url and p.data.exemplo.tarefa == tarefa %} <span class="ex">ex.</span>{% endif %}{% endfor %}
+{%- if not loop.last %} · {% endif %}{% endfor %}</li>
+{%- endif %}
+{%- endfor %}
+</ul>
+{%- else %}
+<p>Nenhum smell do framework usa esta tarefa. Ela completa o perfil da coluna.</p>
+{%- endif %}
+
+<h2>Referências</h2>
+<ul class="refs">
+{%- for r in (["abedjan2015"].concat(refs or [])) | abnt %}
+<li>{{ r | mdInline | safe }}</li>
+{%- endfor %}
+</ul>
