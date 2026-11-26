@@ -44,4 +44,4 @@ exemplos:
       O mínimo 1 vem de `J`: um primeiro nome de um caractere só é o outlier que esta tarefa
       costuma revelar. Uma coluna de datas no mesmo formato teria mínimo, máximo e média iguais.
 ---
-O comprimento dos valores ajuda a reconstruir o esquema, por exemplo para fixar limites justos de tipos como `varchar(n)`. Também revela outliers, como primeiros nomes de um caractere, e problemas de formatação: datas num mesmo formato têm o mesmo comprimento mínimo, máximo e médio. O cálculo exige uma única passada pelos dados.[@abedjan2015]
+O comprimento dos valores revela outliers, como primeiros nomes de um caractere, e problemas de formatação: datas num mesmo formato têm o mesmo comprimento mínimo, máximo e médio.[@abedjan2015]

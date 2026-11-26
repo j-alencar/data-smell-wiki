@@ -40,7 +40,7 @@ exemplos:
         | {r: (($n * $sxy - $sx * $sy) / ((($n * $sxx - $sx * $sx) * ($n * $syy - $sy * $sy)) | sqrt)
                * 1000 | round / 1000)}
     leitura: >-
-      r = 0,974: idade e salário sobem juntos, como no exemplo dos autores. Em perfilamento, o
+      r = 0,974: idade e salário sobem juntos. Em perfilamento, o
       interesse está tanto nas correlações fortes que se esperam quanto nas que somem quando
       deveriam existir.
   - id: regras
@@ -132,11 +132,9 @@ exemplos:
         | map(select(.support >= 0.3 and .confidence >= 0.8))
         | sort_by([-.support, .lhs])[]
     leitura: >-
-      Duas regras passam nos limiares (suporte ≥ 0,3; confiança ≥ 0,8). A primeira repete o exemplo
-      dos autores: todo assistant manager de finance recebe 1000. `department=finance` sozinho não
-      basta (confiança 0,67), porque analysts de finance recebem 500. Com três colunas, o exemplo
-      enumera todos os antecedentes; em dados maiores, Apriori, Eclat ou FP-Growth evitam essa
-      explosão.
+      Duas regras passam nos limiares (suporte ≥ 0,3; confiança ≥ 0,8). Todo assistant manager de
+      finance recebe 1000. `department=finance` sozinho não basta (confiança 0,67), porque analysts
+      de finance recebem 500.
   - id: aplicado
     smell: Unit Inconsistency
     mundo: numerico
@@ -196,17 +194,11 @@ exemplos:
       alturas está em metros e metade em centímetros. Uma correlação esperada que desaparece é
       sinal de unidades misturadas.
 ---
-A análise de correlação revela colunas numéricas relacionadas; numa tabela de funcionários, idade e salário podem estar correlacionados. O caminho direto é calcular a correlação de todos os pares de colunas.[@abedjan2015]
+A correlação revela colunas numéricas relacionadas, como idade e salário; calcule-a para todos os pares.[@abedjan2015] Perto de 1, as colunas crescem juntas. Uma correlação esperada que desaparece pode revelar dados suspeitos, como unidades misturadas.
 
-Além das correlações entre colunas, associações entre valores também informam o perfil. No varejo, uma regra de associação {pão} → {manteiga} diz que quem compra pão tende a comprar manteiga. Em dados relacionais, as regras ligam valores de colunas diferentes, como {department=finance, position=assistant manager} → {allowance=$1000}.[@abedjan2015] Os algoritmos dividem o problema em dois passos:[@abedjan2015]
+Regras de associação ligam valores de colunas diferentes, como {department=finance, position=assistant manager} → {allowance=1000}.[@abedjan2015] O **suporte** é a fração de linhas que satisfazem antecedente e consequente; a **confiança** é a fração das linhas com o antecedente que também satisfazem o consequente. Minere as regras em dois passos:[@abedjan2015]
 
-1. Descubra todos os conjuntos frequentes de itens (*itemsets*), isto é, aqueles cuja frequência no conjunto de dados, o **suporte**, passa de um limiar. Por exemplo, {pão, manteiga} em 800 de 50 000 transações tem suporte de 1,6%.
-2. Para cada conjunto frequente *a*, gere regras *l* → *a* − *l*, com *l* ⊂ *a*, cuja **confiança** passe de um limiar. A confiança é a frequência de *a* dividida pela frequência de *l*, a probabilidade condicional de *a* − *l* dado *l*. Se {pão, manteiga} aparece 800 vezes e {pão}, 1000, a regra {pão} → {manteiga} tem confiança 0,8.
+1. Encontre os conjuntos de itens frequentes, cujo suporte passa de um limiar, com algoritmos como Apriori, Eclat ou FP-Growth.
+2. Para cada conjunto frequente *a*, gere as regras *l* → *a* − *l* cuja confiança passa de um limiar.
 
-O segundo passo é direto; o primeiro é caro, pelo número de conjuntos possíveis. Três algoritmos populares para ele:[@abedjan2015]
-
-- **Apriori:** parte do fato de que todo subconjunto de um conjunto frequente também é frequente. Encontra os conjuntos frequentes de tamanho 1, expande só esses para tamanho 2, e assim por diante.
-- **Eclat:** intersecta os conjuntos de identificadores de transação (TID) dos itens; serve melhor a conjuntos frequentes grandes. Sua estratégia de busca lembra a do Apriori.
-- **FP-Growth:** dispensa a geração de candidatos. Transforma os dados numa árvore de prefixos de padrões frequentes (FP-tree) e a percorre em profundidade, fazendo os padrões crescerem.
-
-Regras de correlação negativa, entre valores que não ocorrem juntos, ajudam a achar anomalias, mas são mais difíceis de minerar: conjuntos infrequentes não se podam como os frequentes.[@abedjan2015]
+Nos exemplos, os limiares são suporte ≥ 0,3 e confiança ≥ 0,8.
