@@ -92,8 +92,6 @@ exemplos:
       primeiras faixas cabem em 12–45 ms, a última vai de 60 a 480 ms. Os limites das faixas são
       quantis; com quatro faixas, são os [quartis](/tarefas/quartiles/).
 ---
-Histogramas estão entre os resultados de perfilamento mais comuns. Distribuições de valores são cardinalidades mais finas: contagens de grupos de valores. Otimizadores usam histogramas como uma distribuição de probabilidade aproximada, em vez de supor distribuição uniforme, para estimar cardinalidades. Pessoas também os leem com facilidade, porque a representação visual é simples de entender.[@abedjan2015]
-
-O histograma equi-width exige uma única passada pelos dados. O equi-depth fixa o número de valores por faixa e, como os quartis, define os limites ordenando os valores. Histogramas enviesados (*biased*) generalizam a ideia e ajustam a precisão por região dos dados.[@abedjan2015]
+Um histograma conta os valores por grupo (faixa). O equi-depth fixa o número de valores por faixa e define os limites ordenando os valores, como os [quartis](/tarefas/quartiles/).[@abedjan2015]
 
 Os exemplos usam 4 faixas sobre os mesmos 10 tempos de resposta, para comparar os dois tipos.
