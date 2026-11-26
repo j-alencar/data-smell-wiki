@@ -1,0 +1,52 @@
+{#- One verified example (frontmatter `ex`) with its recorded outputs (`out`, from saidas.json). -#}
+{%- macro tabela(t) -%}
+<table class="dados"><tr>{% for c in t.cols %}<th>{{ c | e }}</th>{% endfor %}</tr>
+{%- for r in t.rows %}<tr>{% for v in r %}<td>{{ v | e }}</td>{% endfor %}</tr>{% endfor %}</table>
+{%- endmacro -%}
+{%- macro naoAplica(b) -%}<p class="na"><b>Não se aplica.</b> {{ b.na | mdInline | safe }}</p>{%- endmacro -%}
+{%- macro exemplo(ex, out) -%}
+{%- if "pattern(" in (ex.sql + ex.duckdb + ex.postgres + ex.mongo.pipeline + ex.jq.filtro) %}
+<p class="nota">Usa a função <code>pattern</code> de <a href="/tarefas/patterns/">Padrões</a>.</p>
+{%- endif %}
+
+<h3>Entrada (SQL)</h3>
+{{ tabela(out.entrada) }}
+<details><summary>SQL de criação</summary><pre><code>{{ ex.sql | e }}</code></pre></details>
+
+<h3>DuckDB</h3>
+{%- if ex.duckdb.na %}{{ naoAplica(ex.duckdb) }}{% else %}
+<pre><code>{{ ex.duckdb | e }}</code></pre>
+<p class="rot">Saída</p>
+{{ tabela(out.duckdb) }}
+{%- endif %}
+
+<h3>PostgreSQL</h3>
+{%- if ex.postgres.na %}{{ naoAplica(ex.postgres) }}{% else %}
+<pre><code>{{ ex.postgres | e }}</code></pre>
+<p class="rot">Saída</p>
+{{ tabela(out.postgres) }}
+{%- endif %}
+
+<h3>MongoDB</h3>
+{%- if ex.mongo.na %}{{ naoAplica(ex.mongo) }}{% else %}
+<p class="rot">Documentos</p>
+<pre><code>{{ ex.mongo.docs | e }}</code></pre>
+<p class="rot">Pipeline</p>
+<pre><code>{{ ex.mongo.pipeline | e }}</code></pre>
+<p class="rot">Saída</p>
+<pre class="saida"><code>{{ out.mongo | e }}</code></pre>
+{%- endif %}
+
+<h3>jq</h3>
+{%- if ex.jq.na %}{{ naoAplica(ex.jq) }}{% else %}
+<p class="rot">Entrada{% if ex.jq.slurp %} (NDJSON, <code>jq -s</code>){% endif %}</p>
+<pre><code>{{ ex.jq.entrada | e }}</code></pre>
+<p class="rot">Filtro</p>
+<pre><code>{{ ex.jq.filtro | e }}</code></pre>
+<p class="rot">Saída</p>
+<pre class="saida"><code>{{ out.jq | e }}</code></pre>
+{%- endif %}
+
+<h3>Leitura</h3>
+<p>{{ ex.leitura | mdInline | safe }}</p>
+{%- endmacro -%}

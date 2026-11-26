@@ -1,92 +1,166 @@
-# Tarefas de perfilamento (ABEDJAN; GOLAB; NAUMANN, 2015).
-# descricao: tradução nossa; onde: localização no artigo.
+# Tarefas de perfilamento, na ordem do sumário em /tarefas/.
+# secao: numeração do sumário; original: nome em Abedjan, Golab e Naumann (2015).
+# descricao: imperativa, citação indireta de ABEDJAN; GOLAB; NAUMANN (2015).
+# onde: localização no artigo.
 value-length:
-  nome: value length
+  nome: Comprimento dos valores
+  original: value length
+  secao: 1.1.1
   categoria: Cardinalidades
   escopo: Coluna única
-  descricao: Medidas do comprimento dos valores (mínimo, máximo, mediana e média).
-  onde: Tabela 1
+  descricao: Meça o comprimento dos valores em caracteres (mínimo, máximo, mediana e média).
+  onde: Tabela 1; §3.1
 null-values:
-  nome: null values
+  nome: Valores nulos
+  original: null values
+  secao: 1.1.2
   categoria: Cardinalidades
   escopo: Coluna única
-  descricao: Número ou percentual de valores nulos.
-  onde: Tabela 1
+  descricao: Meça o número ou o percentual de valores nulos.
+  onde: Tabela 1; §3.1
+distinct-values:
+  nome: Valores distintos
+  original: distinct
+  secao: 1.1.3
+  categoria: Cardinalidades
+  escopo: Coluna única
+  descricao: Meça o número de valores distintos, às vezes chamado de "cardinalidade".
+  onde: Tabela 1; §3.1
+uniqueness:
+  nome: Unicidade
+  original: uniqueness
+  secao: 1.1.4
+  categoria: Cardinalidades
+  escopo: Coluna única
+  descricao: Divida o número de valores distintos pelo número de linhas.
+  onde: Tabela 1; §3.1
 histogram:
-  nome: histogram
+  nome: Histograma
+  original: histogram
+  secao: 1.2.1
   categoria: Distribuições de valores
   escopo: Coluna única
-  descricao: Histogramas de frequência (largura igual, profundidade igual etc.).
-  onde: Tabela 1
-constancy:
-  nome: constancy
-  categoria: Distribuições de valores
-  escopo: Coluna única
-  descricao: Frequência do valor mais frequente dividida pelo número de linhas.
-  onde: Tabela 1
+  descricao: >-
+    Armazene as frequências dos valores em grupos bem definidos, em geral dividindo o conjunto
+    ordenado de valores em um número fixo de faixas (buckets). Use faixas de mesma largura
+    (equi-width) ou faixas com o mesmo número de ocorrências (equi-depth).
+  onde: Tabela 1; §3.2
 quartiles:
-  nome: quartiles
+  nome: Quartis
+  original: quartiles
+  secao: 1.2.1.1
   categoria: Distribuições de valores
   escopo: Coluna única
-  descricao: Três pontos que dividem os valores (numéricos) em quatro grupos iguais.
-  onde: Tabela 1
+  descricao: >-
+    Encontre os três pontos que dividem os valores numéricos em quatro grupos iguais: um caso
+    especial do histograma equi-depth.
+  onde: Tabela 1; §3.2
+constancy:
+  nome: Constância
+  original: constancy
+  secao: 1.2.2
+  categoria: Distribuições de valores
+  escopo: Coluna única
+  descricao: Divida a frequência do valor mais frequente pelo número de linhas.
+  onde: Tabela 1; §3.2
 first-digit:
-  nome: first digit
+  nome: Primeiro dígito
+  original: first digit
+  secao: 1.2.3
   categoria: Distribuições de valores
   escopo: Coluna única
-  descricao: Distribuição do primeiro dígito de valores numéricos, para verificar a Lei de Benford.
-  onde: Tabela 1
+  descricao: >-
+    Meça a distribuição do primeiro dígito dos valores numéricos e compare-a com a Lei de
+    Benford.
+  onde: Tabela 1; §3.2
 basic-type:
-  nome: basic type
+  nome: Tipo básico
+  original: basic type
+  secao: 1.3.1
   categoria: Padrões, tipos de dados e domínios
   escopo: Coluna única
-  descricao: Tipo de dado genérico, como numérico, alfabético, alfanumérico, data, hora.
-  onde: Tabela 1
-data-type:
-  nome: data type
-  categoria: Padrões, tipos de dados e domínios
-  escopo: Coluna única
-  descricao: Tipo de dado concreto, específico do SGBD, como varchar, timestamp etc.
-  onde: Tabela 1
+  descricao: >-
+    Descubra o tipo básico da coluna (numérico, alfabético, alfanumérico, data ou hora) pela
+    presença ou ausência de caracteres numéricos e não numéricos e pela presença de números
+    apenas dentro de certos intervalos.
+  onde: Tabela 1; §3.3
 decimals:
-  nome: decimals
+  nome: Casas decimais
+  original: decimals
+  secao: 1.3.1.1
   categoria: Padrões, tipos de dados e domínios
   escopo: Coluna única
-  descricao: Número máximo de casas decimais em valores numéricos.
-  onde: Tabela 1
+  descricao: >-
+    Extraia o número máximo de dígitos e de casas decimais dos valores numéricos (decimal,
+    float, double).
+  onde: Tabela 1; §3.3
+data-type:
+  nome: Tipo de dado
+  original: data type
+  secao: 1.3.2
+  categoria: Padrões, tipos de dados e domínios
+  escopo: Coluna única
+  descricao: >-
+    Descubra o tipo de dado concreto da coluna, extraindo o tipo do SGBD ou de outro esquema,
+    quando houver.
+  onde: Tabela 1; §3.3
 patterns:
-  nome: patterns
+  nome: Padrões
+  original: patterns
+  secao: 1.3.3
   categoria: Padrões, tipos de dados e domínios
   escopo: Coluna única
-  descricao: Histograma de padrões de valores (Aa9...).
-  onde: Tabela 1
+  descricao: >-
+    Construa o histograma dos padrões de valores (Aa9...) e trate os valores fora dos padrões
+    frequentes como suspeitos.
+  onde: Tabela 1; §3.3
 domain-classification:
-  nome: domain classification
+  nome: Classificação de domínios
+  original: domain
+  secao: 1.3.4
   categoria: Padrões, tipos de dados e domínios
   escopo: Coluna única
-  descricao: Classificação do domínio semântico, como cartão de crédito, primeiro nome, cidade, fenótipo.
-  onde: Tabela 1
-clustering:
-  nome: clustering
-  categoria: Agrupamentos e outliers
-  escopo: Múltiplas colunas
-  descricao: Segmentar os registros em grupos homogêneos com um algoritmo de agrupamento; registros que não se encaixam em nenhum grupo podem ser marcados como outliers.
-  onde: §4.2
-summaries-sketches:
-  nome: summaries & sketches
-  categoria: Resumos e sketches
-  escopo: Múltiplas colunas
-  descricao: Criar resumos ou sketches dos dados; por exemplo, estimar a similaridade de Jaccard entre colunas pelas assinaturas MinHash.
-  onde: §4.3
+  descricao: >-
+    Classifique o domínio semântico da coluna: descreva não a sintaxe dos valores, mas o seu
+    significado (p. ex., telefone, cartão de crédito, cidade).
+  onde: Tabela 1; §3.3
 correlations:
-  nome: correlations
+  nome: Correlações
+  original: correlations and association rules
+  secao: "2.1"
   categoria: Correlações e regras de associação
   escopo: Múltiplas colunas
-  descricao: A análise de correlação revela colunas numéricas relacionadas; regras de associação denotam relações ou padrões entre valores de atributos de colunas diferentes.
+  descricao: >-
+    Calcule a correlação entre pares de colunas numéricas e minere regras de associação entre
+    valores de colunas diferentes.
   onde: §4.1
+clustering:
+  nome: Agrupamento (clustering)
+  original: clustering and outlier detection
+  secao: "2.2"
+  categoria: Agrupamentos e outliers
+  escopo: Múltiplas colunas
+  descricao: >-
+    Segmente os registros em grupos homogêneos com um algoritmo de agrupamento e marque como
+    outliers os registros que não se encaixam em nenhum grupo.
+  onde: §4.2
+summaries-sketches:
+  nome: Resumos e sketches
+  original: summaries and sketches
+  secao: "2.3"
+  categoria: Resumos e sketches
+  escopo: Múltiplas colunas
+  descricao: >-
+    Crie resumos ou sketches dos dados, por amostragem ou por hashing dos valores para um
+    domínio menor, e responda às consultas sobre eles.
+  onde: §4.3
 sequential-dependencies:
-  nome: sequential dependencies
+  nome: Dependências sequenciais
+  original: sequential dependencies
+  secao: "3.1"
   categoria: Dependências
   escopo: Dependências
-  descricao: Uma dependência sequencial afirma que, ordenados por A, quaisquer dois valores consecutivos de B devem estar dentro de um intervalo predefinido.
+  descricao: >-
+    Ordene os registros por A e verifique se a diferença entre quaisquer dois valores
+    consecutivos de B fica dentro de um intervalo predefinido.
   onde: §5.4

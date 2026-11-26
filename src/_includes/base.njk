@@ -30,8 +30,9 @@
   <div class="portlet">
     <h3>tarefas de perfilamento</h3>
     <ul>
+      <li><a href="/tarefas/"{% if page.url == "/tarefas/" %} class="here"{% endif %}>Visão geral</a></li>
       {%- for id, t in tarefas %}
-      <li><a href="/tarefas/{{ id }}/">{{ t.nome }}</a></li>
+      <li><a href="/tarefas/{{ id }}/"{% if page.url == "/tarefas/" + id + "/" %} class="here"{% endif %}><span class="secao">{{ t.secao }}</span> {{ t.nome }}</a></li>
       {%- endfor %}
     </ul>
   </div>
