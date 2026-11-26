@@ -45,5 +45,5 @@ jain1999:
   citacao: JAIN; MURTY; FLYNN, 1999
   abnt: "JAIN, Anil K.; MURTY, M. Narasimha; FLYNN, Patrick J. Data clustering: a review. **ACM Computing Surveys**, [*s. l.*], v. 31, n. 3, p. 264-323, 1999. DOI: 10.1145/331499.331504. Disponível em: <https://doi.org/10.1145/331499.331504>. Acesso em: 26 nov. 2026."
 nist-handbook:
-  citacao: NIST, [20--]
-  abnt: "NATIONAL INSTITUTE OF STANDARDS AND TECHNOLOGY (NIST). **NIST/SEMATECH e-Handbook of Statistical Methods**. Gaithersburg: NIST, [20--]. Disponível em: <https://www.itl.nist.gov/div898/handbook/>. Acesso em: 26 nov. 2026."
+  citacao: NIST, 2012
+  abnt: "NATIONAL INSTITUTE OF STANDARDS AND TECHNOLOGY (NIST). **NIST/SEMATECH e-Handbook of Statistical Methods**. Gaithersburg: NIST, 2012. Disponível em: <https://www.itl.nist.gov/div898/handbook/>. Acesso em: 26 nov. 2026."

@@ -217,9 +217,9 @@ A análise de agrupamentos (*clustering*) identifica grupos de registros semelha
 
 A detecção de outliers tem várias implementações. As mais comuns:
 
-- **Cercas de Tukey:** com os [quartis](/tarefas/quartiles/) Q1 e Q3 e o intervalo interquartil IQ = Q3 − Q1, as cercas internas ficam em Q1 − 1,5·IQ e Q3 + 1,5·IQ, e as externas em Q1 − 3·IQ e Q3 + 3·IQ. Um ponto além de uma cerca interna é um outlier leve; além de uma externa, extremo (NIST, [20--]).
-- **Z-score:** *z* = (*x* − média) / desvio padrão. É prática comum, mas pode enganar, sobretudo em amostras pequenas: o maior *z* possível é (*n* − 1)/√*n* (NIST, [20--]).
-- **MAD:** o z-score modificado, *M* = 0,6745·(*x* − mediana) / MAD, troca média e desvio pela mediana e pelo desvio absoluto mediano. Iglewicz e Hoaglin recomendam marcar como outlier potencial |*M*| > 3,5 (NIST, [20--]). Valores extremos distorcem o desvio padrão, e o MAD e o IQR estimam a dispersão de forma mais estável (NIST, [20--]).
+- **Cercas de Tukey:** com os [quartis](/tarefas/quartiles/) Q1 e Q3 e o intervalo interquartil IQ = Q3 − Q1, as cercas internas ficam em Q1 − 1,5·IQ e Q3 + 1,5·IQ, e as externas em Q1 − 3·IQ e Q3 + 3·IQ. Um ponto além de uma cerca interna é um outlier leve; além de uma externa, extremo (NIST, 2012).
+- **Z-score:** *z* = (*x* − média) / desvio padrão. É prática comum, mas pode enganar, sobretudo em amostras pequenas: o maior *z* possível é (*n* − 1)/√*n* (NIST, 2012).
+- **MAD:** o z-score modificado, *M* = 0,6745·(*x* − mediana) / MAD, troca média e desvio pela mediana e pelo desvio absoluto mediano. Iglewicz e Hoaglin recomendam marcar como outlier potencial |*M*| > 3,5 (NIST, 2012). Valores extremos distorcem o desvio padrão, e o MAD e o IQR estimam a dispersão de forma mais estável (NIST, 2012).
 - **k-means:** agrupa os valores em *k* grupos em torno de centroides; um grupo pequeno e distante, ou um ponto longe do próprio centroide, é candidato a outlier.
 
 Os exemplos base cobrem os quatro. No exemplo aplicado, o agrupamento é por colisão de chave: valores com a mesma chave normalizada caem no mesmo grupo.

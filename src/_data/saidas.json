@@ -4410,12 +4410,14 @@
   "duckdb": {
    "cols": [
     "k",
-    "est_jaccard"
+    "est_jaccard",
+    "est_intersection"
    ],
    "rows": [
     [
      "16",
-     "0.31"
+     "0.31",
+     "19.0"
     ]
    ]
   },
@@ -4435,17 +4437,19 @@
     ]
    ]
   },
-  "jq": "{\"k\":16,\"est_jaccard\":0.31}",
-  "mongo": "{\"k\":16,\"est_jaccard\":0.31}",
+  "jq": "{\"k\":16,\"est_jaccard\":0.31,\"est_intersection\":19}",
+  "mongo": "{\"k\":16,\"est_jaccard\":0.31,\"est_intersection\":19}",
   "postgres": {
    "cols": [
     "k",
-    "est_jaccard"
+    "est_jaccard",
+    "est_intersection"
    ],
    "rows": [
     [
      "16",
-     "0.31"
+     "0.31",
+     "19.0"
     ]
    ]
   }

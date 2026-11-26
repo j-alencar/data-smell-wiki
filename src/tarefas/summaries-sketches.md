@@ -205,34 +205,43 @@ exemplos:
       f AS (SELECT i, (16807 * i) % 67108859 AS a, (7919 * i) % 67108859 AS b FROM generate_series(1, 16) AS t(i)),
       sig AS (SELECT col, i, min((y * y + 12345) % 67108859) AS m
               FROM (SELECT col, i, (a * x::bigint + b) % 67108859 AS y FROM v, f)
-              GROUP BY col, i)
-      SELECT count(*) AS k, round(avg((sa.m = sb.m)::int), 2) AS est_jaccard
-      FROM sig sa JOIN sig sb ON sa.i = sb.i AND sa.col = 'A' AND sb.col = 'B';
+              GROUP BY col, i),
+      r AS (SELECT count(*) AS k, avg((sa.m = sb.m)::int) AS rho
+            FROM sig sa JOIN sig sb ON sa.i = sb.i AND sa.col = 'A' AND sb.col = 'B')
+      SELECT k, round(rho, 2) AS est_jaccard,
+             round(rho / (1 + rho) * (SELECT count(*) FROM v), 1) AS est_intersection
+      FROM r;
     postgres: |
       WITH v AS (SELECT DISTINCT col, unnest(vals) AS x FROM cols),
       f AS (SELECT i, (16807 * i) % 67108859 AS a, (7919 * i) % 67108859 AS b FROM generate_series(1, 16) AS t(i)),
       sig AS (SELECT col, i, min((y * y + 12345) % 67108859) AS m
               FROM (SELECT col, i, (a * x::bigint + b) % 67108859 AS y FROM v, f) t
-              GROUP BY col, i)
-      SELECT count(*) AS k, round(avg((sa.m = sb.m)::int), 2) AS est_jaccard
-      FROM sig sa JOIN sig sb ON sa.i = sb.i AND sa.col = 'A' AND sb.col = 'B';
+              GROUP BY col, i),
+      r AS (SELECT count(*) AS k, avg((sa.m = sb.m)::int) AS rho
+            FROM sig sa JOIN sig sb ON sa.i = sb.i AND sa.col = 'A' AND sb.col = 'B')
+      SELECT k, round(rho, 2) AS est_jaccard,
+             round(rho / (1 + rho) * (SELECT count(*) FROM v), 1) AS est_intersection
+      FROM r;
     mongo:
       docs: |
         [{ _id: "A", vals: Array.from({ length: 40 }, (_, i) => i + 1) },
          { _id: "B", vals: Array.from({ length: 40 }, (_, i) => i + 21) }]
       pipeline: |
         [
-          { $project: { sig: { $map: { input: { $range: [1, 17] }, as: "i", in: { $min: { $map: {
+          { $project: { n: { $size: { $setUnion: ["$vals"] } },
+              sig: { $map: { input: { $range: [1, 17] }, as: "i", in: { $min: { $map: {
               input: "$vals", as: "x", in: { $let: {
                 vars: { y: { $mod: [{ $add: [{ $multiply: [{ $mod: [{ $multiply: [16807, "$$i"] }, 67108859] }, "$$x"] },
                                              { $mod: [{ $multiply: [7919, "$$i"] }, 67108859] }] }, 67108859] } },
                 in: { $mod: [{ $add: [{ $multiply: ["$$y", "$$y"] }, 12345] }, 67108859] } } } } } } } } } },
           { $sort: { _id: 1 } },
-          { $group: { _id: null, sigs: { $push: "$sig" } } },
-          { $project: { _id: 0, k: { $size: { $arrayElemAt: ["$sigs", 0] } },
-              est_jaccard: { $round: [{ $avg: { $map: { input: { $range: [0, 16] }, as: "i", in: { $cond: [
+          { $group: { _id: null, sigs: { $push: "$sig" }, n: { $sum: "$n" } } },
+          { $set: { k: { $size: { $arrayElemAt: ["$sigs", 0] } },
+              rho: { $avg: { $map: { input: { $range: [0, 16] }, as: "i", in: { $cond: [
                 { $eq: [{ $arrayElemAt: [{ $arrayElemAt: ["$sigs", 0] }, "$$i"] },
-                        { $arrayElemAt: [{ $arrayElemAt: ["$sigs", 1] }, "$$i"] }] }, 1, 0] } } } }, 2] } } }
+                        { $arrayElemAt: [{ $arrayElemAt: ["$sigs", 1] }, "$$i"] }] }, 1, 0] } } } } } },
+          { $project: { _id: 0, k: "$k", est_jaccard: { $round: ["$rho", 2] },
+              est_intersection: { $round: [{ $multiply: [{ $divide: ["$rho", { $add: [1, "$rho"] }] }, "$n"] }, 1] } } }
         ]
     jq:
       entrada: |
@@ -245,11 +254,15 @@ exemplos:
                    | ($y * $y + 12345) % 67108859;
         def sig: . as $vals | [range(1; 17) as $i | [$vals[] | h($i)] | min];
         (.A | sig) as $a | (.B | sig) as $b
-        | {k: 16, est_jaccard: ([range(16) | select($a[.] == $b[.])] | length / 16 * 100 | round / 100)}
+        | ([range(16) | select($a[.] == $b[.])] | length / 16) as $rho
+        | {k: 16, est_jaccard: ($rho * 100 | round / 100),
+           est_intersection: ($rho / (1 + $rho) * ((.A | unique | length) + (.B | unique | length)) * 10 | round / 10)}
     leitura: >-
       Cada coluna vira uma assinatura de 16 números, o menor hash sob cada uma de 16 funções. A
-      fração de posições iguais estima a similaridade de Jaccard: 0,31 (exata: 0,33). Comparar duas
-      assinaturas custa 16 comparações, não importa o tamanho das colunas.
+      fração de posições iguais estima a similaridade de Jaccard: 0,31 (exata: 0,33). Com os 40
+      valores distintos de cada coluna, que o perfil já conhece, a fórmula de Dasu et al. (2002)
+      estima uma interseção de 19 valores (exata: 20). Comparar duas assinaturas custa 16
+      comparações, não importa o tamanho das colunas.
 ---
 Além do agrupamento, outra forma de descrever os dados é criar resumos ou *sketches*, por amostragem ou por hashing dos valores para um domínio menor. Sketches respondem consultas aproximadas, processam fluxos de dados e estimam tamanhos de junções (ABEDJAN; GOLAB; NAUMANN, 2015).
 
@@ -268,9 +281,19 @@ DuckDB (`USING SAMPLE`), PostgreSQL (`TABLESAMPLE`) e MongoDB (`$sample`) sortei
 
 ## Sketches e similaridade de colunas
 
-Uma tarefa de interesse é avaliar a similaridade de duas colunas *A* e *B* pela similaridade de Jaccard, |*A* ∩ *B*| / |*A* ∪ *B*|: o número de valores distintos em comum dividido pelo total de valores distintos nas duas. Como valores semanticamente iguais podem ter formatos diferentes, a mesma conta vale para as distribuições de n-gramas. Se os conjuntos de valores distintos não estiverem disponíveis, estime a similaridade pelas assinaturas MinHash das colunas (ABEDJAN; GOLAB; NAUMANN, 2015; DASU et al., 2002).
+Uma tarefa de interesse é avaliar a similaridade de duas colunas *A* e *B* pela similaridade de Jaccard, |*A* ∩ *B*| / |*A* ∪ *B*|: o número de valores distintos em comum dividido pelo total de valores distintos nas duas. Como valores semanticamente iguais podem ter formatos diferentes, a mesma conta vale para as distribuições de n-gramas. Se os conjuntos de valores distintos não estiverem disponíveis, estime a similaridade pelas assinaturas MinHash das colunas (ABEDJAN; GOLAB; NAUMANN, 2015).
 
 - **k Minimum Values (KMV):** aplique uma função de hash aos valores e guarde só os *k* menores hashes distintos. O número de valores distintos se estima por (*k* − 1)/*h*ₖ, com *h*ₖ o *k*-ésimo menor hash normalizado para [0, 1]. Para duas colunas, os *k* menores hashes da união dos dois sketches formam uma amostra uniforme da união; a fração desses itens presentes nos dois sketches estima |*A* ∩ *B*| / |*A* ∪ *B*|. A precisão depende do tamanho da união: se a interseção for pequena, é improvável que a amostra a encontre (CORMODE et al., 2011).
-- **MinHash (hashing min-wise):** use *k* funções de hash independentes e guarde, para cada uma, o menor hash da coluna. Gasta mais tempo por valor que o KMV, que usa uma única função (CORMODE et al., 2011). Duas colunas têm o mesmo mínimo numa posição com probabilidade igual à similaridade de Jaccard; a fração de posições iguais a estima.
+- **MinHash (hashing min-wise):** use *k* funções de hash independentes e guarde, para cada uma, o menor hash da coluna. Gasta mais tempo por valor que o KMV, que usa uma única função (CORMODE et al., 2011). Duas colunas têm o mesmo mínimo numa posição com probabilidade igual à similaridade de Jaccard; a fração de posições iguais a estima (DASU et al., 2002).
+
+O sistema Bellman usa essas assinaturas para minerar a estrutura de bancos com milhares de tabelas e pouca documentação sobre chaves primárias e estrangeiras (DASU et al., 2002):
+
+- **Semelhança (*resemblance*):** com *s*(*A*) = min *h*(*a*), vale Pr[*s*(*A*) = *s*(*B*)] = ρ, a similaridade de Jaccard. Um único mínimo é uma variável de Bernoulli de variância alta; a assinatura junta *N* mínimos, um por função de hash, e estima ρ pela fração de posições iguais (DASU et al., 2002, p. 241).
+- **Tamanho da interseção:** como o perfil já guarda o número de valores distintos |*A*| e |*B*|, |*A* ∩ *B*| = ρ/(1 + ρ) · (|*A*| + |*B*|). A estimativa filtra pares de colunas com interseção pequena antes de testar junções (DASU et al., 2002, p. 241-242).
+- **Contenção:** a fração de posições com *s*ᵢ(*A*) < *s*ᵢ(*B*) estima |*A* \ *B*| / |*A* ∪ *B*|. Se essa fração é pequena e a inversa é grande, *A* está em grande parte contido em *B* (DASU et al., 2002, p. 242).
+- **Soma:** a assinatura de *A* ∪ *B* é o mínimo, posição a posição, das duas assinaturas (DASU et al., 2002, p. 242).
+- **Em SQL:** as assinaturas ficam numa tabela (campo, número do hash, valor do hash), e uma junção nessa tabela conta as posições iguais entre um campo e todos os outros (DASU et al., 2002, p. 242).
+- **q-gramas:** chaves em formatos diferentes, como `ddd-dd-dddd` e `SSddd-dd-dddd`, quase não têm valores em comum, mas seus conjuntos de q-gramas (substrings de *q* caracteres) são parecidos. A assinatura do conjunto de q-gramas aponta campos ligados por uma pequena transformação (DASU et al., 2002, p. 242-243).
+- **Tamanho da assinatura:** nos experimentos dos autores, 50 posições bastaram para separar interseções pequenas, médias e grandes, e 100 separaram todos os pares testados. O erro cresce muito com similaridade de 25% ou menos (DASU et al., 2002, p. 246).
 
 Nos exemplos, os valores são inteiros e o hash é uma função de módulo primo escrita à mão, para dar o mesmo resultado nos quatro motores. Em uso real, prefira a função de hash do motor (`hash` no DuckDB, `hashtext` no PostgreSQL).
